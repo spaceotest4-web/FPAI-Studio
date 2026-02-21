@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WAN AI: Text-to-Video and Image-to-Video Made Simple | FP AI Studio</title>
+  <meta name="description" content="Learn how to use WAN 2.5 Text-to-Video and Image-to-Video models in FP AI Studio. Master prompt expansion, negative prompts, seed control, and duration settings for stunning AI video.">
+  <meta name="keywords" content="WAN AI video, WAN text to video, WAN image to video, wan-2-5-t2v, wan-2-5-i2v, AI video tutorial, prompt expansion, FP AI Studio video">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://fp-ai-studio.com/blog/wan-image-to-video-tutorial.html">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="WAN AI: Text-to-Video and Image-to-Video Made Simple">
+  <meta property="og:description" content="Master both WAN video models in FP AI Studio — text-to-video and image-to-video with prompt expansion, seeds, and more.">
+  <meta property="article:published_time" content="2026-02-16">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"WAN AI: Text-to-Video and Image-to-Video Made Simple","datePublished":"2026-02-16","author":{"@type":"Person","name":"FP AI Studio Team"},"publisher":{"@type":"Organization","name":"FP AI Studio"}}</script>
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+  <header class="site-header"><div class="container"><a href="../index.html" class="logo"><svg width="32" height="32" viewBox="0 0 32 32" fill="none"><rect width="32" height="32" rx="8" fill="url(#g1)"/><polygon points="13,10 13,22 23,16" fill="#fff"/><defs><linearGradient id="g1" x1="0" y1="0" x2="32" y2="32"><stop stop-color="#6366F1"/><stop offset="1" stop-color="#8B5CF6"/></linearGradient></defs></svg> FP <span>AI Studio</span></a><nav><ul class="nav-links" id="navLinks"><li><a href="../index.html">Home</a></li><li><a href="../index.html#features">Features</a></li><li><a href="../blog.html" class="active">Blog</a></li><li><a href="../index.html#download" class="btn btn-primary">Download App</a></li></ul></nav><button class="mobile-toggle" id="mobileToggle" aria-label="Toggle menu"><span></span><span></span><span></span></button></div></header>
+
+  <main class="blog-detail"><div class="container"><div class="blog-detail-container">
+    <nav class="breadcrumb"><a href="../index.html">Home</a> &rsaquo; <a href="../blog.html">Blog</a> &rsaquo; WAN AI Video Tutorial</nav>
+    <h1>WAN AI: Text-to-Video and Image-to-Video Made Simple</h1>
+    <div class="blog-meta"><div class="author"><div class="author-avatar">FP</div><span>FP AI Studio Team</span></div><div class="date">Feb 16, 2026</div><div class="read-time">6 min read</div></div>
+    <div class="blog-tags" style="margin-bottom:2rem"><span class="tag">Tutorial</span><span class="tag">Video AI</span><span class="tag">WAN</span></div>
+    <div class="featured-image" style="background:linear-gradient(135deg,#0F766E,#14B8A6);display:flex;align-items:center;justify-content:center;color:#fff;font-size:1.25rem;font-weight:600">WAN AI Video Tutorial</div>
+
+    <div class="toc"><h4>Table of Contents</h4><ol>
+      <li><a href="#what-is-wan">What Is WAN AI?</a></li>
+      <li><a href="#text-to-video">Text-to-Video Mode</a></li>
+      <li><a href="#image-to-video">Image-to-Video Mode</a></li>
+      <li><a href="#prompt-expansion">Prompt Expansion Explained</a></li>
+      <li><a href="#negative-prompts">Negative Prompts for Better Quality</a></li>
+      <li><a href="#seed-control">Seed Control &amp; Reproducibility</a></li>
+      <li><a href="#practical-examples">Practical Examples</a></li>
+    </ol></div>
+
+    <div class="blog-content">
+      <h2 id="what-is-wan">What Is WAN AI?</h2>
+      <p>WAN is a powerful family of AI video generation models that excels at creating high-quality 1080p video clips from text descriptions or still images. In FP AI Studio, you get access to two distinct WAN models: <strong>WAN Text-to-Video (wan-2-5-t2v-1080p)</strong> and <strong>WAN Image-to-Video (wan-2-5-i2v-1080p)</strong>. Both models share a common set of controls but serve different creative purposes, making them a versatile pair for any video project.</p>
+      <p>What sets WAN apart from other video models in the app is its combination of prompt expansion, negative prompt support, and clean 1080p output. Whether you are generating a video purely from a text concept or animating an existing photograph, WAN gives you the tools to produce polished results with minimal trial and error.</p>
+
+      <h2 id="text-to-video">Text-to-Video Mode</h2>
+      <p>The WAN Text-to-Video model (wan-2-5-t2v-1080p) generates a video clip entirely from your written prompt. You do not need any reference image &mdash; just a description of the scene you want to see.</p>
+      <h3>Step-by-Step</h3>
+      <ol>
+        <li>Open FP AI Studio and navigate to the <strong>Video Generation</strong> tab.</li>
+        <li>Select <strong>WAN Text-to-Video (wan-2-5-t2v-1080p)</strong> from the model dropdown.</li>
+        <li>Write your prompt. Be specific about the scene, camera movement, lighting, and mood. For example: "A golden retriever running along a sandy beach at sunset, waves crashing in the background, warm cinematic lighting, slow motion."</li>
+        <li>Optionally add a <strong>negative prompt</strong> to exclude unwanted elements.</li>
+        <li>Choose your <strong>duration</strong>: 5 seconds or 10 seconds.</li>
+        <li>Toggle <strong>prompt expansion</strong> on or off depending on your preference.</li>
+        <li>Set a <strong>seed</strong> value if you want reproducible results, or leave it blank for a random seed.</li>
+        <li>Tap <strong>Generate</strong> and wait for your video.</li>
+      </ol>
+      <p>Text-to-Video is ideal when you have a concept in mind but no reference visual. The model handles composition, color, and motion entirely based on your description, giving you a complete video from scratch.</p>
+
+      <h2 id="image-to-video">Image-to-Video Mode</h2>
+      <p>The WAN Image-to-Video model (wan-2-5-i2v-1080p) takes a still image and brings it to life with AI-generated motion. This mode requires an <strong>image URL</strong> as input in addition to your text prompt.</p>
+      <h3>Step-by-Step</h3>
+      <ol>
+        <li>Select <strong>WAN Image-to-Video (wan-2-5-i2v-1080p)</strong> from the model dropdown.</li>
+        <li>Paste the <strong>image URL</strong> of your reference image into the image input field. This can be an image you previously generated in the app or any publicly accessible image URL.</li>
+        <li>Write a prompt describing the <strong>motion</strong> you want. Focus on what should move and how, rather than describing the image itself. For example: "Camera slowly zooms in, hair blowing in the wind, subtle smile appears."</li>
+        <li>Add a negative prompt, choose duration (5s or 10s), set prompt expansion, and configure seed as needed.</li>
+        <li>Tap <strong>Generate</strong>.</li>
+      </ol>
+      <p>Image-to-Video is perfect when you already have a strong visual &mdash; perhaps an AI-generated image from Flux or Mystic, a stock photo, or even a personal photograph &mdash; and you want to add cinematic motion to it. The model preserves the composition and style of your input image while intelligently adding movement.</p>
+
+      <h2 id="prompt-expansion">Prompt Expansion Explained</h2>
+      <p>Both WAN models include a <strong>prompt expansion toggle</strong> that can dramatically improve your results. When enabled, the AI takes your original prompt and expands it with additional descriptive detail before generating the video. This means a short prompt like "cat sleeping on a couch" might be internally expanded to include details about lighting, camera angle, fur texture, and ambient atmosphere.</p>
+      <p>Prompt expansion is especially useful if you tend to write brief prompts or are not sure how to describe cinematic qualities. It acts as a built-in prompt engineer that fills in the gaps. However, if you have already written a highly detailed prompt and want precise control over every aspect, you may want to turn prompt expansion off to avoid the model adding unwanted details.</p>
+      <p><strong>Our recommendation:</strong> Start with prompt expansion on. If the results add elements you did not intend, turn it off and write a more detailed prompt manually.</p>
+
+      <h2 id="negative-prompts">Negative Prompts for Better Quality</h2>
+      <p>Negative prompts tell the model what to avoid in the generated video. Both WAN models support this feature, and using it effectively can significantly improve output quality.</p>
+      <ul>
+        <li><strong>For general quality:</strong> "blurry, low resolution, distorted, flickering, artifacts, watermark"</li>
+        <li><strong>For human subjects:</strong> "deformed hands, extra fingers, unnatural face, morphing body parts"</li>
+        <li><strong>For landscapes:</strong> "oversaturated, flat lighting, repetitive textures, static sky"</li>
+      </ul>
+      <p>Think of the negative prompt as a guardrail. It does not guarantee the exclusion of every listed element, but it steers the generation away from common problems. Even a simple negative prompt like "blurry, low quality, distorted" makes a noticeable difference in most generations.</p>
+
+      <h2 id="seed-control">Seed Control &amp; Reproducibility</h2>
+      <p>Both WAN models support <strong>seed control</strong>. A seed is a numerical value that initializes the random generation process. When you use the same seed with the same prompt and settings, you get the same (or very similar) output. This is invaluable for iterative workflows.</p>
+      <p>For example, if you generate a video you mostly like but want to tweak the prompt slightly, keeping the same seed ensures the overall composition stays consistent while the changes you made take effect. Without a fixed seed, every generation is completely random, making it hard to iterate on a concept.</p>
+      <p>To use seed control, simply enter any integer value in the seed field. Leave it empty or set to 0 for a random seed each time.</p>
+
+      <h2 id="practical-examples">Practical Examples</h2>
+      <h3>Example 1: Cinematic Landscape (Text-to-Video)</h3>
+      <p><strong>Prompt:</strong> "Aerial drone shot of a misty mountain valley at dawn, rays of sunlight breaking through clouds, a river winding through evergreen forests, cinematic 4K quality"</p>
+      <p><strong>Negative prompt:</strong> "blurry, shaky camera, oversaturated, artificial looking"</p>
+      <p><strong>Duration:</strong> 10 seconds | <strong>Prompt expansion:</strong> On</p>
+
+      <h3>Example 2: Product Animation (Image-to-Video)</h3>
+      <p><strong>Image:</strong> A still product photo of a wristwatch on a marble surface</p>
+      <p><strong>Prompt:</strong> "Camera slowly rotates around the watch, light reflections glide across the glass face, shallow depth of field"</p>
+      <p><strong>Negative prompt:</strong> "blurry, flickering, distorted reflections"</p>
+      <p><strong>Duration:</strong> 5 seconds | <strong>Prompt expansion:</strong> Off</p>
+
+      <h3>Example 3: Character Portrait (Image-to-Video)</h3>
+      <p><strong>Image:</strong> An AI-generated portrait of a fantasy warrior</p>
+      <p><strong>Prompt:</strong> "Hair blowing gently in the wind, eyes shift to look at camera, subtle breathing motion, dramatic lighting"</p>
+      <p><strong>Negative prompt:</strong> "morphing face, extra limbs, flickering"</p>
+      <p><strong>Duration:</strong> 5 seconds | <strong>Prompt expansion:</strong> On</p>
+
+      <p>WAN's dual-model approach gives you the flexibility to generate videos from pure imagination or from existing visuals. Combined with prompt expansion, negative prompts, seed reproducibility, and flexible duration options, these two models cover a wide range of creative video needs right inside FP AI Studio.</p>
+    </div>
+
+    <div class="social-share"><span>Share:</span><a class="share-btn" href="https://twitter.com/intent/tweet?url=https://fp-ai-studio.com/blog/wan-image-to-video-tutorial.html" target="_blank" rel="noopener noreferrer">X</a><a class="share-btn" href="https://www.facebook.com/sharer/sharer.php?u=https://fp-ai-studio.com/blog/wan-image-to-video-tutorial.html" target="_blank" rel="noopener noreferrer">f</a><a class="share-btn" href="https://www.linkedin.com/sharing/share-offsite/?url=https://fp-ai-studio.com/blog/wan-image-to-video-tutorial.html" target="_blank" rel="noopener noreferrer">in</a></div>
+    <div class="author-bio"><div class="author-avatar-lg">FP</div><h4>FP AI Studio Team</h4><p>We build tools that make AI-powered creativity accessible to everyone.</p></div>
+    <div class="related-posts"><h2>Related Articles</h2><div class="blog-grid">
+      <a href="ai-video-generation-beginners.html" class="blog-card"><div class="blog-card-image" style="background:linear-gradient(135deg,#7C3AED,#A78BFA);display:flex;align-items:center;justify-content:center;color:#fff"><svg width="36" height="36" viewBox="0 0 24 24" fill="#fff"><path d="M8 5v14l11-7z"/></svg></div><div class="blog-card-content"><div class="blog-tags"><span class="tag">Beginner</span></div><h3>AI Video Generation for Beginners</h3><span class="read-more">Read More &rarr;</span></div></a>
+      <a href="multi-shot-video-storytelling.html" class="blog-card"><div class="blog-card-image" style="background:linear-gradient(135deg,#B45309,#F59E0B);display:flex;align-items:center;justify-content:center;color:#fff"><svg width="36" height="36" viewBox="0 0 24 24" fill="#fff"><path d="M4 6.47L5.76 10H20v8H4V6.47M22 4h-4l2 4h-3l-2-4h-2l2 4h-3l-2-4H8l2 4H7L5 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V4z"/></svg></div><div class="blog-card-content"><div class="blog-tags"><span class="tag">Advanced</span></div><h3>Multi-Shot AI Video: Tell Complete Stories</h3><span class="read-more">Read More &rarr;</span></div></a>
+    </div></div>
+  </div></div></main>
+
+  <footer class="site-footer"><div class="container"><div class="footer-grid"><div class="footer-col"><h4>FP AI Studio</h4><p>The all-in-one AI creative studio for Android.</p></div><div class="footer-col"><h4>Features</h4><ul><li><a href="../index.html#features">Image Generation</a></li><li><a href="../index.html#features">Video Generation</a></li></ul></div><div class="footer-col"><h4>Resources</h4><ul><li><a href="../blog.html">Blog</a></li></ul></div><div class="footer-col"><h4>Legal</h4><ul><li><a href="#">Privacy Policy</a></li><li><a href="#">Terms of Service</a></li></ul></div></div><div class="footer-bottom">&copy; 2026 FP AI Studio. All rights reserved.</div></div></footer>
+  <script>document.getElementById('mobileToggle').addEventListener('click',function(){document.getElementById('navLinks').classList.toggle('open')});</script>
+</body>
+</html>
