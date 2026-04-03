@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Community Chat — FP AI Studio | Share AI Art & Prompts</title>
+  <meta name="description" content="Join the FP AI Studio community chat. Share AI-generated art, exchange prompts, get tips, and connect with fellow creators. No login required.">
+  <meta name="keywords" content="AI art community, AI image generation chat, share AI prompts, FP AI Studio community, AI art gallery chat">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://fp-ai-studio.com/community.html">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Community Chat — FP AI Studio">
+  <meta property="og:description" content="Chat with fellow AI creators. Share art, prompts, and tips. No login needed.">
+  <meta property="og:url" content="https://fp-ai-studio.com/community.html">
+
+  <link rel="stylesheet" href="style.css">
+
+  <style>
+    /* ═══ CHAT PAGE STYLES ═══ */
+    .chat-page {
+      min-height: calc(100vh - 70px);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .chat-header {
+      background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+      color: #fff;
+      padding: 2rem 0 1.5rem;
+      text-align: center;
+    }
+    .chat-header h1 { color: #fff; font-size: 1.75rem; margin-bottom: 0.25rem; }
+    .chat-header p { opacity: 0.85; font-size: 0.95rem; }
+    .online-count { display: inline-flex; align-items: center; gap: 6px; font-size: 0.8rem; background: rgba(255,255,255,0.15); padding: 4px 12px; border-radius: 20px; margin-top: 0.5rem; }
+    .online-dot { width: 8px; height: 8px; border-radius: 50%; background: #4ade80; animation: pulse-dot 2s infinite; }
+    @keyframes pulse-dot { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+
+    .chat-layout {
+      display: flex;
+      flex: 1;
+      max-width: var(--max-width);
+      margin: 0 auto;
+      width: 100%;
+      padding: 1rem 1.25rem;
+      gap: 1rem;
+      min-height: 600px;
+    }
+
+    /* ─── ROOMS SIDEBAR ─── */
+    .rooms-sidebar {
+      width: 200px;
+      flex-shrink: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .rooms-sidebar h3 { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); margin-bottom: 0.5rem; padding: 0 0.5rem; }
+    .room-btn {
+      display: flex; align-items: center; gap: 8px;
+      padding: 10px 14px; border-radius: var(--radius-sm);
+      border: none; background: none; cursor: pointer;
+      font-family: inherit; font-size: 0.9rem; color: var(--text-light);
+      transition: all 0.15s; text-align: left; width: 100%;
+    }
+    .room-btn:hover { background: var(--tag-bg); color: var(--text); }
+    .room-btn.active { background: var(--primary); color: #fff; font-weight: 500; }
+    .room-btn .room-emoji { font-size: 1.1rem; }
+    .room-unread {
+      margin-left: auto; font-size: 0.7rem; font-weight: 600;
+      background: var(--primary); color: #fff; border-radius: 10px;
+      padding: 1px 6px; min-width: 18px; text-align: center;
+    }
+    .room-btn.active .room-unread { background: rgba(255,255,255,0.3); }
+
+    /* ─── CHAT MAIN ─── */
+    .chat-main {
+      flex: 1; display: flex; flex-direction: column;
+      background: var(--bg-white); border-radius: var(--radius);
+      border: 1px solid var(--border); overflow: hidden;
+      min-width: 0;
+    }
+    .chat-room-header {
+      padding: 12px 16px; border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; gap: 8px;
+      font-weight: 600; font-size: 1rem;
+    }
+    .chat-room-header .room-desc { font-weight: 400; font-size: 0.8rem; color: var(--text-muted); margin-left: 8px; }
+
+    /* ─── MESSAGES ─── */
+    .messages-container {
+      flex: 1; overflow-y: auto; padding: 1rem; display: flex;
+      flex-direction: column; gap: 0.25rem;
+      scroll-behavior: smooth;
+    }
+    .messages-container::-webkit-scrollbar { width: 6px; }
+    .messages-container::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+
+    .msg {
+      display: flex; gap: 10px; padding: 8px 12px;
+      border-radius: var(--radius-sm); transition: background 0.1s;
+      max-width: 100%;
+    }
+    .msg:hover { background: var(--bg); }
+    .msg-avatar {
+      width: 36px; height: 36px; border-radius: 50%; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 700; font-size: 0.75rem; color: #fff;
+    }
+    .msg-body { min-width: 0; flex: 1; }
+    .msg-header { display: flex; align-items: baseline; gap: 8px; margin-bottom: 2px; }
+    .msg-user { font-weight: 600; font-size: 0.85rem; }
+    .msg-time { font-size: 0.7rem; color: var(--text-muted); }
+    .msg-text { font-size: 0.9rem; line-height: 1.6; word-wrap: break-word; overflow-wrap: break-word; color: var(--text); }
+    .msg-reply-ref {
+      font-size: 0.78rem; color: var(--text-muted); padding: 4px 8px;
+      border-left: 2px solid var(--primary); margin-bottom: 4px;
+      background: rgba(108,99,255,0.04); border-radius: 0 4px 4px 0;
+      cursor: pointer; max-height: 2.4em; overflow: hidden;
+      text-overflow: ellipsis; white-space: nowrap;
+    }
+    .msg-actions {
+      opacity: 0; display: flex; gap: 4px; margin-left: auto; align-self: flex-start;
+    }
+    .msg:hover .msg-actions { opacity: 1; }
+    .msg-action-btn {
+      border: none; background: var(--tag-bg); cursor: pointer;
+      padding: 2px 6px; border-radius: 4px; font-size: 0.75rem;
+      color: var(--text-muted); transition: all 0.15s;
+    }
+    .msg-action-btn:hover { background: var(--primary); color: #fff; }
+
+    /* System messages */
+    .msg-system {
+      text-align: center; font-size: 0.78rem; color: var(--text-muted);
+      padding: 4px 0; font-style: italic;
+    }
+
+    /* Day divider */
+    .day-divider {
+      text-align: center; font-size: 0.72rem; color: var(--text-muted);
+      padding: 12px 0 4px; position: relative;
+    }
+    .day-divider::before {
+      content: ''; position: absolute; top: 50%; left: 0; right: 0;
+      height: 1px; background: var(--border);
+    }
+    .day-divider span {
+      background: var(--bg-white); padding: 0 12px; position: relative;
+    }
+
+    /* ─── INPUT BAR ─── */
+    .chat-input-bar {
+      padding: 12px 16px; border-top: 1px solid var(--border);
+      display: flex; gap: 8px; align-items: flex-end;
+    }
+    .reply-preview {
+      display: none; padding: 6px 12px; margin: 0 16px;
+      background: rgba(108,99,255,0.06); border-left: 3px solid var(--primary);
+      border-radius: 0 6px 6px 0; font-size: 0.8rem; color: var(--text-light);
+      align-items: center; gap: 8px;
+    }
+    .reply-preview.active { display: flex; }
+    .reply-preview-text { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .reply-cancel {
+      border: none; background: none; cursor: pointer; font-size: 1rem;
+      color: var(--text-muted); padding: 0 4px;
+    }
+    .reply-cancel:hover { color: var(--text); }
+    .chat-input {
+      flex: 1; border: 1px solid var(--border); border-radius: var(--radius-sm);
+      padding: 10px 14px; font-family: inherit; font-size: 0.9rem;
+      resize: none; min-height: 42px; max-height: 120px;
+      outline: none; transition: border-color 0.15s;
+    }
+    .chat-input:focus { border-color: var(--primary); }
+    .chat-input::placeholder { color: var(--text-muted); }
+    .chat-send {
+      width: 42px; height: 42px; border-radius: var(--radius-sm); border: none;
+      background: var(--primary); color: #fff; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: background 0.15s; flex-shrink: 0;
+    }
+    .chat-send:hover { background: var(--primary-dark); }
+    .chat-send:disabled { opacity: 0.5; cursor: not-allowed; }
+
+    /* ─── YOUR ID BADGE ─── */
+    .your-id {
+      display: flex; align-items: center; gap: 6px;
+      font-size: 0.78rem; color: var(--text-muted);
+      padding: 4px 0 0 4px;
+    }
+    .your-id-code { font-weight: 700; color: var(--primary); font-family: monospace; font-size: 0.85rem; }
+
+    /* ─── EMPTY STATE ─── */
+    .chat-empty {
+      flex: 1; display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      color: var(--text-muted); gap: 8px; padding: 2rem;
+    }
+    .chat-empty svg { opacity: 0.3; }
+    .chat-empty p { font-size: 0.9rem; }
+
+    /* ─── MOBILE ─── */
+    .rooms-toggle {
+      display: none; border: none; background: var(--tag-bg);
+      padding: 8px 14px; border-radius: var(--radius-sm);
+      font-family: inherit; font-size: 0.85rem; cursor: pointer;
+      color: var(--text); font-weight: 500;
+    }
+    @media (max-width: 768px) {
+      .chat-layout { flex-direction: column; min-height: 500px; }
+      .rooms-sidebar {
+        flex-direction: row; width: 100%; overflow-x: auto;
+        gap: 4px; padding-bottom: 4px;
+      }
+      .rooms-sidebar h3 { display: none; }
+      .room-btn { white-space: nowrap; padding: 8px 12px; font-size: 0.82rem; }
+      .chat-header h1 { font-size: 1.35rem; }
+      .chat-main { min-height: 400px; }
+    }
+
+    /* ─── LOADING ─── */
+    .chat-loading { display: flex; align-items: center; justify-content: center; flex: 1; color: var(--text-muted); gap: 8px; }
+    .chat-loading .spinner {
+      width: 20px; height: 20px; border: 2px solid var(--border);
+      border-top-color: var(--primary); border-radius: 50%;
+      animation: spin 0.6s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* ─── RULES NOTICE ─── */
+    .chat-rules {
+      font-size: 0.75rem; color: var(--text-muted); text-align: center;
+      padding: 8px 16px; background: rgba(108,99,255,0.03);
+      border-top: 1px solid var(--border);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER (same as all pages) -->
+  <header class="site-header">
+    <div class="container">
+      <a href="index.html" class="logo">
+        <svg width="32" height="32" viewBox="0 0 32 32" fill="none"><rect width="32" height="32" rx="8" fill="url(#g1)"/><polygon points="13,10 13,22 23,16" fill="#fff"/><defs><linearGradient id="g1" x1="0" y1="0" x2="32" y2="32"><stop stop-color="#6366F1"/><stop offset="1" stop-color="#8B5CF6"/></linearGradient></defs></svg>
+        FP <span>AI Studio</span>
+      </a>
+      <nav>
+        <ul class="nav-links" id="navLinks">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="index.html#features">Features</a></li>
+          <li><a href="blog.html">Blog</a></li>
+          <li><a href="community.html" class="active">Community</a></li>
+          <li><a href="index.html#download" class="btn btn-primary">Download App</a></li>
+        </ul>
+      </nav>
+      <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+    </div>
+  </header>
+
+  <div class="chat-page">
+    <!-- CHAT HEADER -->
+    <div class="chat-header">
+      <div class="container">
+        <h1>💬 Community Chat</h1>
+        <p>Share prompts, art, and tips — no login required</p>
+        <div class="online-count"><span class="online-dot"></span> <span id="onlineCount">0</span> online</div>
+      </div>
+    </div>
+
+    <!-- CHAT LAYOUT -->
+    <div class="chat-layout">
+      <!-- ROOMS -->
+      <div class="rooms-sidebar" id="roomsSidebar">
+        <h3>Rooms</h3>
+        <button class="room-btn active" data-room="general"><span class="room-emoji">💬</span> General</button>
+        <button class="room-btn" data-room="prompts"><span class="room-emoji">✨</span> Prompts</button>
+        <button class="room-btn" data-room="gallery"><span class="room-emoji">🎨</span> Gallery</button>
+        <button class="room-btn" data-room="help"><span class="room-emoji">❓</span> Help</button>
+        <button class="room-btn" data-room="offtopic"><span class="room-emoji">🍕</span> Off-Topic</button>
+      </div>
+
+      <!-- CHAT -->
+      <div class="chat-main">
+        <div class="chat-room-header">
+          <span id="currentRoomEmoji">💬</span>
+          <span id="currentRoomName">General</span>
+          <span class="room-desc" id="currentRoomDesc">Chat about anything AI</span>
+        </div>
+
+        <div class="messages-container" id="messages">
+          <div class="chat-loading"><div class="spinner"></div> Loading messages...</div>
+        </div>
+
+        <div class="reply-preview" id="replyPreview">
+          <span>↩ Replying to <strong id="replyToUser"></strong></span>
+          <span class="reply-preview-text" id="replyToText"></span>
+          <button class="reply-cancel" id="replyCancel" title="Cancel reply">✕</button>
+        </div>
+
+        <div class="chat-input-bar">
+          <textarea class="chat-input" id="chatInput" placeholder="Type a message..." rows="1" maxlength="500"></textarea>
+          <button class="chat-send" id="chatSend" title="Send message">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+          </button>
+        </div>
+        <div class="your-id">Your ID: <span class="your-id-code" id="yourId">...</span></div>
+        <div class="chat-rules">Be respectful. No spam, NSFW, or harassment. Messages are public.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col"><h4>FP AI Studio</h4><p>The all-in-one AI creative studio for Android.</p></div>
+        <div class="footer-col"><h4>Features</h4><ul><li><a href="index.html#features">Image Generation</a></li><li><a href="index.html#features">Video Generation</a></li></ul></div>
+        <div class="footer-col"><h4>Resources</h4><ul><li><a href="blog.html">Blog</a></li><li><a href="community.html">Community</a></li></ul></div>
+        <div class="footer-col"><h4>Legal</h4><ul><li><a href="#">Privacy Policy</a></li><li><a href="#">Terms of Service</a></li></ul></div>
+      </div>
+      <div class="footer-bottom">&copy; 2026 FP AI Studio. All rights reserved.</div>
+    </div>
+  </footer>
+
+  <!-- FIREBASE -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-app.js";
+    import { getDatabase, ref, push, onChildAdded, onValue, set, serverTimestamp, get, query, limitToLast, off } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-database.js";
+
+    // ═══ FIREBASE CONFIG ═══
+    const firebaseConfig = {
+      apiKey: "AIzaSyD6ZVj5BcG3k5Yz855Gnqzl9OJfxw2e1rc",
+      authDomain: "fpai-chat.firebaseapp.com",
+      databaseURL: "https://fpai-chat-default-rtdb.firebaseio.com",
+      projectId: "fpai-chat",
+      storageBucket: "fpai-chat.firebasestorage.app",
+      messagingSenderId: "578450557983",
+      appId: "1:578450557983:web:c3da39cf03cb6b1eddd92a"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getDatabase(app);
+
+    // ═══ USER IDENTITY ═══
+    function generateId() {
+      const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+      let id = '';
+      for (let i = 0; i < 4; i++) id += chars[Math.floor(Math.random() * chars.length)];
+      return id;
+    }
+
+    function getUserId() {
+      let id = localStorage.getItem('fpai-chat-id');
+      if (!id) { id = generateId(); localStorage.setItem('fpai-chat-id', id); }
+      return id;
+    }
+
+    function getUserColor() {
+      let color = localStorage.getItem('fpai-chat-color');
+      if (!color) {
+        const colors = ['#6C63FF','#E91E63','#FF9800','#4CAF50','#00BCD4','#9C27B0','#F44336','#3F51B5','#009688','#FF5722','#607D8B','#8BC34A'];
+        color = colors[Math.floor(Math.random() * colors.length)];
+        localStorage.setItem('fpai-chat-color', color);
+      }
+      return color;
+    }
+
+    const userId = getUserId();
+    const userColor = getUserColor();
+    document.getElementById('yourId').textContent = userId;
+
+    // ═══ ROOM CONFIG ═══
+    const rooms = {
+      general: { emoji: '💬', name: 'General', desc: 'Chat about anything AI' },
+      prompts: { emoji: '✨', name: 'Prompts', desc: 'Share and discover great prompts' },
+      gallery: { emoji: '🎨', name: 'Gallery', desc: 'Show off your AI creations' },
+      help:    { emoji: '❓', name: 'Help', desc: 'Ask questions, get answers' },
+      offtopic:{ emoji: '🍕', name: 'Off-Topic', desc: 'Everything else' },
+    };
+
+    let currentRoom = 'general';
+    let replyTo = null;
+    let currentListener = null;
+    let loadedMsgIds = new Set();
+
+    // ═══ PRESENCE ═══
+    const presenceRef = ref(db, `presence/${userId}`);
+    const connectedRef = ref(db, '.info/connected');
+    onValue(connectedRef, (snap) => {
+      if (snap.val() === true) {
+        set(presenceRef, { online: true, lastSeen: Date.now() });
+        // Remove on disconnect handled by onDisconnect isn't available with set,
+        // so we use a heartbeat approach
+      }
+    });
+    // Heartbeat presence
+    setInterval(() => set(presenceRef, { online: true, lastSeen: Date.now() }), 30000);
+
+    // Online count
+    const presenceListRef = ref(db, 'presence');
+    onValue(presenceListRef, (snap) => {
+      const now = Date.now();
+      let count = 0;
+      snap.forEach(child => {
+        const data = child.val();
+        if (data.online && data.lastSeen > now - 60000) count++;
+      });
+      document.getElementById('onlineCount').textContent = count;
+    });
+
+    // ═══ SANITIZE ═══
+    function esc(str) {
+      const div = document.createElement('div');
+      div.textContent = str;
+      return div.innerHTML;
+    }
+
+    // ═══ TIME FORMAT ═══
+    function fmtTime(ts) {
+      const d = new Date(ts);
+      const now = new Date();
+      const hours = d.getHours().toString().padStart(2,'0');
+      const mins = d.getMinutes().toString().padStart(2,'0');
+      if (d.toDateString() === now.toDateString()) return `${hours}:${mins}`;
+      return `${d.getDate()}/${d.getMonth()+1} ${hours}:${mins}`;
+    }
+
+    // ═══ RENDER MESSAGE ═══
+    function renderMsg(msgData, msgId) {
+      const div = document.createElement('div');
+      div.className = 'msg';
+      div.dataset.msgId = msgId;
+
+      let replyHtml = '';
+      if (msgData.replyTo) {
+        replyHtml = `<div class="msg-reply-ref" title="Replying to ${esc(msgData.replyToUser || '?')}">↩ ${esc(msgData.replyToUser || '?')}: ${esc(msgData.replyToText || '...')}</div>`;
+      }
+
+      div.innerHTML = `
+        <div class="msg-avatar" style="background:${esc(msgData.color || '#6C63FF')}">${esc(msgData.userId?.substring(0,2) || '??')}</div>
+        <div class="msg-body">
+          ${replyHtml}
+          <div class="msg-header">
+            <span class="msg-user" style="color:${esc(msgData.color || '#6C63FF')}">${esc(msgData.userId || 'Anon')}</span>
+            <span class="msg-time">${fmtTime(msgData.timestamp || Date.now())}</span>
+          </div>
+          <div class="msg-text">${esc(msgData.text || '')}</div>
+        </div>
+        <div class="msg-actions">
+          <button class="msg-action-btn reply-btn" data-msg-id="${esc(msgId)}" data-user="${esc(msgData.userId || '')}" data-text="${esc((msgData.text || '').substring(0,80))}">↩</button>
+        </div>
+      `;
+      return div;
+    }
+
+    // ═══ LOAD ROOM ═══
+    function loadRoom(roomId) {
+      // Detach old listener
+      if (currentListener) {
+        off(ref(db, `messages/${currentRoom}`));
+        currentListener = null;
+      }
+
+      currentRoom = roomId;
+      loadedMsgIds.clear();
+      const room = rooms[roomId];
+      document.getElementById('currentRoomEmoji').textContent = room.emoji;
+      document.getElementById('currentRoomName').textContent = room.name;
+      document.getElementById('currentRoomDesc').textContent = room.desc;
+
+      // Update active button
+      document.querySelectorAll('.room-btn').forEach(b => b.classList.toggle('active', b.dataset.room === roomId));
+
+      // Clear messages
+      const container = document.getElementById('messages');
+      container.innerHTML = '<div class="chat-loading"><div class="spinner"></div> Loading messages...</div>';
+
+      // Cancel any reply
+      cancelReply();
+
+      // Load last 100 messages then listen
+      const msgRef = query(ref(db, `messages/${roomId}`), limitToLast(100));
+
+      let initialLoad = true;
+
+      // Use get for initial load, then listen for new
+      get(msgRef).then(snap => {
+        container.innerHTML = '';
+
+        if (!snap.exists()) {
+          container.innerHTML = `
+            <div class="chat-empty">
+              <svg width="48" height="48" viewBox="0 0 24 24" fill="var(--text-muted)"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H6l-2 2V4h16v12z"/></svg>
+              <p>No messages yet. Be the first to say something!</p>
+            </div>`;
+        } else {
+          snap.forEach(child => {
+            loadedMsgIds.add(child.key);
+            container.appendChild(renderMsg(child.val(), child.key));
+          });
+          container.scrollTop = container.scrollHeight;
+        }
+
+        initialLoad = false;
+
+        // Now listen for NEW messages only
+        currentListener = onChildAdded(query(ref(db, `messages/${roomId}`), limitToLast(1)), (snap) => {
+          if (initialLoad || loadedMsgIds.has(snap.key)) return;
+          loadedMsgIds.add(snap.key);
+
+          // Remove empty state if present
+          const empty = container.querySelector('.chat-empty');
+          if (empty) empty.remove();
+
+          container.appendChild(renderMsg(snap.val(), snap.key));
+          const isNearBottom = container.scrollHeight - container.scrollTop - container.clientHeight < 150;
+          if (isNearBottom) container.scrollTop = container.scrollHeight;
+        });
+      });
+    }
+
+    // ═══ SEND MESSAGE ═══
+    function sendMessage() {
+      const input = document.getElementById('chatInput');
+      const text = input.value.trim();
+      if (!text || text.length > 500) return;
+
+      const msgData = {
+        userId: userId,
+        color: userColor,
+        text: text,
+        timestamp: Date.now(),
+        room: currentRoom,
+      };
+
+      if (replyTo) {
+        msgData.replyTo = replyTo.msgId;
+        msgData.replyToUser = replyTo.user;
+        msgData.replyToText = replyTo.text;
+      }
+
+      push(ref(db, `messages/${currentRoom}`), msgData);
+      input.value = '';
+      input.style.height = 'auto';
+      cancelReply();
+      input.focus();
+    }
+
+    // ═══ REPLY ═══
+    function setReply(msgId, user, text) {
+      replyTo = { msgId, user, text };
+      document.getElementById('replyToUser').textContent = user;
+      document.getElementById('replyToText').textContent = text;
+      document.getElementById('replyPreview').classList.add('active');
+      document.getElementById('chatInput').focus();
+    }
+
+    function cancelReply() {
+      replyTo = null;
+      document.getElementById('replyPreview').classList.remove('active');
+    }
+
+    // ═══ EVENT LISTENERS ═══
+
+    // Room switching
+    document.querySelectorAll('.room-btn').forEach(btn => {
+      btn.addEventListener('click', () => loadRoom(btn.dataset.room));
+    });
+
+    // Send button
+    document.getElementById('chatSend').addEventListener('click', sendMessage);
+
+    // Enter to send (Shift+Enter for newline)
+    document.getElementById('chatInput').addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' && !e.shiftKey) {
+        e.preventDefault();
+        sendMessage();
+      }
+    });
+
+    // Auto-resize textarea
+    document.getElementById('chatInput').addEventListener('input', function() {
+      this.style.height = 'auto';
+      this.style.height = Math.min(this.scrollHeight, 120) + 'px';
+    });
+
+    // Reply button (delegated)
+    document.getElementById('messages').addEventListener('click', (e) => {
+      const btn = e.target.closest('.reply-btn');
+      if (btn) setReply(btn.dataset.msgId, btn.dataset.user, btn.dataset.text);
+    });
+
+    // Cancel reply
+    document.getElementById('replyCancel').addEventListener('click', cancelReply);
+
+    // Mobile toggle
+    document.getElementById('mobileToggle').addEventListener('click', function() {
+      document.getElementById('navLinks').classList.toggle('open');
+    });
+
+    // Clean up presence on unload
+    window.addEventListener('beforeunload', () => {
+      set(presenceRef, { online: false, lastSeen: Date.now() });
+    });
+
+    // ═══ INIT ═══
+    loadRoom('general');
+  </script>
+
+</body>
+</html>
