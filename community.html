@@ -152,19 +152,21 @@
     .load-more-btn:disabled { opacity: 0.5; cursor: not-allowed; }
 
     .msg {
-      display: flex; gap: 10px; padding: 8px 12px;
+      display: flex; flex-direction: column; padding: 6px 12px;
       border-radius: var(--radius-sm); transition: background 0.1s;
-      max-width: 100%;
+      max-width: 100%; position: relative;
     }
     .msg:hover { background: var(--bg); }
     .msg-avatar {
-      width: 36px; height: 36px; border-radius: 50%; flex-shrink: 0;
-      display: flex; align-items: center; justify-content: center;
-      font-weight: 700; font-size: 0.75rem; color: #fff;
+      display: none; /* replaced by name badge */
     }
     .msg-body { min-width: 0; flex: 1; }
-    .msg-header { display: flex; align-items: baseline; gap: 8px; margin-bottom: 2px; }
-    .msg-user { font-weight: 600; font-size: 0.85rem; }
+    .msg-header { display: flex; align-items: center; gap: 8px; margin-bottom: 3px; }
+    .msg-user {
+      font-weight: 700; font-size: 0.8rem; padding: 2px 8px;
+      border-radius: 4px; color: #fff; display: inline-block;
+      line-height: 1.4;
+    }
     .msg-time { font-size: 0.7rem; color: var(--text-muted); }
     .msg-text { font-size: 0.9rem; line-height: 1.6; word-wrap: break-word; overflow-wrap: break-word; color: var(--text); }
     .msg-reply-ref {
@@ -175,9 +177,10 @@
       text-overflow: ellipsis; white-space: nowrap;
     }
     .msg-actions {
-      opacity: 0; display: flex; gap: 4px; margin-left: auto; align-self: flex-start;
+      opacity: 0; display: flex; gap: 4px; margin-left: auto;
     }
     .msg:hover .msg-actions { opacity: 1; }
+    .msg-header .msg-actions { align-self: center; }
     .msg-action-btn {
       border: none; background: var(--tag-bg); cursor: pointer;
       padding: 2px 6px; border-radius: 4px; font-size: 0.75rem;
@@ -517,17 +520,16 @@
       }
 
       div.innerHTML = `
-        <div class="msg-avatar" style="background:${esc(msgData.color || '#6C63FF')}">${esc(msgData.userId?.substring(0,2) || '??')}</div>
         <div class="msg-body">
           ${replyHtml}
           <div class="msg-header">
-            <span class="msg-user" style="color:${esc(msgData.color || '#6C63FF')}">${esc(msgData.userId || 'Anon')}</span>
+            <span class="msg-user" style="background:${esc(msgData.color || '#6C63FF')}">${esc(msgData.userId || 'Anon')}</span>
             <span class="msg-time">${fmtTime(msgData.timestamp || Date.now())}</span>
+            <div class="msg-actions">
+              <button class="msg-action-btn reply-btn" data-msg-id="${esc(msgId)}" data-user="${esc(msgData.userId || '')}" data-text="${esc((msgData.text || '').substring(0,80))}">↩</button>
+            </div>
           </div>
           <div class="msg-text">${esc(msgData.text || '')}</div>
-        </div>
-        <div class="msg-actions">
-          <button class="msg-action-btn reply-btn" data-msg-id="${esc(msgId)}" data-user="${esc(msgData.userId || '')}" data-text="${esc((msgData.text || '').substring(0,80))}">↩</button>
         </div>
       `;
       return div;
