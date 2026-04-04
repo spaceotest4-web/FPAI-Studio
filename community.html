@@ -133,9 +133,9 @@
 
     /* ─── MESSAGES ─── */
     .messages-container {
-      flex: 1; overflow-y: auto; padding: 1rem; display: flex;
-      flex-direction: column; gap: 0.25rem;
-      min-height: 0; /* allow flex shrink */
+      flex: 1; overflow-y: auto; padding: 8px 10px; display: flex;
+      flex-direction: column; gap: 1px;
+      min-height: 0;
     }
     .messages-container::-webkit-scrollbar { width: 6px; }
     .messages-container::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
@@ -152,35 +152,52 @@
     .load-more-btn:disabled { opacity: 0.5; cursor: not-allowed; }
 
     .msg {
-      display: flex; flex-direction: column; padding: 6px 12px;
-      border-radius: var(--radius-sm); transition: background 0.1s;
-      max-width: 100%; position: relative;
+      display: flex; align-items: baseline; padding: 3px 8px;
+      border-radius: 3px; transition: background 0.1s;
+      max-width: 100%; position: relative; gap: 0;
+      line-height: 1.5; min-height: 0;
     }
     .msg:hover { background: var(--bg); }
     .msg-avatar {
       display: none; /* replaced by name badge */
     }
-    .msg-body { min-width: 0; flex: 1; }
-    .msg-header { display: flex; align-items: center; gap: 8px; margin-bottom: 3px; }
+    .msg-body { display: contents; }
+    .msg-header { display: contents; }
     .msg-user {
-      font-weight: 700; font-size: 0.8rem; padding: 2px 8px;
-      border-radius: 4px; color: #fff; display: inline-block;
-      line-height: 1.4;
+      font-weight: 700; font-size: 0.72rem; padding: 1px 5px;
+      border-radius: 3px; color: #fff; display: inline;
+      line-height: 1.3; white-space: nowrap; flex-shrink: 0;
+      margin-right: 6px; vertical-align: middle;
     }
-    .msg-time { font-size: 0.7rem; color: var(--text-muted); }
-    .msg-text { font-size: 0.9rem; line-height: 1.6; word-wrap: break-word; overflow-wrap: break-word; color: var(--text); }
+    .msg-name {
+      font-weight: 600; font-size: 0.82rem; white-space: nowrap;
+      margin-right: 5px; flex-shrink: 0;
+    }
+    .msg-text {
+      font-size: 0.88rem; line-height: 1.5; word-wrap: break-word;
+      overflow-wrap: break-word; color: var(--text); flex: 1;
+      display: inline;
+    }
+    .msg-time {
+      font-size: 0.65rem; color: var(--text-muted); white-space: nowrap;
+      margin-left: auto; padding-left: 8px; flex-shrink: 0;
+      opacity: 0.6;
+    }
     .msg-reply-ref {
-      font-size: 0.78rem; color: var(--text-muted); padding: 4px 8px;
-      border-left: 2px solid var(--primary); margin-bottom: 4px;
-      background: rgba(108,99,255,0.04); border-radius: 0 4px 4px 0;
-      cursor: pointer; max-height: 2.4em; overflow: hidden;
+      font-size: 0.72rem; color: var(--text-muted); padding: 2px 6px;
+      border-left: 2px solid var(--primary);
+      background: rgba(108,99,255,0.04); border-radius: 0 3px 3px 0;
+      cursor: pointer; overflow: hidden;
       text-overflow: ellipsis; white-space: nowrap;
+      margin-bottom: 1px; display: block;
     }
+    .msg.has-reply { flex-wrap: wrap; }
+    .msg.has-reply .msg-reply-ref { width: 100%; flex-basis: 100%; }
     .msg-actions {
-      opacity: 0; display: flex; gap: 4px; margin-left: auto;
+      opacity: 0; display: inline-flex; gap: 4px; margin-left: 4px;
+      flex-shrink: 0;
     }
     .msg:hover .msg-actions { opacity: 1; }
-    .msg-header .msg-actions { align-self: center; }
     .msg-action-btn {
       border: none; background: var(--tag-bg); cursor: pointer;
       padding: 2px 6px; border-radius: 4px; font-size: 0.75rem;
@@ -519,19 +536,9 @@
         replyHtml = `<div class="msg-reply-ref" title="Replying to ${esc(msgData.replyToUser || '?')}">↩ ${esc(msgData.replyToUser || '?')}: ${esc(msgData.replyToText || '...')}</div>`;
       }
 
-      div.innerHTML = `
-        <div class="msg-body">
-          ${replyHtml}
-          <div class="msg-header">
-            <span class="msg-user" style="background:${esc(msgData.color || '#6C63FF')}">${esc(msgData.userId || 'Anon')}</span>
-            <span class="msg-time">${fmtTime(msgData.timestamp || Date.now())}</span>
-            <div class="msg-actions">
-              <button class="msg-action-btn reply-btn" data-msg-id="${esc(msgId)}" data-user="${esc(msgData.userId || '')}" data-text="${esc((msgData.text || '').substring(0,80))}">↩</button>
-            </div>
-          </div>
-          <div class="msg-text">${esc(msgData.text || '')}</div>
-        </div>
-      `;
+      if (msgData.replyTo) div.classList.add('has-reply');
+
+      div.innerHTML = `${replyHtml}<span class="msg-user" style="background:${esc(msgData.color || '#6C63FF')}">${esc(msgData.userId || 'Anon')}</span><span class="msg-text">${esc(msgData.text || '')}</span><span class="msg-time">${fmtTime(msgData.timestamp || Date.now())}</span><span class="msg-actions"><button class="msg-action-btn reply-btn" data-msg-id="${esc(msgId)}" data-user="${esc(msgData.userId || '')}" data-text="${esc((msgData.text || '').substring(0,80))}">↩</button></span>`;
       return div;
     }
 
