@@ -17,22 +17,26 @@
   <link rel="stylesheet" href="style.css">
 
   <style>
-    /* ═══ CHAT PAGE STYLES ═══ */
+    /* ═══ CHAT PAGE — FIXED VIEWPORT LAYOUT ═══ */
+    html, body { height: 100%; overflow: hidden; }
+
     .chat-page {
-      min-height: calc(100vh - 70px);
       display: flex;
       flex-direction: column;
+      height: calc(100vh - 70px); /* subtract nav height */
+      overflow: hidden;
     }
 
     .chat-header {
       background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
       color: #fff;
-      padding: 2rem 0 1.5rem;
+      padding: 1.25rem 0 1rem;
       text-align: center;
+      flex-shrink: 0;
     }
-    .chat-header h1 { color: #fff; font-size: 1.75rem; margin-bottom: 0.25rem; }
-    .chat-header p { opacity: 0.85; font-size: 0.95rem; }
-    .online-count { display: inline-flex; align-items: center; gap: 6px; font-size: 0.8rem; background: rgba(255,255,255,0.15); padding: 4px 12px; border-radius: 20px; margin-top: 0.5rem; }
+    .chat-header h1 { color: #fff; font-size: 1.5rem; margin-bottom: 0.15rem; }
+    .chat-header p { opacity: 0.85; font-size: 0.88rem; }
+    .online-count { display: inline-flex; align-items: center; gap: 6px; font-size: 0.8rem; background: rgba(255,255,255,0.15); padding: 4px 12px; border-radius: 20px; margin-top: 0.4rem; }
     .online-dot { width: 8px; height: 8px; border-radius: 50%; background: #4ade80; animation: pulse-dot 2s infinite; }
     @keyframes pulse-dot { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
 
@@ -42,9 +46,10 @@
       max-width: var(--max-width);
       margin: 0 auto;
       width: 100%;
-      padding: 1rem 1.25rem;
+      padding: 0.75rem 1.25rem;
       gap: 1rem;
-      min-height: 600px;
+      overflow: hidden;
+      min-height: 0; /* crucial for flex children to shrink */
     }
 
     /* ─── ROOMS SIDEBAR ─── */
@@ -54,14 +59,15 @@
       display: flex;
       flex-direction: column;
       gap: 4px;
+      overflow-y: auto;
     }
-    .rooms-sidebar h3 { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); margin-bottom: 0.5rem; padding: 0 0.5rem; }
+    .rooms-sidebar h3 { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); margin-bottom: 0.5rem; padding: 0 0.5rem; flex-shrink: 0; }
     .room-btn {
       display: flex; align-items: center; gap: 8px;
       padding: 10px 14px; border-radius: var(--radius-sm);
       border: none; background: none; cursor: pointer;
       font-family: inherit; font-size: 0.9rem; color: var(--text-light);
-      transition: all 0.15s; text-align: left; width: 100%;
+      transition: all 0.15s; text-align: left; width: 100%; flex-shrink: 0;
     }
     .room-btn:hover { background: var(--tag-bg); color: var(--text); }
     .room-btn.active { background: var(--primary); color: #fff; font-weight: 500; }
@@ -73,17 +79,55 @@
     }
     .room-btn.active .room-unread { background: rgba(255,255,255,0.3); }
 
+    /* Add room button */
+    .add-room-btn {
+      display: flex; align-items: center; gap: 8px;
+      padding: 10px 14px; border-radius: var(--radius-sm);
+      border: 1px dashed var(--border); background: none; cursor: pointer;
+      font-family: inherit; font-size: 0.85rem; color: var(--text-muted);
+      transition: all 0.15s; text-align: left; width: 100%; margin-top: 4px;
+    }
+    .add-room-btn:hover { border-color: var(--primary); color: var(--primary); background: rgba(108,99,255,0.04); }
+    .add-room-btn .plus-icon { font-size: 1.2rem; font-weight: 300; }
+
+    /* New room modal */
+    .modal-overlay {
+      display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5);
+      z-index: 1000; align-items: center; justify-content: center;
+    }
+    .modal-overlay.active { display: flex; }
+    .modal-box {
+      background: var(--bg-white); border-radius: var(--radius); padding: 1.5rem;
+      width: 90%; max-width: 380px; box-shadow: 0 16px 48px rgba(0,0,0,0.2);
+    }
+    .modal-box h3 { margin-bottom: 1rem; font-size: 1.1rem; }
+    .modal-box input {
+      width: 100%; padding: 10px 12px; border: 1px solid var(--border);
+      border-radius: var(--radius-sm); font-family: inherit; font-size: 0.9rem;
+      outline: none; margin-bottom: 0.75rem; box-sizing: border-box;
+    }
+    .modal-box input:focus { border-color: var(--primary); }
+    .modal-actions { display: flex; gap: 8px; justify-content: flex-end; }
+    .modal-actions button {
+      padding: 8px 18px; border-radius: var(--radius-sm); border: none;
+      font-family: inherit; font-size: 0.85rem; cursor: pointer; font-weight: 500;
+    }
+    .modal-cancel { background: var(--tag-bg); color: var(--text); }
+    .modal-cancel:hover { background: var(--border); }
+    .modal-create { background: var(--primary); color: #fff; }
+    .modal-create:hover { background: var(--primary-dark); }
+
     /* ─── CHAT MAIN ─── */
     .chat-main {
       flex: 1; display: flex; flex-direction: column;
       background: var(--bg-white); border-radius: var(--radius);
       border: 1px solid var(--border); overflow: hidden;
-      min-width: 0;
+      min-width: 0; min-height: 0;
     }
     .chat-room-header {
       padding: 12px 16px; border-bottom: 1px solid var(--border);
       display: flex; align-items: center; gap: 8px;
-      font-weight: 600; font-size: 1rem;
+      font-weight: 600; font-size: 1rem; flex-shrink: 0;
     }
     .chat-room-header .room-desc { font-weight: 400; font-size: 0.8rem; color: var(--text-muted); margin-left: 8px; }
 
@@ -91,10 +135,21 @@
     .messages-container {
       flex: 1; overflow-y: auto; padding: 1rem; display: flex;
       flex-direction: column; gap: 0.25rem;
-      scroll-behavior: smooth;
+      min-height: 0; /* allow flex shrink */
     }
     .messages-container::-webkit-scrollbar { width: 6px; }
     .messages-container::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+
+    /* Load more button */
+    .load-more-btn {
+      align-self: center; border: none; background: var(--tag-bg);
+      color: var(--primary); padding: 6px 20px; border-radius: 20px;
+      font-family: inherit; font-size: 0.8rem; cursor: pointer;
+      font-weight: 500; margin-bottom: 8px; transition: all 0.15s;
+      flex-shrink: 0;
+    }
+    .load-more-btn:hover { background: var(--primary); color: #fff; }
+    .load-more-btn:disabled { opacity: 0.5; cursor: not-allowed; }
 
     .msg {
       display: flex; gap: 10px; padding: 8px 12px;
@@ -136,29 +191,16 @@
       padding: 4px 0; font-style: italic;
     }
 
-    /* Day divider */
-    .day-divider {
-      text-align: center; font-size: 0.72rem; color: var(--text-muted);
-      padding: 12px 0 4px; position: relative;
-    }
-    .day-divider::before {
-      content: ''; position: absolute; top: 50%; left: 0; right: 0;
-      height: 1px; background: var(--border);
-    }
-    .day-divider span {
-      background: var(--bg-white); padding: 0 12px; position: relative;
-    }
-
     /* ─── INPUT BAR ─── */
     .chat-input-bar {
       padding: 12px 16px; border-top: 1px solid var(--border);
-      display: flex; gap: 8px; align-items: flex-end;
+      display: flex; gap: 8px; align-items: flex-end; flex-shrink: 0;
     }
     .reply-preview {
       display: none; padding: 6px 12px; margin: 0 16px;
       background: rgba(108,99,255,0.06); border-left: 3px solid var(--primary);
       border-radius: 0 6px 6px 0; font-size: 0.8rem; color: var(--text-light);
-      align-items: center; gap: 8px;
+      align-items: center; gap: 8px; flex-shrink: 0;
     }
     .reply-preview.active { display: flex; }
     .reply-preview-text { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
@@ -185,12 +227,19 @@
     .chat-send:disabled { opacity: 0.5; cursor: not-allowed; }
 
     /* ─── YOUR ID BADGE ─── */
+    .chat-bottom-info {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 4px 16px 6px; flex-shrink: 0;
+    }
     .your-id {
       display: flex; align-items: center; gap: 6px;
       font-size: 0.78rem; color: var(--text-muted);
-      padding: 4px 0 0 4px;
     }
     .your-id-code { font-weight: 700; color: var(--primary); font-family: monospace; font-size: 0.85rem; }
+
+    .chat-rules {
+      font-size: 0.72rem; color: var(--text-muted); text-align: right;
+    }
 
     /* ─── EMPTY STATE ─── */
     .chat-empty {
@@ -202,22 +251,20 @@
     .chat-empty p { font-size: 0.9rem; }
 
     /* ─── MOBILE ─── */
-    .rooms-toggle {
-      display: none; border: none; background: var(--tag-bg);
-      padding: 8px 14px; border-radius: var(--radius-sm);
-      font-family: inherit; font-size: 0.85rem; cursor: pointer;
-      color: var(--text); font-weight: 500;
-    }
     @media (max-width: 768px) {
-      .chat-layout { flex-direction: column; min-height: 500px; }
+      .chat-page { height: calc(100vh - 60px); }
+      .chat-layout { flex-direction: column; padding: 0.5rem; gap: 0.5rem; }
       .rooms-sidebar {
         flex-direction: row; width: 100%; overflow-x: auto;
-        gap: 4px; padding-bottom: 4px;
+        gap: 4px; padding-bottom: 4px; flex-shrink: 0;
       }
       .rooms-sidebar h3 { display: none; }
       .room-btn { white-space: nowrap; padding: 8px 12px; font-size: 0.82rem; }
-      .chat-header h1 { font-size: 1.35rem; }
-      .chat-main { min-height: 400px; }
+      .add-room-btn { white-space: nowrap; padding: 8px 12px; font-size: 0.8rem; min-width: fit-content; }
+      .chat-header { padding: 0.75rem 0; }
+      .chat-header h1 { font-size: 1.2rem; }
+      .chat-header p { font-size: 0.8rem; }
+      .chat-main { min-height: 0; flex: 1; }
     }
 
     /* ─── LOADING ─── */
@@ -228,18 +275,11 @@
       animation: spin 0.6s linear infinite;
     }
     @keyframes spin { to { transform: rotate(360deg); } }
-
-    /* ─── RULES NOTICE ─── */
-    .chat-rules {
-      font-size: 0.75rem; color: var(--text-muted); text-align: center;
-      padding: 8px 16px; background: rgba(108,99,255,0.03);
-      border-top: 1px solid var(--border);
-    }
   </style>
 </head>
 <body>
 
-  <!-- HEADER (same as all pages) -->
+  <!-- HEADER -->
   <header class="site-header">
     <div class="container">
       <a href="index.html" class="logo">
@@ -279,6 +319,8 @@
         <button class="room-btn" data-room="gallery"><span class="room-emoji">🎨</span> Gallery</button>
         <button class="room-btn" data-room="help"><span class="room-emoji">❓</span> Help</button>
         <button class="room-btn" data-room="offtopic"><span class="room-emoji">🍕</span> Off-Topic</button>
+        <!-- Custom rooms inserted here by JS -->
+        <button class="add-room-btn" id="addRoomBtn"><span class="plus-icon">+</span> New Channel</button>
       </div>
 
       <!-- CHAT -->
@@ -305,29 +347,33 @@
             <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
           </button>
         </div>
-        <div class="your-id">Your ID: <span class="your-id-code" id="yourId">...</span></div>
-        <div class="chat-rules">Be respectful. No spam, NSFW, or harassment. Messages are public.</div>
+        <div class="chat-bottom-info">
+          <div class="your-id">Your ID: <span class="your-id-code" id="yourId">...</span></div>
+          <div class="chat-rules">Be respectful. No spam or harassment.</div>
+        </div>
       </div>
     </div>
   </div>
 
-  <!-- FOOTER -->
-  <footer class="site-footer">
-    <div class="container">
-      <div class="footer-grid">
-        <div class="footer-col"><h4>FP AI Studio</h4><p>The all-in-one AI creative studio for Android.</p></div>
-        <div class="footer-col"><h4>Features</h4><ul><li><a href="index.html#features">Image Generation</a></li><li><a href="index.html#features">Video Generation</a></li></ul></div>
-        <div class="footer-col"><h4>Resources</h4><ul><li><a href="blog.html">Blog</a></li><li><a href="community.html">Community</a></li></ul></div>
-        <div class="footer-col"><h4>Legal</h4><ul><li><a href="#">Privacy Policy</a></li><li><a href="#">Terms of Service</a></li></ul></div>
+  <!-- NEW CHANNEL MODAL -->
+  <div class="modal-overlay" id="newRoomModal">
+    <div class="modal-box">
+      <h3>✨ Create a Channel</h3>
+      <input type="text" id="newRoomName" placeholder="Channel name (e.g. Flux Tips)" maxlength="24" autocomplete="off">
+      <input type="text" id="newRoomEmoji" placeholder="Emoji (optional, e.g. 🔥)" maxlength="2">
+      <div class="modal-actions">
+        <button class="modal-cancel" id="modalCancel">Cancel</button>
+        <button class="modal-create" id="modalCreate">Create</button>
       </div>
-      <div class="footer-bottom">&copy; 2026 FP AI Studio. All rights reserved.</div>
     </div>
-  </footer>
+  </div>
+
+  <!-- FOOTER (hidden on this page to maximize chat space — accessible via nav) -->
 
   <!-- FIREBASE -->
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-app.js";
-    import { getDatabase, ref, push, onChildAdded, onValue, set, serverTimestamp, get, query, limitToLast, off } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-database.js";
+    import { getDatabase, ref, push, onChildAdded, onValue, set, get, query, limitToLast, orderByKey, endBefore, off } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-database.js";
 
     // ═══ FIREBASE CONFIG ═══
     const firebaseConfig = {
@@ -342,6 +388,8 @@
 
     const app = initializeApp(firebaseConfig);
     const db = getDatabase(app);
+
+    const BATCH_SIZE = 50;
 
     // ═══ USER IDENTITY ═══
     function generateId() {
@@ -372,18 +420,21 @@
     document.getElementById('yourId').textContent = userId;
 
     // ═══ ROOM CONFIG ═══
-    const rooms = {
-      general: { emoji: '💬', name: 'General', desc: 'Chat about anything AI' },
-      prompts: { emoji: '✨', name: 'Prompts', desc: 'Share and discover great prompts' },
-      gallery: { emoji: '🎨', name: 'Gallery', desc: 'Show off your AI creations' },
-      help:    { emoji: '❓', name: 'Help', desc: 'Ask questions, get answers' },
-      offtopic:{ emoji: '🍕', name: 'Off-Topic', desc: 'Everything else' },
+    const defaultRooms = {
+      general:  { emoji: '💬', name: 'General',  desc: 'Chat about anything AI' },
+      prompts:  { emoji: '✨', name: 'Prompts',  desc: 'Share and discover great prompts' },
+      gallery:  { emoji: '🎨', name: 'Gallery',  desc: 'Show off your AI creations' },
+      help:     { emoji: '❓', name: 'Help',     desc: 'Ask questions, get answers' },
+      offtopic: { emoji: '🍕', name: 'Off-Topic', desc: 'Everything else' },
     };
 
+    let rooms = { ...defaultRooms };
     let currentRoom = 'general';
     let replyTo = null;
     let currentListener = null;
-    let loadedMsgIds = new Set();
+    let oldestKey = null; // for pagination
+    let isLoadingMore = false;
+    let allLoaded = false; // no more older messages
 
     // ═══ PRESENCE ═══
     const presenceRef = ref(db, `presence/${userId}`);
@@ -391,14 +442,10 @@
     onValue(connectedRef, (snap) => {
       if (snap.val() === true) {
         set(presenceRef, { online: true, lastSeen: Date.now() });
-        // Remove on disconnect handled by onDisconnect isn't available with set,
-        // so we use a heartbeat approach
       }
     });
-    // Heartbeat presence
     setInterval(() => set(presenceRef, { online: true, lastSeen: Date.now() }), 30000);
 
-    // Online count
     const presenceListRef = ref(db, 'presence');
     onValue(presenceListRef, (snap) => {
       const now = Date.now();
@@ -409,6 +456,37 @@
       });
       document.getElementById('onlineCount').textContent = count;
     });
+
+    // ═══ CUSTOM ROOMS (from Firebase) ═══
+    function loadCustomRooms() {
+      const roomsRef = ref(db, 'custom_rooms');
+      onValue(roomsRef, (snap) => {
+        // Remove old custom room buttons
+        document.querySelectorAll('.room-btn[data-custom="true"]').forEach(b => b.remove());
+        // Reset rooms to defaults
+        rooms = { ...defaultRooms };
+
+        if (snap.exists()) {
+          const addBtn = document.getElementById('addRoomBtn');
+          snap.forEach(child => {
+            const data = child.val();
+            const roomId = child.key;
+            rooms[roomId] = { emoji: data.emoji || '💬', name: data.name, desc: data.desc || 'Custom channel' };
+            // Create button
+            const btn = document.createElement('button');
+            btn.className = 'room-btn';
+            btn.dataset.room = roomId;
+            btn.dataset.custom = 'true';
+            btn.innerHTML = `<span class="room-emoji">${esc(data.emoji || '💬')}</span> ${esc(data.name)}`;
+            btn.addEventListener('click', () => loadRoom(roomId));
+            addBtn.parentNode.insertBefore(btn, addBtn);
+          });
+        }
+
+        // Re-apply active state
+        document.querySelectorAll('.room-btn').forEach(b => b.classList.toggle('active', b.dataset.room === currentRoom));
+      });
+    }
 
     // ═══ SANITIZE ═══
     function esc(str) {
@@ -455,6 +533,72 @@
       return div;
     }
 
+    // ═══ LOAD MORE (older messages) ═══
+    function createLoadMoreBtn() {
+      const btn = document.createElement('button');
+      btn.className = 'load-more-btn';
+      btn.id = 'loadMoreBtn';
+      btn.textContent = '↑ Load older messages';
+      btn.addEventListener('click', loadOlderMessages);
+      return btn;
+    }
+
+    async function loadOlderMessages() {
+      if (isLoadingMore || allLoaded || !oldestKey) return;
+      isLoadingMore = true;
+
+      const btn = document.getElementById('loadMoreBtn');
+      if (btn) { btn.textContent = 'Loading...'; btn.disabled = true; }
+
+      const container = document.getElementById('messages');
+      const prevScrollHeight = container.scrollHeight;
+
+      try {
+        // Fetch messages BEFORE the oldest key
+        const olderQuery = query(ref(db, `messages/${currentRoom}`), orderByKey(), endBefore(oldestKey), limitToLast(BATCH_SIZE));
+        const snap = await get(olderQuery);
+
+        if (!snap.exists() || snap.size === 0) {
+          allLoaded = true;
+          if (btn) btn.remove();
+          return;
+        }
+
+        const msgs = [];
+        snap.forEach(child => {
+          msgs.push({ key: child.key, val: child.val() });
+        });
+
+        if (msgs.length < BATCH_SIZE) {
+          allLoaded = true;
+          if (btn) btn.remove();
+        } else if (btn) {
+          btn.textContent = '↑ Load older messages';
+          btn.disabled = false;
+        }
+
+        // Update oldest key
+        oldestKey = msgs[0].key;
+
+        // Insert messages after the load-more button (or at start)
+        const insertBefore = btn ? btn.nextSibling : container.firstChild;
+        msgs.forEach(m => {
+          const el = renderMsg(m.val, m.key);
+          container.insertBefore(el, insertBefore);
+        });
+
+        // Maintain scroll position
+        const newScrollHeight = container.scrollHeight;
+        container.scrollTop = newScrollHeight - prevScrollHeight;
+
+      } catch (e) {
+        console.error('Load more error:', e);
+        if (btn) { btn.textContent = '↑ Load older messages'; btn.disabled = false; }
+      } finally {
+        isLoadingMore = false;
+      }
+    }
+
     // ═══ LOAD ROOM ═══
     function loadRoom(roomId) {
       // Detach old listener
@@ -464,8 +608,11 @@
       }
 
       currentRoom = roomId;
-      loadedMsgIds.clear();
-      const room = rooms[roomId];
+      oldestKey = null;
+      allLoaded = false;
+      isLoadingMore = false;
+
+      const room = rooms[roomId] || { emoji: '💬', name: roomId, desc: '' };
       document.getElementById('currentRoomEmoji').textContent = room.emoji;
       document.getElementById('currentRoomName').textContent = room.name;
       document.getElementById('currentRoomDesc').textContent = room.desc;
@@ -473,19 +620,14 @@
       // Update active button
       document.querySelectorAll('.room-btn').forEach(b => b.classList.toggle('active', b.dataset.room === roomId));
 
-      // Clear messages
       const container = document.getElementById('messages');
       container.innerHTML = '<div class="chat-loading"><div class="spinner"></div> Loading messages...</div>';
 
-      // Cancel any reply
       cancelReply();
 
-      // Load last 100 messages then listen
-      const msgRef = query(ref(db, `messages/${roomId}`), limitToLast(100));
+      // Load latest BATCH_SIZE messages
+      const msgRef = query(ref(db, `messages/${roomId}`), limitToLast(BATCH_SIZE));
 
-      let initialLoad = true;
-
-      // Use get for initial load, then listen for new
       get(msgRef).then(snap => {
         container.innerHTML = '';
 
@@ -496,25 +638,39 @@
               <p>No messages yet. Be the first to say something!</p>
             </div>`;
         } else {
-          snap.forEach(child => {
-            loadedMsgIds.add(child.key);
-            container.appendChild(renderMsg(child.val(), child.key));
+          const msgs = [];
+          snap.forEach(child => { msgs.push({ key: child.key, val: child.val() }); });
+
+          // Track oldest key for pagination
+          oldestKey = msgs[0].key;
+
+          // If we got a full batch, there might be more
+          if (msgs.length >= BATCH_SIZE) {
+            container.appendChild(createLoadMoreBtn());
+          } else {
+            allLoaded = true;
+          }
+
+          msgs.forEach(m => {
+            container.appendChild(renderMsg(m.val, m.key));
           });
+
+          // Scroll to bottom
           container.scrollTop = container.scrollHeight;
         }
 
-        initialLoad = false;
+        // Listen for NEW messages
+        const loadedKeys = new Set();
+        snap?.forEach(child => loadedKeys.add(child.key));
 
-        // Now listen for NEW messages only
-        currentListener = onChildAdded(query(ref(db, `messages/${roomId}`), limitToLast(1)), (snap) => {
-          if (initialLoad || loadedMsgIds.has(snap.key)) return;
-          loadedMsgIds.add(snap.key);
+        currentListener = onChildAdded(query(ref(db, `messages/${roomId}`), limitToLast(1)), (childSnap) => {
+          if (loadedKeys.has(childSnap.key)) return;
+          loadedKeys.add(childSnap.key);
 
-          // Remove empty state if present
           const empty = container.querySelector('.chat-empty');
           if (empty) empty.remove();
 
-          container.appendChild(renderMsg(snap.val(), snap.key));
+          container.appendChild(renderMsg(childSnap.val(), childSnap.key));
           const isNearBottom = container.scrollHeight - container.scrollTop - container.clientHeight < 150;
           if (isNearBottom) container.scrollTop = container.scrollHeight;
         });
@@ -562,17 +718,62 @@
       document.getElementById('replyPreview').classList.remove('active');
     }
 
+    // ═══ NEW CHANNEL MODAL ═══
+    const modal = document.getElementById('newRoomModal');
+    document.getElementById('addRoomBtn').addEventListener('click', () => {
+      modal.classList.add('active');
+      document.getElementById('newRoomName').value = '';
+      document.getElementById('newRoomEmoji').value = '';
+      document.getElementById('newRoomName').focus();
+    });
+    document.getElementById('modalCancel').addEventListener('click', () => modal.classList.remove('active'));
+    modal.addEventListener('click', (e) => { if (e.target === modal) modal.classList.remove('active'); });
+
+    document.getElementById('modalCreate').addEventListener('click', createRoom);
+    document.getElementById('newRoomName').addEventListener('keydown', (e) => { if (e.key === 'Enter') createRoom(); });
+
+    function createRoom() {
+      const nameInput = document.getElementById('newRoomName');
+      const emojiInput = document.getElementById('newRoomEmoji');
+      const name = nameInput.value.trim();
+      const emoji = emojiInput.value.trim() || '💬';
+
+      if (!name || name.length < 2 || name.length > 24) return;
+
+      // Create a slug for the room ID
+      const slug = name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+      if (!slug) return;
+
+      // Check if room exists
+      if (rooms[slug]) {
+        loadRoom(slug);
+        modal.classList.remove('active');
+        return;
+      }
+
+      // Save to Firebase
+      set(ref(db, `custom_rooms/${slug}`), {
+        name: name,
+        emoji: emoji,
+        desc: `Created by ${userId}`,
+        createdBy: userId,
+        createdAt: Date.now()
+      }).then(() => {
+        modal.classList.remove('active');
+        // loadCustomRooms listener will add the button; switch to it after a short delay
+        setTimeout(() => loadRoom(slug), 500);
+      });
+    }
+
     // ═══ EVENT LISTENERS ═══
 
-    // Room switching
-    document.querySelectorAll('.room-btn').forEach(btn => {
+    // Room switching (default rooms)
+    document.querySelectorAll('.room-btn[data-room]').forEach(btn => {
       btn.addEventListener('click', () => loadRoom(btn.dataset.room));
     });
 
-    // Send button
     document.getElementById('chatSend').addEventListener('click', sendMessage);
 
-    // Enter to send (Shift+Enter for newline)
     document.getElementById('chatInput').addEventListener('keydown', (e) => {
       if (e.key === 'Enter' && !e.shiftKey) {
         e.preventDefault();
@@ -580,32 +781,28 @@
       }
     });
 
-    // Auto-resize textarea
     document.getElementById('chatInput').addEventListener('input', function() {
       this.style.height = 'auto';
       this.style.height = Math.min(this.scrollHeight, 120) + 'px';
     });
 
-    // Reply button (delegated)
     document.getElementById('messages').addEventListener('click', (e) => {
       const btn = e.target.closest('.reply-btn');
       if (btn) setReply(btn.dataset.msgId, btn.dataset.user, btn.dataset.text);
     });
 
-    // Cancel reply
     document.getElementById('replyCancel').addEventListener('click', cancelReply);
 
-    // Mobile toggle
     document.getElementById('mobileToggle').addEventListener('click', function() {
       document.getElementById('navLinks').classList.toggle('open');
     });
 
-    // Clean up presence on unload
     window.addEventListener('beforeunload', () => {
       set(presenceRef, { online: false, lastSeen: Date.now() });
     });
 
     // ═══ INIT ═══
+    loadCustomRooms();
     loadRoom('general');
   </script>
 
