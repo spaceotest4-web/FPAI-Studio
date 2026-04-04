@@ -254,25 +254,26 @@
       .chat-layout { flex-direction: column; padding: 0; gap: 0; }
       .rooms-sidebar {
         flex-direction: row; width: 100%; overflow-x: auto;
-        gap: 6px; padding: 8px 12px; flex-shrink: 0;
+        gap: 4px; padding: 6px 8px; flex-shrink: 0;
         background: var(--bg-white); border-bottom: 1px solid var(--border);
         -webkit-overflow-scrolling: touch;
         scrollbar-width: none;
+        flex-wrap: wrap;
       }
       .rooms-sidebar::-webkit-scrollbar { display: none; }
       .rooms-sidebar h3 { display: none; }
       .room-btn {
-        white-space: nowrap; padding: 6px 14px; font-size: 0.78rem;
-        border-radius: 20px; background: var(--tag-bg); color: var(--text-light);
-        border: 1px solid transparent; gap: 4px; min-width: fit-content;
+        white-space: nowrap; padding: 4px 10px; font-size: 0.7rem;
+        border-radius: 14px; background: var(--tag-bg); color: var(--text-light);
+        border: 1px solid transparent; gap: 3px; min-width: fit-content;
       }
-      .room-btn .room-emoji { font-size: 0.9rem; }
+      .room-btn .room-emoji { font-size: 0.75rem; }
+      .add-room-btn {
+        white-space: nowrap; padding: 4px 10px; font-size: 0.7rem;
+        min-width: fit-content; border-radius: 14px;
+      }
       .room-btn.active {
         background: var(--primary); color: #fff; border-color: var(--primary);
-      }
-      .add-room-btn {
-        white-space: nowrap; padding: 6px 14px; font-size: 0.78rem;
-        min-width: fit-content; border-radius: 20px;
       }
       .chat-header { padding: 0.6rem 0; }
       .chat-header h1 { font-size: 1.1rem; }
