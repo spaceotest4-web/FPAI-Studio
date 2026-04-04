@@ -250,21 +250,82 @@
     .chat-empty svg { opacity: 0.3; }
     .chat-empty p { font-size: 0.9rem; }
 
+    /* ─── IMAGE ATTACHMENT ─── */
+    .chat-img-btn {
+      width: 42px; height: 42px; border-radius: var(--radius-sm); border: none;
+      background: var(--tag-bg); color: var(--text-muted); cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: all 0.15s; flex-shrink: 0;
+    }
+    .chat-img-btn:hover { background: var(--primary); color: #fff; }
+    .img-preview-bar {
+      display: none; padding: 8px 16px; border-top: 1px solid var(--border);
+      align-items: center; gap: 10px; flex-shrink: 0;
+    }
+    .img-preview-bar.active { display: flex; }
+    .img-preview-thumb {
+      width: 48px; height: 48px; border-radius: 6px; object-fit: cover;
+      border: 1px solid var(--border);
+    }
+    .img-preview-name { flex: 1; font-size: 0.8rem; color: var(--text-light); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .img-preview-cancel {
+      border: none; background: none; cursor: pointer; font-size: 1.1rem;
+      color: var(--text-muted); padding: 0 4px;
+    }
+    .img-preview-cancel:hover { color: var(--text); }
+    .msg-img {
+      max-width: 280px; max-height: 200px; border-radius: 6px;
+      margin-top: 4px; cursor: pointer; display: block;
+    }
+    .msg-img:hover { opacity: 0.9; }
+
+    /* Image lightbox */
+    .lightbox {
+      display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.85);
+      z-index: 2000; align-items: center; justify-content: center; cursor: zoom-out;
+    }
+    .lightbox.active { display: flex; }
+    .lightbox img { max-width: 95vw; max-height: 95vh; border-radius: 8px; }
+
     /* ─── MOBILE ─── */
     @media (max-width: 768px) {
-      .chat-page { height: calc(100vh - 60px); }
-      .chat-layout { flex-direction: column; padding: 0.5rem; gap: 0.5rem; }
+      .chat-page { height: calc(100dvh - 56px); }
+      .chat-layout { flex-direction: column; padding: 0; gap: 0; }
       .rooms-sidebar {
         flex-direction: row; width: 100%; overflow-x: auto;
-        gap: 4px; padding-bottom: 4px; flex-shrink: 0;
+        gap: 6px; padding: 8px 12px; flex-shrink: 0;
+        background: var(--bg-white); border-bottom: 1px solid var(--border);
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
       }
+      .rooms-sidebar::-webkit-scrollbar { display: none; }
       .rooms-sidebar h3 { display: none; }
-      .room-btn { white-space: nowrap; padding: 8px 12px; font-size: 0.82rem; }
-      .add-room-btn { white-space: nowrap; padding: 8px 12px; font-size: 0.8rem; min-width: fit-content; }
-      .chat-header { padding: 0.75rem 0; }
-      .chat-header h1 { font-size: 1.2rem; }
-      .chat-header p { font-size: 0.8rem; }
-      .chat-main { min-height: 0; flex: 1; }
+      .room-btn {
+        white-space: nowrap; padding: 6px 14px; font-size: 0.78rem;
+        border-radius: 20px; background: var(--tag-bg); color: var(--text-light);
+        border: 1px solid transparent; gap: 4px; min-width: fit-content;
+      }
+      .room-btn .room-emoji { font-size: 0.9rem; }
+      .room-btn.active {
+        background: var(--primary); color: #fff; border-color: var(--primary);
+      }
+      .add-room-btn {
+        white-space: nowrap; padding: 6px 14px; font-size: 0.78rem;
+        min-width: fit-content; border-radius: 20px;
+      }
+      .chat-header { padding: 0.6rem 0; }
+      .chat-header h1 { font-size: 1.1rem; }
+      .chat-header p { font-size: 0.75rem; }
+      .online-count { font-size: 0.7rem; margin-top: 0.25rem; }
+      .chat-main { min-height: 0; flex: 1; border-radius: 0; border-left: 0; border-right: 0; }
+      .chat-room-header { display: none; } /* already visible via tabs */
+      .chat-bottom-info { display: none; } /* remove bottom bar on mobile */
+      .chat-input-bar { padding: 8px 10px; gap: 6px; }
+      .chat-input { padding: 8px 12px; font-size: 0.85rem; min-height: 38px; }
+      .chat-send { width: 38px; height: 38px; }
+      .chat-img-btn { width: 38px; height: 38px; }
+      .msg-img { max-width: 200px; max-height: 150px; }
+      .reply-preview { margin: 0 10px; font-size: 0.75rem; }
     }
 
     /* ─── LOADING ─── */
@@ -341,7 +402,17 @@
           <button class="reply-cancel" id="replyCancel" title="Cancel reply">✕</button>
         </div>
 
+        <div class="img-preview-bar" id="imgPreview">
+          <img class="img-preview-thumb" id="imgThumb" src="" alt="preview">
+          <span class="img-preview-name" id="imgName"></span>
+          <button class="img-preview-cancel" id="imgCancel" title="Remove image">✕</button>
+        </div>
+
         <div class="chat-input-bar">
+          <button class="chat-img-btn" id="chatImgBtn" title="Upload image">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>
+          </button>
+          <input type="file" id="chatImgInput" accept="image/*" style="display:none">
           <textarea class="chat-input" id="chatInput" placeholder="Type a message..." rows="1" maxlength="500"></textarea>
           <button class="chat-send" id="chatSend" title="Send message">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
@@ -368,12 +439,16 @@
     </div>
   </div>
 
+  <!-- LIGHTBOX -->
+  <div class="lightbox" id="lightbox"><img id="lightboxImg" src="" alt="Full image"></div>
+
   <!-- FOOTER (hidden on this page to maximize chat space — accessible via nav) -->
 
   <!-- FIREBASE -->
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-app.js";
     import { getDatabase, ref, push, onChildAdded, onValue, set, get, query, limitToLast, orderByKey, endBefore, off } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-database.js";
+    import { getStorage, ref as storageRef, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-storage.js";
 
     // ═══ FIREBASE CONFIG ═══
     const firebaseConfig = {
@@ -388,6 +463,7 @@
 
     const app = initializeApp(firebaseConfig);
     const db = getDatabase(app);
+    const storage = getStorage(app);
 
     const BATCH_SIZE = 50;
 
@@ -516,7 +592,12 @@
         replyHtml = `<div class="msg-reply-ref" title="Replying to ${esc(msgData.replyToUser || '?')}">↩ ${esc(msgData.replyToUser || '?')}: ${esc(msgData.replyToText || '...')}</div>`;
       }
 
-      div.innerHTML = `${replyHtml}<span class="msg-user" style="background:${esc(msgData.color || '#6C63FF')}">${esc(msgData.userId || 'Anon')}</span><span class="msg-text">${esc(msgData.text || '')}</span><span class="msg-time">${fmtTime(msgData.timestamp || Date.now())}</span><span class="msg-actions"><button class="msg-action-btn reply-btn" data-msg-id="${esc(msgId)}" data-user="${esc(msgData.userId || '')}" data-text="${esc((msgData.text || '').substring(0,80))}">↩</button></span>`;
+      let imgHtml = '';
+      if (msgData.imageUrl) {
+        imgHtml = `<img class="msg-img" src="${esc(msgData.imageUrl)}" alt="shared image" loading="lazy" onclick="document.getElementById('lightboxImg').src=this.src;document.getElementById('lightbox').classList.add('active')">`;
+      }
+
+      div.innerHTML = `${replyHtml}<span class="msg-user" style="background:${esc(msgData.color || '#6C63FF')}">${esc(msgData.userId || 'Anon')}</span><span class="msg-text">${esc(msgData.text || '')}</span><span class="msg-time">${fmtTime(msgData.timestamp || Date.now())}</span><span class="msg-actions"><button class="msg-action-btn reply-btn" data-msg-id="${esc(msgId)}" data-user="${esc(msgData.userId || '')}" data-text="${esc((msgData.text || '').substring(0,80))}">↩</button></span>${imgHtml}`;
       return div;
     }
 
@@ -664,11 +745,44 @@
       });
     }
 
+    // ═══ IMAGE UPLOAD ═══
+    let pendingImage = null;
+
+    document.getElementById('chatImgBtn').addEventListener('click', () => {
+      document.getElementById('chatImgInput').click();
+    });
+
+    document.getElementById('chatImgInput').addEventListener('change', (e) => {
+      const file = e.target.files[0];
+      if (!file) return;
+      // Max 5MB
+      if (file.size > 5 * 1024 * 1024) {
+        alert('Image must be under 5MB');
+        e.target.value = '';
+        return;
+      }
+      pendingImage = file;
+      const thumb = document.getElementById('imgThumb');
+      thumb.src = URL.createObjectURL(file);
+      document.getElementById('imgName').textContent = file.name;
+      document.getElementById('imgPreview').classList.add('active');
+    });
+
+    document.getElementById('imgCancel').addEventListener('click', () => {
+      pendingImage = null;
+      document.getElementById('imgPreview').classList.remove('active');
+      document.getElementById('chatImgInput').value = '';
+    });
+
     // ═══ SEND MESSAGE ═══
-    function sendMessage() {
+    async function sendMessage() {
       const input = document.getElementById('chatInput');
       const text = input.value.trim();
-      if (!text || text.length > 500) return;
+      if (!text && !pendingImage) return;
+      if (text.length > 500) return;
+
+      const sendBtn = document.getElementById('chatSend');
+      sendBtn.disabled = true;
 
       const msgData = {
         userId: userId,
@@ -684,11 +798,30 @@
         msgData.replyToText = replyTo.text;
       }
 
+      // Upload image if attached
+      if (pendingImage) {
+        try {
+          const fileName = `${Date.now()}_${userId}_${pendingImage.name}`;
+          const imgRef = storageRef(storage, `chat-images/${currentRoom}/${fileName}`);
+          await uploadBytes(imgRef, pendingImage);
+          msgData.imageUrl = await getDownloadURL(imgRef);
+        } catch (err) {
+          console.error('Image upload failed:', err);
+          alert('Failed to upload image. Try again.');
+          sendBtn.disabled = false;
+          return;
+        }
+        pendingImage = null;
+        document.getElementById('imgPreview').classList.remove('active');
+        document.getElementById('chatImgInput').value = '';
+      }
+
       push(ref(db, `messages/${currentRoom}`), msgData);
       input.value = '';
       input.style.height = 'auto';
       cancelReply();
       input.focus();
+      sendBtn.disabled = false;
     }
 
     // ═══ REPLY ═══
@@ -786,6 +919,11 @@
 
     window.addEventListener('beforeunload', () => {
       set(presenceRef, { online: false, lastSeen: Date.now() });
+    });
+
+    // Lightbox close
+    document.getElementById('lightbox').addEventListener('click', function() {
+      this.classList.remove('active');
     });
 
     // ═══ INIT ═══
