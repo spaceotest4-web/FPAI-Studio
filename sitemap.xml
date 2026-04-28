@@ -7,14 +7,20 @@
     <priority>1.0</priority>
   </url>
   <url>
+    <loc>https://fp-ai-studio.com/blog/ai-image-upscaling-guide-2026.html</loc>
+    <lastmod>2026-04-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://fp-ai-studio.com/blog/ai-video-generation-beginners-2026.html</loc>
-    <lastmod>2026-01-28</lastmod>
+    <lastmod>2026-04-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://fp-ai-studio.com/blog/ai-style-transfer-complete-guide.html</loc>
-    <lastmod>2026-01-28</lastmod>
+    <lastmod>2026-04-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
