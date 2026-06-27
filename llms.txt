@@ -41,6 +41,16 @@
 - Community: https://fp-ai-studio.com/community.html
 
 ## Key guides and resources
+- AI slideshow maker (photo to video): https://fp-ai-studio.com/blog/ai-slideshow-video-maker-guide-2026.html
+- AI logo animation: https://fp-ai-studio.com/blog/ai-animated-logo-generator-guide-2026.html
+- AI GIF generator: https://fp-ai-studio.com/blog/ai-gif-maker-guide-2026.html
+- AI product video generator: https://fp-ai-studio.com/blog/ai-product-video-generator-guide-2026.html
+- AI explainer video generator: https://fp-ai-studio.com/blog/ai-explainer-video-generator-guide-2026.html
+- AI negative prompts guide: https://fp-ai-studio.com/blog/ai-negative-prompts-guide-2026.html
+- AI image aspect ratio guide: https://fp-ai-studio.com/blog/ai-image-aspect-ratio-guide-2026.html
+- AI inpainting guide (edit part of an image): https://fp-ai-studio.com/blog/ai-inpainting-guide-2026.html
+- AI image-to-image guide (img2img): https://fp-ai-studio.com/blog/ai-image-to-image-guide-2026.html
+- AI pose control and ControlNet guide: https://fp-ai-studio.com/blog/ai-pose-control-controlnet-guide-2026.html
 - AI brochure maker (tri-fold and bi-fold): https://fp-ai-studio.com/blog/ai-brochure-maker-guide-2026.html
 - AI menu maker (restaurant menus): https://fp-ai-studio.com/blog/ai-menu-design-generator-guide-2026.html
 - AI packaging design generator: https://fp-ai-studio.com/blog/ai-packaging-design-generator-guide-2026.html

@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Negative Prompts: What to Exclude for Better Images (2026) | FP AI Studio</title>
+  <meta name="description" content="Negative prompts guide for 2026 — what to exclude to fix bad hands, extra limbs, and artifacts. Ready-to-use negative prompt lists by use case for AI images.">
+  <meta name="keywords" content="negative prompts, AI negative prompts, fix bad hands AI, remove extra limbs, negative prompt list, AI image artifacts, what to exclude AI prompt">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://fp-ai-studio.com/blog/ai-negative-prompts-guide-2026.html">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="AI Negative Prompts: What to Exclude for Better Images (2026)">
+  <meta property="og:description" content="Fix bad hands, extra limbs, and artifacts with negative prompts. Ready-to-use lists by use case.">
+  <meta property="og:url" content="https://fp-ai-studio.com/blog/ai-negative-prompts-guide-2026.html">
+  <meta property="article:published_time" content="2026-06-27">
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"Article","headline":"AI Negative Prompts: What to Exclude for Better Images (2026)","datePublished":"2026-06-27","dateModified":"2026-06-27","author":{"@type":"Person","name":"FP AI Studio Team"},"publisher":{"@type":"Organization","name":"FP AI Studio"}}
+  </script>
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What are negative prompts in AI image generation?","acceptedAnswer":{"@type":"Answer","text":"Negative prompts are a separate field where you list what you do not want in an image. The model treats these terms as things to steer away from while it generates. You use the main prompt to describe the subject and the negative prompt to suppress recurring problems like bad hands, extra limbs, blur, or watermarks."}},{"@type":"Question","name":"How do I fix bad hands with a negative prompt?","acceptedAnswer":{"@type":"Answer","text":"Add terms like bad hands, extra fingers, fused fingers, missing fingers, and deformed hands to the negative prompt. This reduces malformed hands but does not guarantee perfect ones. Generating a few variations and picking the best, or cropping the composition so hands are less prominent, often helps more than the negative prompt alone."}},{"@type":"Question","name":"Do all AI models use negative prompts?","acceptedAnswer":{"@type":"Answer","text":"No. Some newer models ignore negative prompts or handle exclusions through the main prompt instead. On those models a long negative list does little, so you describe what you want positively and keep exclusions short. Check whether your model exposes a negative prompt field before relying on one."}},{"@type":"Question","name":"Can a negative prompt be too long?","acceptedAnswer":{"@type":"Answer","text":"Yes. Overloading a negative prompt with dozens of terms can dilute its effect and occasionally remove detail you wanted to keep. A focused list of ten to fifteen relevant terms usually works better than a copied wall of fifty. Add terms that target the specific artifacts you actually see, not every term you can find."}},{"@type":"Question","name":"What is the difference between a negative prompt and a positive prompt?","acceptedAnswer":{"@type":"Answer","text":"A positive prompt describes what you want the model to create, such as the subject, style, and lighting. A negative prompt lists what you want excluded, such as blur, extra limbs, or text. The positive prompt sets direction and the negative prompt cleans up recurring flaws that direction alone does not prevent."}}]}
+  </script>
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+  <header class="site-header"><div class="container"><a href="../index.html" class="logo"><svg width="32" height="32" viewBox="0 0 32 32" fill="none"><rect width="32" height="32" rx="8" fill="url(#g1)"/><polygon points="13,10 13,22 23,16" fill="#fff"/><defs><linearGradient id="g1" x1="0" y1="0" x2="32" y2="32"><stop stop-color="#6366F1"/><stop offset="1" stop-color="#8B5CF6"/></linearGradient></defs></svg> FP <span>AI Studio</span></a><nav><ul class="nav-links" id="navLinks"><li><a href="../index.html">Home</a></li><li><a href="../index.html#features">Features</a></li><li><a href="../blog.html" class="active">Blog</a></li><li><a href="../index.html#download" class="btn btn-primary">Download App</a></li></ul></nav><button class="mobile-toggle" id="mobileToggle" aria-label="Toggle menu"><span></span><span></span><span></span></button></div></header>
+
+  <main class="blog-detail"><div class="container"><div class="blog-detail-container">
+    <nav class="breadcrumb"><a href="../index.html">Home</a> &rsaquo; <a href="../blog.html">Blog</a> &rsaquo; AI Negative Prompts</nav>
+    <h1>AI Negative Prompts: What to Exclude for Better Images (2026)</h1>
+    <div class="blog-meta"><div class="author"><div class="author-avatar">FP</div><span>FP AI Studio Team</span></div><div class="date">Jun 27, 2026</div><div class="read-time">9 min read</div></div>
+    <div class="blog-tags" style="margin-bottom:2rem"><span class="tag">Prompting</span><span class="tag">Negative Prompts</span><span class="tag">Tips</span></div>
+    <div class="featured-image" style="background:linear-gradient(135deg,#111827,#EC4899);display:flex;align-items:center;justify-content:center;color:#fff;font-size:1.25rem;font-weight:600">Negative Prompts 2026</div>
+
+    <div class="toc"><h4>Table of Contents</h4><ol>
+      <li><a href="#what-are">What negative prompts are</a></li>
+      <li><a href="#how-they-work">How do negative prompts actually work?</a></li>
+      <li><a href="#fix-hands">How do you fix bad hands and extra limbs?</a></li>
+      <li><a href="#artifacts">Which negative prompts remove common artifacts?</a></li>
+      <li><a href="#by-use-case">Ready-to-use negative prompts by use case</a></li>
+      <li><a href="#how-long">How long should a negative prompt be?</a></li>
+      <li><a href="#modern-models">Do modern models still use negative prompts?</a></li>
+      <li><a href="#workflow">How do you build a negative prompt that works?</a></li>
+      <li><a href="#faq">FAQ</a></li>
+    </ol></div>
+
+    <div class="blog-content">
+      <p>Negative prompts are the list of things you tell an AI image generator <em>not</em> to draw — bad hands, extra limbs, blur, watermarks, distorted faces. While your main prompt describes the picture you want, the negative prompt cleans up the recurring flaws that description alone never quite prevents. Used well, it is the fastest way to turn a roughly-right image into a usable one.</p>
+      <p>This guide explains how negative prompts work, gives ready-to-use lists by use case, and shows where they help and where a newer model makes them unnecessary. It pairs naturally with our broader <a href="ai-prompt-engineering-tips.html">AI prompt engineering tips</a> for the positive side of the same craft.</p>
+      <div class="callout"><p><strong>The core idea:</strong> a negative prompt is not magic deletion — it is a nudge away from certain content. It works best when it targets the specific artifacts you keep seeing in your own outputs, not when you paste a generic wall of fifty terms and hope.</p></div>
+
+      <h2 id="what-are">What negative prompts are</h2>
+      <p>A negative prompt is a separate field where you list the elements, qualities, and defects you want kept out of the generated image. The model reads it as a set of concepts to steer away from while it builds the picture, so terms like blurry, deformed, or text push the result in the opposite direction without you having to describe everything you do want.</p>
+      <p>That one field quietly replaces several older habits:</p>
+      <ul>
+        <li><strong>Re-rolling endlessly</strong> — instead of regenerating until the hands look right, you suppress the flaw directly</li>
+        <li><strong>Overloading the main prompt</strong> — no need to cram "not blurry, not low quality" into your description</li>
+        <li><strong>Manual cleanup</strong> — fewer artifacts mean less retouching after the fact</li>
+      </ul>
+
+      <h2 id="how-they-work">How do negative prompts actually work?</h2>
+      <p>A negative prompt works by giving the model a second target to move away from. During generation the model compares the direction your positive prompt points toward against the direction the negative prompt points toward, then steers between them. The bigger the gap, the more strongly your unwanted terms are suppressed in the final image.</p>
+      <p>In practice the pipeline behind a single generation looks like this:</p>
+      <ol>
+        <li><strong>Read both fields</strong> — the model encodes the positive and negative prompts separately</li>
+        <li><strong>Set two targets</strong> — one to move toward, one to move away from</li>
+        <li><strong>Compare each step</strong> — at every denoising step it weighs the two directions</li>
+        <li><strong>Steer the result</strong> — pixels drift toward the positive and away from the negative</li>
+        <li><strong>Resolve the image</strong> — the final frame reflects the balance between them</li>
+      </ol>
+      <p>Two things decide how much a negative prompt helps: whether your model supports the field at all, and how relevant your terms are to the artifacts actually appearing. Listing "watermark" does nothing if your outputs never had watermarks, while listing it on a model trained on stock photos can be the single most useful term. The strength of the steer also depends on a guidance setting some tools expose, where a higher value pushes harder away from your negative terms but can flatten detail if pushed too far. For the bigger picture of how prompts drive a model, see our <a href="text-to-image-ai-complete-guide-2026.html">complete text-to-image AI guide</a>.</p>
+
+      <h2 id="fix-hands">How do you fix bad hands and extra limbs?</h2>
+      <p>To reduce bad hands and extra limbs, add anatomy-specific exclusions like extra fingers, fused fingers, missing fingers, extra arms, extra legs, and deformed hands to the negative prompt. This lowers how often malformed anatomy appears, but it does not guarantee perfect results — generating a few variations and choosing the best still matters.</p>
+      <p>Hands and limbs are the most-reported AI image problem because they have many small, jointed parts that models historically struggled to count. A focused negative list targets exactly those failures:</p>
+      <ol>
+        <li><strong>Cover finger faults</strong> — extra fingers, missing fingers, fused fingers, too many fingers</li>
+        <li><strong>Cover limb faults</strong> — extra arms, extra legs, extra limbs, missing limbs</li>
+        <li><strong>Cover general distortion</strong> — deformed hands, mutated hands, malformed, disfigured</li>
+        <li><strong>Generate a small batch</strong> — produce four to six variations rather than one</li>
+        <li><strong>Pick and refine</strong> — keep the cleanest, then crop or regenerate the rest</li>
+      </ol>
+      <p>One honest caveat: negative prompts reduce bad anatomy but rarely eliminate it on their own. Composition helps too — a pose where hands are partly out of frame, in pockets, or holding an object hides the hardest detail. The <a href="ai-image-generation-guide.html">AI image generation guide</a> covers framing choices that work alongside your prompt.</p>
+
+      <h2 id="artifacts">Which negative prompts remove common artifacts?</h2>
+      <p>The most useful artifact-removal terms fall into four groups: quality defects like blurry and low quality, unwanted text like watermark and signature, anatomy faults like deformed and extra limbs, and style leaks like cartoon when you want realism. Matching the group to the flaw you see keeps the list short and effective.</p>
+      <table>
+        <thead><tr><th>Artifact</th><th>Negative prompt terms</th><th>When to use</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Blur and softness</strong></td><td>blurry, out of focus, low quality, jpeg artifacts</td><td>Results look hazy or compressed</td></tr>
+          <tr><td><strong>Unwanted text</strong></td><td>text, watermark, signature, logo, caption</td><td>Stray letters or marks appear</td></tr>
+          <tr><td><strong>Bad anatomy</strong></td><td>deformed, extra limbs, bad hands, mutated</td><td>People or animals look wrong</td></tr>
+          <tr><td><strong>Wrong style</strong></td><td>cartoon, 3d render, painting, sketch</td><td>You want photorealism and get illustration</td></tr>
+        </tbody>
+      </table>
+      <p>Notice that the last row works both ways. If you wanted an illustration and kept getting photos, you would instead exclude photo, photograph, and realistic. The negative prompt always describes the opposite of your goal, so the right terms depend entirely on what you are aiming for.</p>
+
+      <h2 id="by-use-case">Ready-to-use negative prompts by use case</h2>
+      <p>Different image types fail in different ways, so a portrait negative prompt and a product-shot negative prompt should not be identical. Below are four starting lists you can copy, adjust, and trim to match the artifacts you actually see — treat them as a base, not a fixed recipe.</p>
+      <ul>
+        <li><strong>Portraits and people</strong> — deformed, bad hands, extra fingers, extra limbs, mutated, disfigured, asymmetric eyes, blurry, low quality. Anatomy faults dominate here, so the list leans on hands, fingers, and faces.</li>
+        <li><strong>Product and e-commerce</strong> — watermark, text, logo, reflection, extra objects, cluttered background, blurry, low quality. The goal is a clean, distraction-free subject, so exclusions target stray marks and clutter.</li>
+        <li><strong>Landscapes and scenes</strong> — people, watermark, text, blurry, oversaturated, jpeg artifacts, low contrast. Few anatomy concerns, so the list focuses on stray figures and quality defects.</li>
+        <li><strong>Stylized and concept art</strong> — photo, realistic, blurry, low quality, watermark, signature, extra limbs. Here you exclude realism to protect the illustrated look while still suppressing defects.</li>
+      </ul>
+      <p>For each list, start with the full set, generate a small batch, and remove any term that seems to strip detail you wanted. The right negative prompt is the shortest one that still fixes your specific problem. If you are matching a particular look, our <a href="top-ai-art-styles.html">guide to top AI art styles</a> pairs well with the stylized list above.</p>
+
+      <h2 id="how-long">How long should a negative prompt be?</h2>
+      <p>A negative prompt works best at roughly ten to fifteen focused terms. Beyond that, extra words tend to dilute each other and can occasionally remove detail you wanted to keep. A short list aimed at the artifacts you actually see almost always beats a copied wall of fifty generic terms pasted from a forum.</p>
+      <p>The reasoning is simple: every term you add competes for the model's attention, and many copied terms describe defects that were never going to appear in your image anyway. A trimmed list keeps the pressure on real problems. The table below shows how the same goal narrows down.</p>
+      <table>
+        <thead><tr><th>Approach</th><th>Example</th><th>Result</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Too short</strong></td><td>blurry</td><td>Misses anatomy and text faults</td></tr>
+          <tr><td><strong>Focused</strong></td><td>blurry, low quality, deformed, extra fingers, watermark, text</td><td>Targets the flaws you see</td></tr>
+          <tr><td><strong>Overloaded</strong></td><td>fifty-plus stacked terms</td><td>Diluted effect, may strip wanted detail</td></tr>
+        </tbody>
+      </table>
+      <p>If you are unsure which terms matter, generate once with no negative prompt, study what goes wrong, then add only the terms that address those specific flaws.</p>
+
+      <h2 id="modern-models">Do modern models still use negative prompts?</h2>
+      <p>Not all of them do. Many newer models either ignore a negative prompt field or handle exclusions through the main prompt instead, so a long negative list can do almost nothing on them. On those models you describe what you want clearly and positively, and reach for a negative prompt only if the tool exposes the field and it visibly changes results.</p>
+      <p>This is the most important shift to understand in 2026. Negative prompts came from earlier diffusion workflows where the field reliably steered output. Today the landscape is mixed:</p>
+      <ul>
+        <li><strong>Models with strong negative support</strong> — the field works as described, and a focused list meaningfully cleans up artifacts</li>
+        <li><strong>Models with weak or no support</strong> — the field is ignored or barely registers, so effort belongs in the positive prompt</li>
+        <li><strong>Instruction-style models</strong> — you phrase exclusions naturally in the prompt, such as "with no text and clean hands," rather than in a separate field</li>
+      </ul>
+      <p>Before investing in a long negative list, check whether your model actually responds to it. Generate the same prompt with and without the negative terms; if the outputs look the same, your model is not using the field and your time is better spent on the positive description.</p>
+
+      <h2 id="workflow">How do you build a negative prompt that works?</h2>
+      <p>The reliable method is to start empty, generate, and add only terms that fix flaws you can see. Build the negative prompt from your own outputs rather than someone else's list — that way every term earns its place, the list stays short, and you can tell which addition actually changed the result.</p>
+      <ol>
+        <li><strong>Generate with no negative prompt</strong> — see what the model does on its own first</li>
+        <li><strong>Name the flaws</strong> — list what actually went wrong: bad hands, stray text, softness</li>
+        <li><strong>Add matching terms</strong> — translate each flaw into a negative term, one group at a time</li>
+        <li><strong>Regenerate and compare</strong> — confirm the new term improved the result</li>
+        <li><strong>Trim what does nothing</strong> — drop terms that made no visible difference</li>
+        <li><strong>Save the working list</strong> — keep a per-style base you can reuse and adjust</li>
+      </ol>
+      <p>This loop keeps your negative prompt tied to reality instead of superstition. Combined with a clear positive prompt, it is usually enough to get clean, usable images without endless re-rolling — and on models that ignore negatives entirely, the same flaw-spotting habit tells you to fix the positive prompt instead. The discipline matters more than any single term: a creator who watches their own outputs and adjusts deliberately will out-perform one who pastes the same fifty-word block into every project regardless of what the model actually produces.</p>
+
+      <h2 id="faq">FAQ</h2>
+      <h3>What are negative prompts in AI image generation?</h3>
+      <p>Negative prompts are a separate field where you list what you do not want in an image. The model treats these terms as things to steer away from while it generates. You use the main prompt to describe the subject and the negative prompt to suppress recurring problems like bad hands, extra limbs, blur, or watermarks.</p>
+      <h3>How do I fix bad hands with a negative prompt?</h3>
+      <p>Add terms like bad hands, extra fingers, fused fingers, missing fingers, and deformed hands to the negative prompt. This reduces malformed hands but does not guarantee perfect ones. Generating a few variations and picking the best, or cropping the composition so hands are less prominent, often helps more than the negative prompt alone.</p>
+      <h3>Do all AI models use negative prompts?</h3>
+      <p>No. Some newer models ignore negative prompts or handle exclusions through the main prompt instead. On those models a long negative list does little, so you describe what you want positively and keep exclusions short. Check whether your model exposes a negative prompt field before relying on one.</p>
+      <h3>Can a negative prompt be too long?</h3>
+      <p>Yes. Overloading a negative prompt with dozens of terms can dilute its effect and occasionally remove detail you wanted to keep. A focused list of ten to fifteen relevant terms usually works better than a copied wall of fifty. Add terms that target the specific artifacts you actually see, not every term you can find.</p>
+      <h3>What is the difference between a negative prompt and a positive prompt?</h3>
+      <p>A positive prompt describes what you want the model to create, such as the subject, style, and lighting. A negative prompt lists what you want excluded, such as blur, extra limbs, or text. The positive prompt sets direction and the negative prompt cleans up recurring flaws that direction alone does not prevent.</p>
+    </div>
+
+    <div class="social-share"><span>Share:</span><a class="share-btn" href="https://twitter.com/intent/tweet?url=https://fp-ai-studio.com/blog/ai-negative-prompts-guide-2026.html" target="_blank" rel="noopener noreferrer" aria-label="Share on Twitter">X</a><a class="share-btn" href="https://www.facebook.com/sharer/sharer.php?u=https://fp-ai-studio.com/blog/ai-negative-prompts-guide-2026.html" target="_blank" rel="noopener noreferrer" aria-label="Share on Facebook">f</a><a class="share-btn" href="https://www.linkedin.com/sharing/share-offsite/?url=https://fp-ai-studio.com/blog/ai-negative-prompts-guide-2026.html" target="_blank" rel="noopener noreferrer" aria-label="Share on LinkedIn">in</a></div>
+    <div class="author-bio"><div class="author-avatar-lg">FP</div><h4>FP AI Studio Team</h4><p>We build tools that make AI-powered creativity accessible to everyone.</p></div>
+    <div class="related-posts"><h2>Related Articles</h2><div class="blog-grid">
+      <a href="ai-prompt-engineering-tips.html" class="blog-card"><div class="blog-card-image" style="background:linear-gradient(135deg,#6366F1,#8B5CF6);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:600">Prompting</div><div class="blog-card-content"><div class="blog-tags"><span class="tag">Guide</span></div><h3>AI Prompt Engineering Tips for Better Images</h3><span class="read-more">Read More &rarr;</span></div></a>
+      <a href="text-to-image-ai-complete-guide-2026.html" class="blog-card"><div class="blog-card-image" style="background:linear-gradient(135deg,#0EA5E9,#EC4899);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:600">Text to Image</div><div class="blog-card-content"><div class="blog-tags"><span class="tag">Guide</span></div><h3>Text-to-Image AI: The Complete 2026 Guide</h3><span class="read-more">Read More &rarr;</span></div></a>
+    </div></div>
+  </div></div></main>
+
+  <footer class="site-footer"><div class="container"><div class="footer-grid"><div class="footer-col"><h4>FP AI Studio</h4><p>The all-in-one AI creative studio for Android.</p></div><div class="footer-col"><h4>Features</h4><ul><li><a href="../index.html#features">Image Generation</a></li><li><a href="../index.html#features">Video Generation</a></li></ul></div><div class="footer-col"><h4>Resources</h4><ul><li><a href="../blog.html">Blog</a></li></ul></div><div class="footer-col"><h4>Legal</h4><ul><li><a href="#">Privacy Policy</a></li><li><a href="#">Terms of Service</a></li></ul></div></div><div class="footer-bottom">&copy; 2026 FP AI Studio. All rights reserved.</div></div></footer>
+  <script>document.getElementById('mobileToggle').addEventListener('click',function(){document.getElementById('navLinks').classList.toggle('open')});</script>
+</body>
+</html>

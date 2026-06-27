@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Inpainting: Edit Part of Any Image With AI (2026) | FP AI Studio</title>
+  <meta name="description" content="AI inpainting guide for 2026 — mask and regenerate part of any image to change clothing, fix faces, and add or replace objects. How it works, a step-by-step workflow, and tips.">
+  <meta name="keywords" content="AI inpainting, inpainting vs outpainting, mask and regenerate image, AI image editing, change clothing AI, fix faces AI, replace objects AI, generative fill">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://fp-ai-studio.com/blog/ai-inpainting-guide-2026.html">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="AI Inpainting: Edit Part of Any Image With AI (2026)">
+  <meta property="og:description" content="Mask and regenerate part of any image to change clothing, fix faces, or replace objects with AI.">
+  <meta property="og:url" content="https://fp-ai-studio.com/blog/ai-inpainting-guide-2026.html">
+  <meta property="article:published_time" content="2026-06-27">
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"Article","headline":"AI Inpainting: Edit Part of Any Image With AI (2026)","datePublished":"2026-06-27","dateModified":"2026-06-27","author":{"@type":"Person","name":"FP AI Studio Team"},"publisher":{"@type":"Organization","name":"FP AI Studio"}}
+  </script>
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is the difference between AI inpainting and outpainting?","acceptedAnswer":{"@type":"Answer","text":"AI inpainting regenerates a region inside the existing image, so you change or replace something within the frame. Outpainting generates new scene beyond the original edges, extending the canvas outward. Inpainting edits what is already there; outpainting adds what was never in the photo. Both rely on the same generative fill technique applied to different areas."}},{"@type":"Question","name":"Can AI inpainting change clothing in a photo?","acceptedAnswer":{"@type":"Answer","text":"Yes. Mask the existing garment, write a prompt describing the new clothing, and generate. The model keeps the pose, lighting, and body while regenerating only the masked fabric. Results are cleanest when the mask follows the edge of the original clothing closely and your prompt names the material, color, and cut you want."}},{"@type":"Question","name":"Does AI inpainting work for fixing faces?","acceptedAnswer":{"@type":"Answer","text":"Yes, inpainting is a common way to fix small face problems such as closed eyes, an odd expression, or a blemish. Mask only the area that needs work and keep the rest of the face untouched, so the model regenerates a small region that blends into the surrounding features rather than redrawing the whole face."}},{"@type":"Question","name":"How do I get clean results with AI inpainting?","acceptedAnswer":{"@type":"Answer","text":"Mask tightly, write a clear prompt, and edit one element at a time. A precise mask that hugs the target gives the model a defined area to work in, and a specific prompt tells it what to put there. Because each generation samples differently, re-running the same mask often yields a cleaner blend on the second or third attempt."}},{"@type":"Question","name":"Is AI inpainting the same as object removal?","acceptedAnswer":{"@type":"Answer","text":"Object removal is one use of inpainting. Removal masks an element and fills the gap with background so it disappears, with no prompt needed. General inpainting can also add or replace content using a prompt, so it does more than erase. Object removal is the prompt-free, background-fill case of the broader inpainting technique."}}]}
+  </script>
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+  <header class="site-header"><div class="container"><a href="../index.html" class="logo"><svg width="32" height="32" viewBox="0 0 32 32" fill="none"><rect width="32" height="32" rx="8" fill="url(#g1)"/><polygon points="13,10 13,22 23,16" fill="#fff"/><defs><linearGradient id="g1" x1="0" y1="0" x2="32" y2="32"><stop stop-color="#6366F1"/><stop offset="1" stop-color="#8B5CF6"/></linearGradient></defs></svg> FP <span>AI Studio</span></a><nav><ul class="nav-links" id="navLinks"><li><a href="../index.html">Home</a></li><li><a href="../index.html#features">Features</a></li><li><a href="../blog.html" class="active">Blog</a></li><li><a href="../index.html#download" class="btn btn-primary">Download App</a></li></ul></nav><button class="mobile-toggle" id="mobileToggle" aria-label="Toggle menu"><span></span><span></span><span></span></button></div></header>
+
+  <main class="blog-detail"><div class="container"><div class="blog-detail-container">
+    <nav class="breadcrumb"><a href="../index.html">Home</a> &rsaquo; <a href="../blog.html">Blog</a> &rsaquo; AI Inpainting</nav>
+    <h1>AI Inpainting: Edit Part of Any Image With AI (2026)</h1>
+    <div class="blog-meta"><div class="author"><div class="author-avatar">FP</div><span>FP AI Studio Team</span></div><div class="date">Jun 27, 2026</div><div class="read-time">9 min read</div></div>
+    <div class="blog-tags" style="margin-bottom:2rem"><span class="tag">Inpainting</span><span class="tag">Editing</span><span class="tag">Tips</span></div>
+    <div class="featured-image" style="background:linear-gradient(135deg,#8B5CF6,#0D9488);display:flex;align-items:center;justify-content:center;color:#fff;font-size:1.25rem;font-weight:600">AI Inpainting 2026</div>
+
+    <div class="toc"><h4>Table of Contents</h4><ol>
+      <li><a href="#what-is">What AI inpainting is</a></li>
+      <li><a href="#how-it-works">How AI inpainting works</a></li>
+      <li><a href="#workflow">How do I inpaint an image step by step?</a></li>
+      <li><a href="#use-cases">What can you change with inpainting?</a></li>
+      <li><a href="#prompting">How do I write a good inpainting prompt?</a></li>
+      <li><a href="#clean-results">How do I get clean, seamless results?</a></li>
+      <li><a href="#compare">Inpainting vs outpainting vs object removal</a></li>
+      <li><a href="#limitations">When does AI inpainting struggle?</a></li>
+      <li><a href="#faq">FAQ</a></li>
+    </ol></div>
+
+    <div class="blog-content">
+      <p>AI inpainting lets you mask a region of any image and regenerate just that part — swap a jacket for a coat, fix a closed eye, add an object that was never there, or replace one item with another. The rest of the photo stays exactly as it was. On Android, the whole edit is a brush stroke, a short prompt, and a few seconds of generation, with no desktop software and no manual pixel work.</p>
+      <p>This guide explains how AI inpainting actually works, walks through the mask-and-regenerate workflow in FP AI Studio, shows how to prompt the masked area, and draws the line between inpainting, outpainting, and object removal so you reach for the right tool every time.</p>
+      <div class="callout"><p><strong>The core idea:</strong> inpainting is targeted regeneration, not painting over pixels. You hand the model a hole and a description, and it fills the hole with content that matches the surrounding light, perspective, and texture — which is why a tight mask and a precise prompt matter more than the size of the edit.</p></div>
+
+      <h2 id="what-is">What AI inpainting is</h2>
+      <p>AI inpainting is the technique of masking a region of an image and regenerating only that region with new, AI-generated content while leaving everything else untouched. You select an area, optionally describe what should appear there, and the model paints in pixels that blend with the surrounding scene — so the edit reads as part of the original photo rather than a paste-over.</p>
+      <p>That one capability covers a wide range of edits that used to need separate tools or a full reshoot:</p>
+      <ul>
+        <li><strong>Change</strong> — swap clothing, hair, or backgrounds within the frame</li>
+        <li><strong>Fix</strong> — repair faces, hands, blemishes, or damaged areas</li>
+        <li><strong>Add or replace</strong> — drop in a new object, or substitute one element for another</li>
+      </ul>
+      <p>The word inpainting comes from photo restoration, where conservators painted over scratches and gaps in a damaged print. The AI version keeps that spirit — repairing what is missing — but adds the ability to generate something entirely new in the masked area, guided by a text prompt. That shift is what turns a repair tool into a general-purpose editor: the same brush that patches a torn corner can also dress a subject in a different outfit or place an object that was never in the original scene.</p>
+
+      <h2 id="how-it-works">How AI inpainting works</h2>
+      <p>AI inpainting runs on a generative model that reads the pixels around a masked region and predicts the most probable content for the gap, then synthesizes new pixels to fill it. When you supply a prompt, the model conditions its prediction on your text so the fill matches both the surrounding scene and your description. Models trained on huge image-text datasets reconstruct texture, lighting, and edges that older patch tools could only fake.</p>
+      <p>The pipeline behind a single generation looks like this:</p>
+      <ol>
+        <li><strong>Select</strong> — you brush over the region you want to change</li>
+        <li><strong>Mask</strong> — the app turns your stroke into a precise selection edge</li>
+        <li><strong>Context analysis</strong> — the model reads the pixels surrounding the mask</li>
+        <li><strong>Conditioned fill</strong> — it generates new pixels guided by your prompt and the scene</li>
+        <li><strong>Blend</strong> — the fill is feathered and matched to the original light and grain</li>
+      </ol>
+      <p>Two details decide quality here: how tightly the mask hugs the target, and how clearly your prompt describes the result. The model feathers the mask edge to avoid a hard seam, and because each generation samples differently, re-running the same mask often produces a cleaner fill on the second or third try.</p>
+      <p>It helps to picture what the model is actually solving. Inside the mask it knows nothing; outside it has the full image. Its job is to extend the visible scene inward so the boundary disappears. A large mask gives it a wide blank to invent, which raises the odds of a mismatch in lighting or perspective. A small mask surrounded by consistent detail gives it strong cues to copy from, which is why precise selections almost always blend better than sweeping ones. Your prompt then steers the content within that space — without it, the model simply continues the most likely background.</p>
+
+      <h2 id="workflow">How do I inpaint an image step by step?</h2>
+      <p>To inpaint an image in FP AI Studio, open your photo, brush over the area you want to change, type a short prompt describing the result, and tap generate — the AI regenerates only the masked region in a few seconds. The full workflow takes under a minute, and you can re-run a region until the blend reads cleanly.</p>
+      <ol>
+        <li><strong>Open your photo</strong> in FP AI Studio and choose the inpainting tool</li>
+        <li><strong>Brush over the area</strong> you want to change, add, or fix</li>
+        <li><strong>Tighten the mask</strong> — zoom in and trim the selection so it hugs the target edges</li>
+        <li><strong>Write a prompt</strong> describing what should appear in the masked area</li>
+        <li><strong>Tap generate</strong> and wait a few seconds for the fill</li>
+        <li><strong>Inspect at 100%</strong> — check the seam between the fill and the original</li>
+        <li><strong>Re-run if needed</strong> — regenerate for a different result, or refine the mask and prompt</li>
+        <li><strong>Export</strong> at full resolution once the edit reads cleanly</li>
+      </ol>
+      <p>For deeper edits — say, replacing a garment and then brightening the scene — chain the steps in order using the <a href="ai-photo-editor-android-guide-2026.html">Android photo editor guide</a> so each pass builds on a clean result.</p>
+
+      <h2 id="use-cases">What can you change with inpainting?</h2>
+      <p>The most common inpainting edits are changing clothing, fixing faces, and adding or replacing objects. Each follows the same mask-and-regenerate workflow but benefits from a different brush size, amount of surrounding context, and prompt detail. Knowing the pattern for your edit speeds the work and improves the blend.</p>
+      <ul>
+        <li><strong>Change clothing</strong> — mask the garment and prompt the new fabric, color, and cut while pose and lighting stay fixed</li>
+        <li><strong>Fix faces</strong> — mask a small area such as a closed eye or an odd expression, keeping the rest of the face untouched</li>
+        <li><strong>Add objects</strong> — mask empty space and prompt the item you want, matched to the scene's perspective</li>
+        <li><strong>Replace objects</strong> — mask one element and prompt another in its place</li>
+        <li><strong>Repair damage</strong> — mask scratches, dust, or torn areas on scanned and old photos</li>
+      </ul>
+      <p>One responsible-use note: inpainting can alter how people and products appear, so edits meant to mislead — fabricated evidence, deceptive product claims, or impersonation — cross an ethical and often legal line. Use the tool on content you own and for edits you would be comfortable disclosing.</p>
+
+      <h2 id="prompting">How do I write a good inpainting prompt?</h2>
+      <p>A good inpainting prompt names the subject, its material or color, and how it should sit in the scene — short, specific, and focused only on the masked area. The model already sees the surrounding pixels, so you describe what changes, not the whole image. Vague prompts like "make it better" give the model nothing to anchor to and produce inconsistent fills.</p>
+      <ol>
+        <li><strong>Name the subject plainly</strong> — "a navy wool overcoat," not "nice outfit"</li>
+        <li><strong>Add material and color</strong> — texture and tone help the fill match the scene's light</li>
+        <li><strong>Describe placement</strong> — "buttoned, falling to the knee" keeps the result physically plausible</li>
+        <li><strong>Skip the rest of the image</strong> — only describe the masked region, not the background</li>
+        <li><strong>Iterate in small steps</strong> — adjust one word, regenerate, and compare</li>
+      </ol>
+      <p>The same habits that improve full-image generations apply to masked edits. For a deeper look at structuring descriptions, materials, and modifiers, the <a href="ai-prompt-engineering-tips.html">AI prompt engineering tips</a> guide covers the patterns that carry over directly to inpainting.</p>
+
+      <h2 id="clean-results">How do I get clean, seamless results?</h2>
+      <p>Clean inpainting comes down to three habits: mask tightly, prompt precisely, and edit one element at a time. Over-large masks, vague prompts, and trying to change several things at once cause most of the seams, ghosting, and mismatched lighting people complain about.</p>
+      <ol>
+        <li><strong>Mask the whole target</strong> — leftover edges force the model to rebuild around a fragment</li>
+        <li><strong>Leave a little surrounding context</strong> — the model needs nearby pixels to match light and texture</li>
+        <li><strong>Write a specific prompt</strong> — name the subject, material, and placement</li>
+        <li><strong>Edit one element per pass</strong> — sequential edits blend better than one busy mask</li>
+        <li><strong>Regenerate for a better fill</strong> — each run samples differently, so try two or three</li>
+        <li><strong>Inspect the seam at 100%</strong> — check where the fill meets the original before exporting</li>
+      </ol>
+      <p>When an edit is mostly removing something rather than replacing it — a stray object or a photobomber — the prompt-free path is faster. The <a href="ai-object-remover-guide-2026.html">AI object remover guide</a> covers that background-fill workflow in detail.</p>
+
+      <h2 id="compare">Inpainting vs outpainting vs object removal</h2>
+      <p>Inpainting, outpainting, and object removal share the same generative fill technique but solve different problems, and they are easy to confuse. Inpainting regenerates a region inside the frame, outpainting extends the scene beyond the edges, and object removal erases an element and fills behind it. Pick the tool that matches where you want the change to happen.</p>
+      <table>
+        <thead><tr><th>Tool</th><th>What it does</th><th>Best for</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Inpainting</strong></td><td>Regenerates a masked region inside the image, guided by a prompt</td><td>Changing, fixing, adding, or replacing content in the frame</td></tr>
+          <tr><td><a href="ai-image-expand-outpainting.html">Outpainting</a></td><td>Generates new scene beyond the original edges</td><td>Reframing, widening a crop, changing aspect ratio</td></tr>
+          <tr><td><a href="ai-object-remover-guide-2026.html">Object removal</a></td><td>Erases an element and fills behind it with background</td><td>Cleaning up a photo you keep whole, no prompt needed</td></tr>
+        </tbody>
+      </table>
+      <p>The three chain well together. A common sequence is to inpaint a fix or a swap, expand the frame for a wider crop with outpainting, then remove any stray distraction the wider crop revealed.</p>
+      <p>The quickest way to choose is to ask where the change lives. If it sits inside the existing photo and you want to alter, add, or replace it, that is inpainting. If you need more scene than the camera captured — sky above a portrait, floor below a product — that is outpainting. If the goal is simply to make something vanish and leave the background looking untouched, object removal is the prompt-free shortcut. The decision rarely depends on the subject and almost always on whether you are editing inward, extending outward, or erasing.</p>
+
+      <h2 id="limitations">When does AI inpainting struggle?</h2>
+      <p>AI inpainting struggles with very large masks, hands and fine anatomy, repeating patterns, and edits that contradict the surrounding scene. The less consistent context the model has, the more it has to invent — and invented detail is where seams and artifacts appear.</p>
+      <ul>
+        <li><strong>Very large masks</strong> — little surrounding context left to match against</li>
+        <li><strong>Hands and fine anatomy</strong> — fingers and joints are hard to regenerate convincingly</li>
+        <li><strong>Repeating patterns</strong> — tile, brick, or fabric where a seam is easy to spot</li>
+        <li><strong>Scene contradictions</strong> — a prompt that fights the existing perspective or lighting</li>
+      </ul>
+      <p>When an edit is too ambitious for one pass, split it: regenerate the easy region first, then mask the difficult remainder against the cleaner result you just created, with a tighter prompt the second time.</p>
+
+      <h2 id="faq">FAQ</h2>
+      <h3>What is the difference between AI inpainting and outpainting?</h3>
+      <p>AI inpainting regenerates a region inside the existing image, so you change or replace something within the frame. Outpainting generates new scene beyond the original edges, extending the canvas outward. Inpainting edits what is already there; outpainting adds what was never in the photo. Both rely on the same generative fill technique applied to different areas.</p>
+      <h3>Can AI inpainting change clothing in a photo?</h3>
+      <p>Yes. Mask the existing garment, write a prompt describing the new clothing, and generate. The model keeps the pose, lighting, and body while regenerating only the masked fabric. Results are cleanest when the mask follows the edge of the original clothing closely and your prompt names the material, color, and cut you want.</p>
+      <h3>Does AI inpainting work for fixing faces?</h3>
+      <p>Yes, inpainting is a common way to fix small face problems such as closed eyes, an odd expression, or a blemish. Mask only the area that needs work and keep the rest of the face untouched, so the model regenerates a small region that blends into the surrounding features rather than redrawing the whole face.</p>
+      <h3>How do I get clean results with AI inpainting?</h3>
+      <p>Mask tightly, write a clear prompt, and edit one element at a time. A precise mask that hugs the target gives the model a defined area to work in, and a specific prompt tells it what to put there. Because each generation samples differently, re-running the same mask often yields a cleaner blend on the second or third attempt.</p>
+      <h3>Is AI inpainting the same as object removal?</h3>
+      <p>Object removal is one use of inpainting. Removal masks an element and fills the gap with background so it disappears, with no prompt needed. General inpainting can also add or replace content using a prompt, so it does more than erase. Object removal is the prompt-free, background-fill case of the broader inpainting technique.</p>
+    </div>
+
+    <div class="social-share"><span>Share:</span><a class="share-btn" href="https://twitter.com/intent/tweet?url=https://fp-ai-studio.com/blog/ai-inpainting-guide-2026.html" target="_blank" rel="noopener noreferrer" aria-label="Share on Twitter">X</a><a class="share-btn" href="https://www.facebook.com/sharer/sharer.php?u=https://fp-ai-studio.com/blog/ai-inpainting-guide-2026.html" target="_blank" rel="noopener noreferrer" aria-label="Share on Facebook">f</a><a class="share-btn" href="https://www.linkedin.com/sharing/share-offsite/?url=https://fp-ai-studio.com/blog/ai-inpainting-guide-2026.html" target="_blank" rel="noopener noreferrer" aria-label="Share on LinkedIn">in</a></div>
+    <div class="author-bio"><div class="author-avatar-lg">FP</div><h4>FP AI Studio Team</h4><p>We build tools that make AI-powered creativity accessible to everyone.</p></div>
+    <div class="related-posts"><h2>Related Articles</h2><div class="blog-grid">
+      <a href="ai-image-expand-outpainting.html" class="blog-card"><div class="blog-card-image" style="background:linear-gradient(135deg,#0EA5E9,#8B5CF6);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:600">Outpaint</div><div class="blog-card-content"><div class="blog-tags"><span class="tag">Editing</span></div><h3>AI Image Expand: Outpaint Beyond the Original Frame</h3><span class="read-more">Read More &rarr;</span></div></a>
+      <a href="ai-object-remover-guide-2026.html" class="blog-card"><div class="blog-card-image" style="background:linear-gradient(135deg,#0EA5E9,#8B5CF6,#EC4899);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:600">Remove</div><div class="blog-card-content"><div class="blog-tags"><span class="tag">Guide</span></div><h3>AI Object Remover: Erase Anything from Photos on Android</h3><span class="read-more">Read More &rarr;</span></div></a>
+    </div></div>
+  </div></div></main>
+
+  <footer class="site-footer"><div class="container"><div class="footer-grid"><div class="footer-col"><h4>FP AI Studio</h4><p>The all-in-one AI creative studio for Android.</p></div><div class="footer-col"><h4>Features</h4><ul><li><a href="../index.html#features">Image Generation</a></li><li><a href="../index.html#features">Video Generation</a></li></ul></div><div class="footer-col"><h4>Resources</h4><ul><li><a href="../blog.html">Blog</a></li></ul></div><div class="footer-col"><h4>Legal</h4><ul><li><a href="#">Privacy Policy</a></li><li><a href="#">Terms of Service</a></li></ul></div></div><div class="footer-bottom">&copy; 2026 FP AI Studio. All rights reserved.</div></div></footer>
+  <script>document.getElementById('mobileToggle').addEventListener('click',function(){document.getElementById('navLinks').classList.toggle('open')});</script>
+</body>
+</html>
