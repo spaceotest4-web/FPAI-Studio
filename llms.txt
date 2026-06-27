@@ -41,6 +41,26 @@
 - Community: https://fp-ai-studio.com/community.html
 
 ## Key guides and resources
+- AI yearbook photos (90s yearbook portraits): https://fp-ai-studio.com/blog/ai-yearbook-photos-generator-guide-2026.html
+- AI dating profile picture generator: https://fp-ai-studio.com/blog/ai-dating-profile-picture-generator-guide-2026.html
+- AI Disney Pixar style portrait generator: https://fp-ai-studio.com/blog/ai-disney-pixar-style-generator-guide-2026.html
+- AI Halloween costume generator: https://fp-ai-studio.com/blog/ai-halloween-costume-generator-guide-2026.html
+- AI graduation photos (cap and gown): https://fp-ai-studio.com/blog/ai-graduation-photo-generator-guide-2026.html
+- AI jewelry photography (product shots): https://fp-ai-studio.com/blog/ai-jewelry-photography-generator-guide-2026.html
+- AI virtual staging for real estate: https://fp-ai-studio.com/blog/ai-virtual-staging-real-estate-guide-2026.html
+- AI mockup generator (product and apparel): https://fp-ai-studio.com/blog/ai-product-mockup-generator-guide-2026.html
+- AI business card generator: https://fp-ai-studio.com/blog/ai-business-card-generator-guide-2026.html
+- AI flyer and poster maker: https://fp-ai-studio.com/blog/ai-flyer-poster-maker-guide-2026.html
+- AI ad creative generator (social ads): https://fp-ai-studio.com/blog/ai-ad-creative-generator-guide-2026.html
+- AI meme generator: https://fp-ai-studio.com/blog/ai-meme-generator-guide-2026.html
+- AI album cover generator (music): https://fp-ai-studio.com/blog/ai-album-cover-generator-guide-2026.html
+- AI app icon generator: https://fp-ai-studio.com/blog/ai-app-icon-generator-guide-2026.html
+- AI pattern generator (seamless textures): https://fp-ai-studio.com/blog/ai-pattern-generator-guide-2026.html
+- AI emoji generator (custom emojis): https://fp-ai-studio.com/blog/ai-emoji-generator-guide-2026.html
+- AI photo enhancer (unblur and sharpen): https://fp-ai-studio.com/blog/ai-photo-enhancer-unblur-guide-2026.html
+- AI sky replacement: https://fp-ai-studio.com/blog/ai-sky-replacement-guide-2026.html
+- AI faceless video generator (YouTube): https://fp-ai-studio.com/blog/ai-faceless-video-generator-guide-2026.html
+- AI talking avatar (spokesperson video): https://fp-ai-studio.com/blog/ai-talking-avatar-video-generator-guide-2026.html
 - AI action figure generator (toyification trend): https://fp-ai-studio.com/blog/ai-action-figure-generator-guide-2026.html
 - Image to prompt generator (reverse prompt): https://fp-ai-studio.com/blog/ai-image-to-prompt-generator-guide-2026.html
 - AI passport photo maker (Android): https://fp-ai-studio.com/blog/ai-passport-photo-maker-guide-2026.html
