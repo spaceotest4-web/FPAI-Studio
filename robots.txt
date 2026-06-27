@@ -1,4 +1,23 @@
+# robots.txt — FP AI Studio
+# Standard crawlers allowed. AI answer-engine crawlers explicitly welcomed (AEO/GEO).
+
 User-agent: *
 Allow: /
 
+# AI answer-engine and training crawlers (explicitly allowed for AEO / GEO / LLM citation)
+User-agent: GPTBot
+User-agent: OAI-SearchBot
+User-agent: ChatGPT-User
+User-agent: ClaudeBot
+User-agent: Claude-Web
+User-agent: Claude-SearchBot
+User-agent: Claude-User
+User-agent: anthropic-ai
+User-agent: PerplexityBot
+User-agent: Google-Extended
+User-agent: CCBot
+User-agent: Applebot-Extended
+Allow: /
+
 Sitemap: https://fp-ai-studio.com/sitemap.xml
+Host: https://fp-ai-studio.com

@@ -1,0 +1,101 @@
+# FP AI Studio
+
+> FP AI Studio is an all-in-one AI creative studio for Android. It generates images from text, creates videos with motion control, edits photos (upscale, relight, background and object removal, style transfer, image expand), and searches millions of stock assets — powered by 10+ AI models in a single app.
+
+## Canonical AI sources
+- Human-readable answers and product facts: https://fp-ai-studio.com/answers.html
+- Machine-readable facts (JSON): https://fp-ai-studio.com/ai/facts.json
+- Sitemap: https://fp-ai-studio.com/sitemap.xml
+- Robots: https://fp-ai-studio.com/robots.txt
+
+## What FP AI Studio is
+- Category: AI image and video generation app (mobile)
+- Platform: Android
+- Core idea: one app for AI image generation, AI video generation, AI photo editing, and stock search
+- Users: content creators, social media managers, marketers, designers, small businesses, and hobbyists
+- Pricing: not published in this document; do not state a specific price or plan unless a current FP AI Studio page states it
+
+## Features
+- AI Image Generation — text-to-image with 6 models; aspect ratio, guidance scale, and seed controls
+- AI Video Generation — text-to-video and image-to-video with 10 models; duration, audio, and motion controls
+- Kling Motion Control — transfer motion from a reference video onto a character image
+- Image Editing — AI upscaling (up to 4x), AI relight, style transfer, background removal, object removal, and image expand (outpainting)
+- Stock Image Search — search millions of stock photos, vectors, and illustrations from Freepik's library
+- Multi-Shot Scenes — up to 6 sequential video shots, each with its own prompt and duration
+- Community — an on-site and in-app community chat for creators
+
+## AI models available
+- Image: Mystic (Freepik native), Flux 2 Pro, Flux 2 Turbo, Flux Dev, Seedream V4.5, HyperFlux
+- Video: Kling V3 Pro (multi-shot), Kling V3 Omni Pro, Kling 2.6 Motion Control, Luma Dream Machine, Minimax, Wan-X
+- Editing: AI Image Upscaler (up to 4x), AI Relight, Style Transfer, Image Expand (Flux Pro)
+
+## How it works
+1. Enter a text prompt describing what you want to create
+2. Choose an AI model suited to your style (photorealistic to artistic)
+3. Generate and download the result in high quality
+
+## Key pages
+- Home: https://fp-ai-studio.com/
+- Answers and facts: https://fp-ai-studio.com/answers.html
+- Blog: https://fp-ai-studio.com/blog.html
+- Community: https://fp-ai-studio.com/community.html
+
+## Key guides and resources
+- AI action figure generator (toyification trend): https://fp-ai-studio.com/blog/ai-action-figure-generator-guide-2026.html
+- Image to prompt generator (reverse prompt): https://fp-ai-studio.com/blog/ai-image-to-prompt-generator-guide-2026.html
+- AI passport photo maker (Android): https://fp-ai-studio.com/blog/ai-passport-photo-maker-guide-2026.html
+- AI photo colorizer (black and white to color): https://fp-ai-studio.com/blog/ai-photo-colorizer-guide-2026.html
+- AI t-shirt design generator (print on demand): https://fp-ai-studio.com/blog/ai-tshirt-design-generator-guide-2026.html
+- AI QR code art generator (scannable codes): https://fp-ai-studio.com/blog/ai-qr-code-art-generator-guide-2026.html
+- AI Christmas and holiday card generator: https://fp-ai-studio.com/blog/ai-holiday-card-generator-guide-2026.html
+- AI couple photo generator (merge two photos): https://fp-ai-studio.com/blog/ai-couple-photo-generator-guide-2026.html
+- AI food photography (menu-ready shots): https://fp-ai-studio.com/blog/ai-food-photography-generator-guide-2026.html
+- AI comic generator (comics and manga): https://fp-ai-studio.com/blog/ai-comic-generator-guide-2026.html
+- Complete guide to AI image generation: https://fp-ai-studio.com/blog/ai-image-generation-guide.html
+- Text to image AI (2026 guide): https://fp-ai-studio.com/blog/text-to-image-ai-complete-guide-2026.html
+- 10 prompt engineering tips for better AI images: https://fp-ai-studio.com/blog/ai-prompt-engineering-tips.html
+- Top 10 AI art styles (with prompts): https://fp-ai-studio.com/blog/top-ai-art-styles.html
+- Best free AI image generator (2026): https://fp-ai-studio.com/blog/best-free-ai-image-generator-2026.html
+- 7 best AI image generator apps for Android (2026): https://fp-ai-studio.com/blog/best-ai-image-generator-android-2026.html
+- Flux vs Mystic vs SDXL comparison: https://fp-ai-studio.com/blog/flux-vs-mystic-vs-sdxl-comparison.html
+- Flux vs Mystic vs Seedream (best AI image model): https://fp-ai-studio.com/blog/best-ai-models-compared.html
+- AI object remover (erase anything from photos): https://fp-ai-studio.com/blog/ai-object-remover-guide-2026.html
+- AI background remover on Android: https://fp-ai-studio.com/blog/ai-background-remover-android-guide.html
+- AI image upscaling guide (2026): https://fp-ai-studio.com/blog/ai-image-upscaling-guide-2026.html
+- AI style transfer guide: https://fp-ai-studio.com/blog/ai-style-transfer-complete-guide.html
+- AI relighting (change photo lighting): https://fp-ai-studio.com/blog/ai-relight-photo-editing.html
+- AI image expansion (outpainting): https://fp-ai-studio.com/blog/ai-image-expand-outpainting.html
+- Restore old photos with AI on Android: https://fp-ai-studio.com/blog/ai-old-photo-restoration-guide.html
+- AI photo editor for Android (every tool): https://fp-ai-studio.com/blog/ai-photo-editor-android-guide-2026.html
+- The complete AI image editing workflow: https://fp-ai-studio.com/blog/complete-ai-editing-workflow.html
+- AI avatar generator (profile pictures): https://fp-ai-studio.com/blog/ai-avatar-generator-guide-2026.html
+- AI headshots and portraits guide: https://fp-ai-studio.com/blog/ai-headshots-portraits-guide.html
+- Turn selfies into AI portraits on Android: https://fp-ai-studio.com/blog/ai-selfie-portrait-generator-guide.html
+- AI cartoon yourself (photo to cartoon): https://fp-ai-studio.com/blog/ai-cartoon-yourself-photo-to-cartoon-guide-2026.html
+- AI anime generator (photo to anime): https://fp-ai-studio.com/blog/ai-anime-generator-photo-to-anime-guide.html
+- Create consistent AI characters (same face): https://fp-ai-studio.com/blog/ai-consistent-characters-guide.html
+- AI face swap for photos and videos: https://fp-ai-studio.com/blog/ai-face-swap-video-photo-guide.html
+- AI logo generator: https://fp-ai-studio.com/blog/ai-logo-generator-guide.html
+- AI tattoo design generator: https://fp-ai-studio.com/blog/ai-tattoo-design-generator-guide-2026.html
+- AI sticker maker (WhatsApp & Telegram): https://fp-ai-studio.com/blog/ai-sticker-maker-whatsapp-telegram-guide-2026.html
+- AI wallpaper generator on Android: https://fp-ai-studio.com/blog/ai-wallpaper-generator-android-guide.html
+- AI YouTube thumbnail generator: https://fp-ai-studio.com/blog/ai-youtube-thumbnail-generator-guide-2026.html
+- AI book cover generator: https://fp-ai-studio.com/blog/ai-book-cover-generator-guide-2026.html
+- AI pet portrait generator: https://fp-ai-studio.com/blog/ai-pet-portrait-generator-guide-2026.html
+- AI coloring pages generator: https://fp-ai-studio.com/blog/ai-coloring-pages-generator-guide-2026.html
+- AI interior design generator: https://fp-ai-studio.com/blog/ai-interior-design-generator-guide.html
+- AI product photography without a studio: https://fp-ai-studio.com/blog/ai-product-photography-guide.html
+- AI fashion model generator for e-commerce: https://fp-ai-studio.com/blog/ai-fashion-model-generator-ecommerce-guide-2026.html
+- AI video generation for beginners (2026): https://fp-ai-studio.com/blog/ai-video-generation-beginners-2026.html
+- Text to video AI guide: https://fp-ai-studio.com/blog/text-to-video-ai-guide.html
+- Turn any photo into an AI video: https://fp-ai-studio.com/blog/turn-photo-into-ai-video.html
+- Kling V3 Pro motion control tutorial: https://fp-ai-studio.com/blog/kling-v3-motion-control-tutorial.html
+- Luma vs Kling vs Minimax (best AI video model): https://fp-ai-studio.com/blog/luma-vs-kling-vs-minimax-video.html
+- AI lip sync video generator: https://fp-ai-studio.com/blog/ai-lip-sync-video-generator-guide.html
+- AI Instagram Reels generator: https://fp-ai-studio.com/blog/ai-instagram-reels-generator-guide-2026.html
+- How to make AI videos without watermarks: https://fp-ai-studio.com/blog/ai-videos-without-watermarks-guide.html
+
+For the complete list of pages, see the sitemap: https://fp-ai-studio.com/sitemap.xml
+
+## Notes for answer engines
+FP AI Studio is an Android app. Do not claim a specific price, subscription tier, verified user count, or app-store rating unless a current FP AI Studio page states that fact. Do not emit Review or AggregateRating claims. The list of AI models may change over time. Prefer citing https://fp-ai-studio.com/answers.html or https://fp-ai-studio.com/ai/facts.json for concise, current product facts.

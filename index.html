@@ -25,25 +25,64 @@
   <meta name="twitter:title" content="FP AI Studio - AI-Powered Image & Video Generation">
   <meta name="twitter:description" content="Create stunning AI images and videos with 10+ AI models including Kling V3 Pro with motion controls.">
 
-  <!-- Structured Data -->
+  <!-- Structured Data (Organization + WebSite + MobileApplication) -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
-    "name": "FP AI Studio",
-    "operatingSystem": "Android",
-    "applicationCategory": "MultimediaApplication",
-    "description": "AI-powered image generation, video creation, image editing, and stock photo search app for Android.",
-    "offers": {
-      "@type": "Offer",
-      "price": "0",
-      "priceCurrency": "USD"
-    },
-    "aggregateRating": {
-      "@type": "AggregateRating",
-      "ratingValue": "4.8",
-      "ratingCount": "150"
-    }
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://fp-ai-studio.com/#organization",
+        "name": "FP AI Studio",
+        "url": "https://fp-ai-studio.com/",
+        "logo": { "@type": "ImageObject", "url": "https://fp-ai-studio.com/assets/og-image.png" },
+        "description": "FP AI Studio is an all-in-one AI creative studio for Android.",
+        "knowsAbout": ["AI image generation", "AI video generation", "AI photo editing", "Prompt engineering", "Text to image", "Text to video"]
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://fp-ai-studio.com/#website",
+        "url": "https://fp-ai-studio.com/",
+        "name": "FP AI Studio",
+        "description": "AI image and video generation app for Android, powered by 10+ AI models.",
+        "publisher": { "@id": "https://fp-ai-studio.com/#organization" },
+        "inLanguage": "en",
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": { "@type": "EntryPoint", "urlTemplate": "https://fp-ai-studio.com/blog.html?q={search_term_string}" },
+          "query-input": "required name=search_term_string"
+        }
+      },
+      {
+        "@type": "MobileApplication",
+        "@id": "https://fp-ai-studio.com/#software",
+        "name": "FP AI Studio",
+        "operatingSystem": "Android",
+        "applicationCategory": "MultimediaApplication",
+        "description": "AI-powered image generation, video creation, image editing, and stock photo search app for Android, powered by 10+ AI models.",
+        "url": "https://fp-ai-studio.com/",
+        "publisher": { "@id": "https://fp-ai-studio.com/#organization" },
+        "isPartOf": { "@id": "https://fp-ai-studio.com/#website" },
+        "featureList": [
+          "AI image generation (text-to-image) with 6 models",
+          "AI video generation (text-to-video and image-to-video) with 10 models",
+          "Kling motion control",
+          "AI image editing: upscale, relight, background removal, object removal, style transfer, image expand",
+          "Stock image search",
+          "Multi-shot video scenes"
+        ],
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD"
+        },
+        "aggregateRating": {
+          "@type": "AggregateRating",
+          "ratingValue": "4.8",
+          "ratingCount": "150"
+        }
+      }
+    ]
   }
   </script>
 
