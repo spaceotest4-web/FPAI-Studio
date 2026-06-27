@@ -41,6 +41,16 @@
 - Community: https://fp-ai-studio.com/community.html
 
 ## Key guides and resources
+- AI hairstyle changer (try haircuts): https://fp-ai-studio.com/blog/ai-hairstyle-changer-guide-2026.html
+- AI hair color changer (preview hair color): https://fp-ai-studio.com/blog/ai-hair-color-changer-guide-2026.html
+- AI makeup generator (virtual try-on): https://fp-ai-studio.com/blog/ai-makeup-generator-guide-2026.html
+- AI outfit generator (virtual clothes try-on): https://fp-ai-studio.com/blog/ai-outfit-generator-virtual-try-on-guide-2026.html
+- AI photo retouching (skin and portrait): https://fp-ai-studio.com/blog/ai-photo-retouching-guide-2026.html
+- AI teeth whitening for photos: https://fp-ai-studio.com/blog/ai-teeth-whitening-photo-guide-2026.html
+- AI photo to sketch (pencil line art): https://fp-ai-studio.com/blog/ai-photo-to-sketch-guide-2026.html
+- AI photo to painting (oil and watercolor): https://fp-ai-studio.com/blog/ai-photo-to-painting-guide-2026.html
+- AI pixel art generator (8-bit and 16-bit): https://fp-ai-studio.com/blog/ai-pixel-art-generator-guide-2026.html
+- AI background blur (portrait-mode bokeh): https://fp-ai-studio.com/blog/ai-background-blur-bokeh-guide-2026.html
 - AI Ghibli style generator (anime art): https://fp-ai-studio.com/blog/ai-ghibli-style-generator-guide-2026.html
 - AI Lego generator (minifigure): https://fp-ai-studio.com/blog/ai-lego-yourself-generator-guide-2026.html
 - AI superhero generator: https://fp-ai-studio.com/blog/ai-superhero-generator-guide-2026.html
