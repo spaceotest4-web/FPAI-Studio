@@ -390,10 +390,10 @@
           <div class="hero-gen-controls">
             <select id="genModel" class="hero-gen-select" aria-label="AI model">
               <option value="flux">Flux — free &amp; unlimited</option>
+              <option value="turbo">Turbo — fast &amp; unlimited</option>
               <option value="nanobanana">Nano Banana — uses daily credits</option>
               <option value="seedream">Seedream — uses daily credits</option>
               <option value="gptimage">GPT Image — uses daily credits</option>
-              <option value="turbo">Turbo — fast, uses credits</option>
             </select>
             <select id="genRatio" class="hero-gen-select" aria-label="Aspect ratio">
               <option value="1024x1024">Square 1:1</option>
@@ -417,7 +417,7 @@
           <img id="genImage" class="hero-gen-image" alt="AI generated image" hidden>
         </div>
         <div class="hero-gen-actions" id="genActions" hidden>
-          <a id="genDownload" class="hero-gen-dl" href="#" target="_blank" rel="noopener" download>Download image</a>
+          <a id="genDownload" class="hero-gen-dl" href="#">Download image</a>
           <a href="#download" class="hero-gen-cta">Get the full app &rarr;</a>
         </div>
       </div>
@@ -443,9 +443,32 @@
           var loading = document.getElementById('genLoading');
           var actions = document.getElementById('genActions');
           var dl = document.getElementById('genDownload');
+          var currentUrl = '';
 
           Array.prototype.forEach.call(document.querySelectorAll('.hero-gen-chip'), function (chip) {
             chip.addEventListener('click', function () { promptEl.value = chip.textContent.trim(); promptEl.focus(); });
+          });
+
+          dl.addEventListener('click', function (e) {
+            e.preventDefault();
+            if (!currentUrl) return;
+            var label = dl.textContent;
+            dl.textContent = 'Preparing…';
+            fetch(currentUrl).then(function (r) { return r.blob(); }).then(function (blob) {
+              var ext = blob.type === 'image/png' ? 'png' : 'jpg';
+              var obj = URL.createObjectURL(blob);
+              var a = document.createElement('a');
+              a.href = obj;
+              a.download = 'fp-ai-studio-image.' + ext;
+              document.body.appendChild(a);
+              a.click();
+              document.body.removeChild(a);
+              setTimeout(function () { URL.revokeObjectURL(obj); }, 1500);
+              dl.textContent = label;
+            }).catch(function () {
+              window.open(currentUrl, '_blank', 'noopener');
+              dl.textContent = label;
+            });
           });
 
           form.addEventListener('submit', function (e) {
@@ -472,7 +495,7 @@
               stageImg.src = url;
               stageImg.hidden = false;
               loading.hidden = true;
-              dl.href = url;
+              dl.href = url; currentUrl = url;
               actions.hidden = false;
               btn.disabled = false;
               btn.textContent = 'Generate';
