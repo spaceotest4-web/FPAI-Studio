@@ -308,6 +308,12 @@
       padding: 0.5rem 0.75rem; font-family: var(--font); font-size: 0.85rem;
       background: var(--bg-white); color: var(--text); cursor: pointer;
     }
+    .hero-gen-random {
+      border: 1px solid var(--border); background: var(--bg); color: var(--text-light);
+      border-radius: var(--radius-sm); padding: 0.5rem 0.85rem; font-family: var(--font);
+      font-size: 0.85rem; cursor: pointer; transition: border-color 0.15s, color 0.15s;
+    }
+    .hero-gen-random:hover { border-color: var(--primary); color: var(--primary); }
     .hero-gen-chips { display: flex; gap: 0.4rem; flex-wrap: wrap; margin-bottom: 1rem; }
     .hero-gen-chip {
       border: 1px solid var(--border); background: var(--bg); color: var(--text-light);
@@ -400,6 +406,7 @@
               <option value="1280x720">Landscape 16:9</option>
               <option value="720x1280">Portrait 9:16</option>
             </select>
+            <button type="button" class="hero-gen-random" id="genRandom">&#127922; Random prompt</button>
           </div>
           <div class="hero-gen-chips" id="genChips">
             <button type="button" class="hero-gen-chip">a corgi astronaut floating in space, 3d render</button>
@@ -428,7 +435,7 @@
              POLLINATIONS_KEY: added for testing at the user's request. WARNING: this is a SECRET sk_ key and it
              is PUBLICLY VISIBLE in this static page's source, so anyone can read and reuse it. The account has
              no payment method attached, so it cannot incur charges; rotate it at auth.pollinations.ai if abused. */
-          var POLLINATIONS_REFERRER = "fp-ai-studio.com";
+          var POLLINATIONS_REFERRER = "fpai-studio.vercel.app";
           var POLLINATIONS_KEY = "sk_tQ3h9enOwM7mdXWihfYAh6vekUaB2I0h";
 
           var form = document.getElementById('genForm');
@@ -470,6 +477,27 @@
               dl.textContent = label;
             });
           });
+
+          var R_SUBJECTS = ['a majestic lion','a curious red fox','a snow leopard','a wise old owl','a playful otter','a hummingbird mid-flight','a cyberpunk samurai','a steampunk inventor','an astronaut','a medieval knight','a forest sorceress','a friendly robot','a cozy cottage','a floating island','an old lighthouse','a futuristic city skyline','an ancient temple','a treehouse village','a vintage sports car','a hot air balloon','a tall sailing ship','a mechanical dragon','a glowing crystal cave','a lone cherry blossom tree'];
+          var R_SETTINGS = ['in a misty bamboo forest','on a neon-lit street in the rain','under a vast starry sky','beside a mirror-calm mountain lake','in a blooming spring meadow','in a snowy alpine village','on a windswept cliff above the sea','in a glowing autumn forest','in a bustling night market','floating in a dreamy pastel sky','among bioluminescent mushrooms','in a golden desert at sunset'];
+          var R_STYLES = ['photorealistic, 50mm photo','cinematic concept art','soft watercolor painting','rich oil painting','3D render in Pixar style','detailed anime illustration','Studio Ghibli inspired art','clean flat vector illustration','expressive pencil sketch','moody digital painting','isometric miniature','retro pixel art'];
+          var R_LIGHTING = ['golden hour lighting','dramatic rim lighting','soft volumetric light','moody cinematic lighting','bright studio lighting','glowing neon accents','warm backlight','ethereal morning haze','bold high-contrast light'];
+          var R_MODIFIERS = ['ultra detailed','highly detailed, sharp focus','8k, crisp details','beautiful composition','rich vivid colors','intricate detail','masterpiece quality','natural depth of field'];
+          function rPick(a) { return a[Math.floor(Math.random() * a.length)]; }
+          function randomPrompt() {
+            var s = rPick(R_SUBJECTS), set = rPick(R_SETTINGS), st = rPick(R_STYLES), li = rPick(R_LIGHTING), mo = rPick(R_MODIFIERS);
+            var forms = [
+              s + ' ' + set + ', ' + st + ', ' + li + ', ' + mo,
+              st + ' of ' + s + ' ' + set + ', ' + li + ', ' + mo,
+              s + ' ' + set + ', ' + li + ', ' + mo
+            ];
+            var p = forms[Math.floor(Math.random() * forms.length)];
+            return p.charAt(0).toUpperCase() + p.slice(1);
+          }
+          var randomBtn = document.getElementById('genRandom');
+          if (randomBtn) {
+            randomBtn.addEventListener('click', function () { promptEl.value = randomPrompt(); promptEl.focus(); });
+          }
 
           form.addEventListener('submit', function (e) {
             e.preventDefault();
