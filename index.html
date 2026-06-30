@@ -278,6 +278,64 @@
       .home-chat-box { height: 520px; }
       .home-chat-foot { font-size: 0.68rem; }
     }
+
+    /* ═══ HERO IMAGE GENERATOR (Pollinations.AI) ═══ */
+    .hero-gen {
+      max-width: 760px; margin: 3rem auto 0;
+      background: var(--bg-white); border: 1px solid var(--border);
+      border-radius: var(--radius); box-shadow: var(--shadow-hover);
+      padding: 1.5rem; text-align: left;
+    }
+    .hero-gen-head { display: flex; flex-direction: column; gap: 0.4rem; margin-bottom: 1rem; }
+    .hero-gen-badge {
+      display: inline-flex; align-items: center; gap: 6px; align-self: flex-start;
+      font-size: 0.72rem; font-weight: 600; color: var(--primary);
+      background: var(--tag-bg); padding: 4px 10px; border-radius: 50px;
+    }
+    .hero-gen-badge .dot { width: 7px; height: 7px; border-radius: 50%; background: #10B981; animation: home-pulse 2s infinite; }
+    .hero-gen-title { font-size: 1.15rem; margin: 0; }
+    .hero-gen-inputrow { display: flex; gap: 0.5rem; margin-bottom: 0.75rem; }
+    .hero-gen-input {
+      flex: 1; border: 1px solid var(--border); border-radius: var(--radius-sm);
+      padding: 0.75rem 1rem; font-family: var(--font); font-size: 0.95rem;
+      color: var(--text); outline: none; transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .hero-gen-input:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(37,99,235,0.12); }
+    .hero-gen-btn { white-space: nowrap; }
+    .hero-gen-controls { display: flex; gap: 0.5rem; margin-bottom: 0.75rem; flex-wrap: wrap; }
+    .hero-gen-select {
+      border: 1px solid var(--border); border-radius: var(--radius-sm);
+      padding: 0.5rem 0.75rem; font-family: var(--font); font-size: 0.85rem;
+      background: var(--bg-white); color: var(--text); cursor: pointer;
+    }
+    .hero-gen-chips { display: flex; gap: 0.4rem; flex-wrap: wrap; margin-bottom: 1rem; }
+    .hero-gen-chip {
+      border: 1px solid var(--border); background: var(--bg); color: var(--text-light);
+      border-radius: 50px; padding: 0.35rem 0.8rem; font-size: 0.78rem; cursor: pointer;
+      font-family: var(--font); transition: border-color 0.15s, color 0.15s;
+    }
+    .hero-gen-chip:hover { border-color: var(--primary); color: var(--primary); }
+    .hero-gen-stage {
+      position: relative; width: 100%; aspect-ratio: 16/10;
+      background: var(--bg-alt); border: 1px solid var(--border);
+      border-radius: var(--radius-sm); overflow: hidden;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .hero-gen-image { width: 100%; height: 100%; object-fit: contain; display: block; }
+    .hero-gen-placeholder { display: flex; flex-direction: column; align-items: center; gap: 0.6rem; color: var(--text-muted); font-size: 0.9rem; text-align: center; padding: 1rem; }
+    .hero-gen-placeholder svg { opacity: 0.5; }
+    .hero-gen-loading { display: flex; align-items: center; gap: 0.6rem; color: var(--text-light); font-size: 0.9rem; }
+    .hero-gen-loading .spinner { width: 20px; height: 20px; border: 2px solid var(--border); border-top-color: var(--primary); border-radius: 50%; animation: home-spin 0.6s linear infinite; }
+    .hero-gen-actions { display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin-top: 1rem; flex-wrap: wrap; }
+    .hero-gen-dl { font-weight: 600; font-size: 0.9rem; color: var(--primary); }
+    .hero-gen-cta { font-weight: 600; font-size: 0.9rem; color: var(--ink); }
+    .hero-gen-note { font-size: 0.72rem; color: var(--text-muted); margin: 0.75rem 0 0; text-align: center; }
+    .hero-gen-note a { color: var(--text-muted); text-decoration: underline; }
+    @media (max-width: 600px) {
+      .hero-gen { padding: 1.25rem; }
+      .hero-gen-inputrow { flex-direction: column; }
+      .hero-gen-btn { width: 100%; justify-content: center; }
+    }
   </style>
 </head>
 <body>
@@ -320,9 +378,110 @@
         </a>
         <a href="#features" class="btn btn-outline">Explore Features</a>
       </div>
-      <div class="hero-image" style="padding:0;overflow:hidden">
-        <img src="hero-image-v3.png" alt="FP AI Studio - AI Image and Video Generation App for Android" style="width:100%;height:100%;object-fit:cover;display:block;border-radius:inherit" loading="eager">
+      <div class="hero-gen" id="heroGen">
+        <div class="hero-gen-head">
+          <span class="hero-gen-badge"><span class="dot"></span> Live AI image generator</span>
+          <h2 class="hero-gen-title">Type a prompt and create an image free</h2>
+        </div>
+        <form class="hero-gen-form" id="genForm" autocomplete="off">
+          <div class="hero-gen-inputrow">
+            <input type="text" id="genPrompt" class="hero-gen-input" placeholder="Describe an image — e.g. a neon cyberpunk fox, cinematic lighting" maxlength="500" required>
+            <button type="submit" class="btn btn-primary hero-gen-btn" id="genBtn">Generate</button>
+          </div>
+          <div class="hero-gen-controls">
+            <select id="genModel" class="hero-gen-select" aria-label="AI model">
+              <option value="flux">Flux — best quality</option>
+              <option value="turbo">Turbo — fastest</option>
+            </select>
+            <select id="genRatio" class="hero-gen-select" aria-label="Aspect ratio">
+              <option value="1024x1024">Square 1:1</option>
+              <option value="1280x720">Landscape 16:9</option>
+              <option value="720x1280">Portrait 9:16</option>
+            </select>
+          </div>
+          <div class="hero-gen-chips" id="genChips">
+            <button type="button" class="hero-gen-chip">a corgi astronaut floating in space, 3d render</button>
+            <button type="button" class="hero-gen-chip">minimalist mountain logo, flat vector</button>
+            <button type="button" class="hero-gen-chip">cyberpunk city at night, neon rain</button>
+            <button type="button" class="hero-gen-chip">watercolor koi pond, soft morning light</button>
+          </div>
+        </form>
+        <div class="hero-gen-stage" id="genStage">
+          <div class="hero-gen-placeholder" id="genPlaceholder">
+            <svg width="44" height="44" viewBox="0 0 24 24" fill="currentColor"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>
+            <p id="genPlaceholderText">Your AI image will appear here</p>
+          </div>
+          <div class="hero-gen-loading" id="genLoading" hidden><span class="spinner"></span><span>Generating your image…</span></div>
+          <img id="genImage" class="hero-gen-image" alt="AI generated image" hidden>
+        </div>
+        <div class="hero-gen-actions" id="genActions" hidden>
+          <a id="genDownload" class="hero-gen-dl" href="#" target="_blank" rel="noopener" download>Download image</a>
+          <a href="#download" class="hero-gen-cta">Get the full app &rarr;</a>
+        </div>
+        <p class="hero-gen-note">Free preview powered by <a href="https://pollinations.ai" target="_blank" rel="noopener noreferrer">Pollinations.AI</a></p>
       </div>
+      <script>
+        (function () {
+          /* Optional: paste your Pollinations.AI token here to raise rate limits and remove the watermark.
+             NOTE: this file is public, so anyone viewing source can read this token. Leave blank for keyless use. */
+          var POLLINATIONS_TOKEN = "";
+
+          var form = document.getElementById('genForm');
+          if (!form) return;
+          var promptEl = document.getElementById('genPrompt');
+          var modelEl = document.getElementById('genModel');
+          var ratioEl = document.getElementById('genRatio');
+          var btn = document.getElementById('genBtn');
+          var stageImg = document.getElementById('genImage');
+          var placeholder = document.getElementById('genPlaceholder');
+          var placeholderText = document.getElementById('genPlaceholderText');
+          var loading = document.getElementById('genLoading');
+          var actions = document.getElementById('genActions');
+          var dl = document.getElementById('genDownload');
+
+          Array.prototype.forEach.call(document.querySelectorAll('.hero-gen-chip'), function (chip) {
+            chip.addEventListener('click', function () { promptEl.value = chip.textContent.trim(); promptEl.focus(); });
+          });
+
+          form.addEventListener('submit', function (e) {
+            e.preventDefault();
+            var prompt = (promptEl.value || '').trim();
+            if (!prompt) { promptEl.focus(); return; }
+            var dims = (ratioEl.value || '1024x1024').split('x');
+            var model = modelEl.value || 'flux';
+            var seed = Math.floor(Math.random() * 1000000);
+            var url = 'https://image.pollinations.ai/prompt/' + encodeURIComponent(prompt)
+              + '?width=' + dims[0] + '&height=' + dims[1] + '&model=' + model + '&seed=' + seed + '&nologo=true';
+            if (POLLINATIONS_TOKEN) { url += '&token=' + encodeURIComponent(POLLINATIONS_TOKEN); }
+
+            placeholder.hidden = true;
+            stageImg.hidden = true;
+            actions.hidden = true;
+            loading.hidden = false;
+            btn.disabled = true;
+            btn.textContent = 'Generating…';
+
+            var probe = new Image();
+            probe.onload = function () {
+              stageImg.src = url;
+              stageImg.hidden = false;
+              loading.hidden = true;
+              dl.href = url;
+              actions.hidden = false;
+              btn.disabled = false;
+              btn.textContent = 'Generate';
+            };
+            probe.onerror = function () {
+              loading.hidden = true;
+              placeholder.hidden = false;
+              placeholderText.textContent = 'Generation failed — please try again.';
+              btn.disabled = false;
+              btn.textContent = 'Generate';
+            };
+            probe.src = url;
+          });
+        })();
+      </script>
     </div>
   </section>
 
