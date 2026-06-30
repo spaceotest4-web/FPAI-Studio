@@ -322,6 +322,7 @@
       display: flex; align-items: center; justify-content: center;
     }
     .hero-gen-image { width: 100%; height: 100%; object-fit: contain; display: block; }
+    .hero-gen [hidden] { display: none !important; }
     .hero-gen-placeholder { display: flex; flex-direction: column; align-items: center; gap: 0.6rem; color: var(--text-muted); font-size: 0.9rem; text-align: center; padding: 1rem; }
     .hero-gen-placeholder svg { opacity: 0.5; }
     .hero-gen-loading { display: flex; align-items: center; gap: 0.6rem; color: var(--text-light); font-size: 0.9rem; }
@@ -418,13 +419,15 @@
           <a id="genDownload" class="hero-gen-dl" href="#" target="_blank" rel="noopener" download>Download image</a>
           <a href="#download" class="hero-gen-cta">Get the full app &rarr;</a>
         </div>
-        <p class="hero-gen-note">Free preview powered by <a href="https://pollinations.ai" target="_blank" rel="noopener noreferrer">Pollinations.AI</a></p>
       </div>
       <script>
         (function () {
-          /* Optional: paste your Pollinations.AI token here to raise rate limits and remove the watermark.
-             NOTE: this file is public, so anyone viewing source can read this token. Leave blank for keyless use. */
-          var POLLINATIONS_TOKEN = "";
+          /* Web-app auth for Pollinations.AI. This is a static, client-side page, so do NOT put an sk_ SECRET
+             key here (it would be public). Two browser-safe options:
+             1) referrer — register your domain at auth.pollinations.ai; requests are identified by domain (safe to expose).
+             2) POLLINATIONS_PUBLISHABLE_KEY — a pk_ publishable key only (pk_ keys are safe in browsers; sk_ keys are NOT). */
+          var POLLINATIONS_REFERRER = "fp-ai-studio.com";
+          var POLLINATIONS_PUBLISHABLE_KEY = ""; // optional pk_ key only — never an sk_ secret key
 
           var form = document.getElementById('genForm');
           if (!form) return;
@@ -452,7 +455,8 @@
             var seed = Math.floor(Math.random() * 1000000);
             var url = 'https://image.pollinations.ai/prompt/' + encodeURIComponent(prompt)
               + '?width=' + dims[0] + '&height=' + dims[1] + '&model=' + model + '&seed=' + seed + '&nologo=true';
-            if (POLLINATIONS_TOKEN) { url += '&token=' + encodeURIComponent(POLLINATIONS_TOKEN); }
+            if (POLLINATIONS_REFERRER) { url += '&referrer=' + encodeURIComponent(POLLINATIONS_REFERRER); }
+            if (POLLINATIONS_PUBLISHABLE_KEY) { url += '&key=' + encodeURIComponent(POLLINATIONS_PUBLISHABLE_KEY); }
 
             placeholder.hidden = true;
             stageImg.hidden = true;
