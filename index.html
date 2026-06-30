@@ -420,12 +420,13 @@
       </div>
       <script>
         (function () {
-          /* Web-app auth for Pollinations.AI. This is a static, client-side page, so do NOT put an sk_ SECRET
-             key here (it would be public). Two browser-safe options:
-             1) referrer — register your domain at auth.pollinations.ai; requests are identified by domain (safe to expose).
-             2) POLLINATIONS_PUBLISHABLE_KEY — a pk_ publishable key only (pk_ keys are safe in browsers; sk_ keys are NOT). */
+          /* Pollinations.AI auth.
+             POLLINATIONS_REFERRER: your domain (safe to expose); register it at auth.pollinations.ai.
+             POLLINATIONS_KEY: added for testing at the user's request. WARNING: this is a SECRET sk_ key and it
+             is PUBLICLY VISIBLE in this static page's source, so anyone can read and reuse it. The account has
+             no payment method attached, so it cannot incur charges; rotate it at auth.pollinations.ai if abused. */
           var POLLINATIONS_REFERRER = "fp-ai-studio.com";
-          var POLLINATIONS_PUBLISHABLE_KEY = ""; // optional pk_ key only — never an sk_ secret key
+          var POLLINATIONS_KEY = "sk_tQ3h9enOwM7mdXWihfYAh6vekUaB2I0h";
 
           var form = document.getElementById('genForm');
           if (!form) return;
@@ -454,7 +455,7 @@
             var url = 'https://image.pollinations.ai/prompt/' + encodeURIComponent(prompt)
               + '?width=' + dims[0] + '&height=' + dims[1] + '&model=' + model + '&seed=' + seed + '&nologo=true';
             if (POLLINATIONS_REFERRER) { url += '&referrer=' + encodeURIComponent(POLLINATIONS_REFERRER); }
-            if (POLLINATIONS_PUBLISHABLE_KEY) { url += '&key=' + encodeURIComponent(POLLINATIONS_PUBLISHABLE_KEY); }
+            if (POLLINATIONS_KEY) { url += '&key=' + encodeURIComponent(POLLINATIONS_KEY); }
 
             placeholder.hidden = true;
             stageImg.hidden = true;
