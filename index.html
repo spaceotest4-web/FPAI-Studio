@@ -286,14 +286,6 @@
       border-radius: var(--radius); box-shadow: var(--shadow-hover);
       padding: 1.5rem; text-align: left;
     }
-    .hero-split {
-      display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;
-      align-items: start; max-width: 1120px; margin: 3rem auto 0; text-align: left;
-    }
-    .hero-split .hero-gen { margin: 0; max-width: none; }
-    .hero-chat { min-width: 0; }
-    .hero-chat .home-chat-wrap { max-width: none; margin: 0; padding: 0; }
-    @media (max-width: 900px) { .hero-split { grid-template-columns: 1fr; } }
     .hero-gen-head { display: flex; flex-direction: column; gap: 0.4rem; margin-bottom: 1rem; }
     .hero-gen-badge {
       display: inline-flex; align-items: center; gap: 6px; align-self: flex-start;
@@ -396,7 +388,6 @@
         </a>
         <a href="#features" class="btn btn-outline">Explore Features</a>
       </div>
-      <div class="hero-split">
       <div class="hero-gen" id="heroGen">
         <div class="hero-gen-head">
           <span class="hero-gen-badge"><span class="dot"></span> Live AI image generator</span>
@@ -441,10 +432,9 @@
         </div>
         <div class="hero-gen-actions" id="genActions" hidden>
           <a id="genDownload" class="hero-gen-dl" href="#">Download image</a>
+          <a href="#community-chat" class="hero-gen-dl" title="Open the community chat">&#128172; Chat</a>
           <a href="#download" class="hero-gen-cta">Get the full app &rarr;</a>
         </div>
-      </div>
-      <div class="hero-chat" id="heroChatMount"></div>
       </div>
       <script>
         (function () {
@@ -557,18 +547,6 @@
             probe.src = url;
           });
         })();
-      </script>
-      <script>
-        document.addEventListener('DOMContentLoaded', function () {
-          var sec = document.getElementById('community-chat');
-          var wrap = sec ? sec.querySelector('.home-chat-wrap') : null;
-          var mount = document.getElementById('heroChatMount');
-          if (wrap && mount) {
-            mount.appendChild(wrap);
-            if (sec && sec.parentNode) sec.parentNode.removeChild(sec);
-            mount.id = 'community-chat';
-          }
-        });
       </script>
     </div>
   </section>
