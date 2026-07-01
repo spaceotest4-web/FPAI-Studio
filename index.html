@@ -314,6 +314,11 @@
       font-size: 0.85rem; cursor: pointer; transition: border-color 0.15s, color 0.15s;
     }
     .hero-gen-random:hover { border-color: var(--primary); color: var(--primary); }
+    .hero-gen-seed {
+      border: 1px solid var(--border); border-radius: var(--radius-sm);
+      padding: 0.5rem 0.75rem; font-family: var(--font); font-size: 0.85rem;
+      background: var(--bg-white); color: var(--text); width: 150px;
+    }
     .hero-gen-chips { display: flex; gap: 0.4rem; flex-wrap: wrap; margin-bottom: 1rem; }
     .hero-gen-chip {
       border: 1px solid var(--border); background: var(--bg); color: var(--text-light);
@@ -362,7 +367,7 @@
           <li><a href="#features">Features</a></li>
           <li><a href="blog.html">Blog</a></li>
           <li><a href="community.html">Community</a></li>
-          <li><a href="#download" class="btn btn-primary">Download App</a></li>
+          <li><a href="conjure.apk" class="btn btn-primary" download>Download App</a></li>
         </ul>
       </nav>
       <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle menu">
@@ -377,7 +382,7 @@
       <h1>Create Stunning Visuals with <span>AI Power</span></h1>
       <p>Generate images, create videos with motion controls, edit photos, and search millions of stock assets — all from one Android app powered by 10+ AI models.</p>
       <div class="hero-buttons">
-        <a href="#download" class="btn btn-primary">
+        <a href="conjure.apk" class="btn btn-primary" download>
           <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.523 2H6.477L3.694 7.618 12 21.5l8.306-13.882L17.523 2zM12 17.776L5.237 7.6 7.2 4h9.6l1.963 3.6L12 17.776z"/></svg>
           Download for Android
         </a>
@@ -397,6 +402,7 @@
             <select id="genModel" class="hero-gen-select" aria-label="AI model">
               <option value="flux">Flux — free &amp; unlimited</option>
               <option value="turbo">Turbo — fast &amp; unlimited</option>
+              <option value="sana">Sana — free &amp; fast</option>
               <option value="nanobanana">Nano Banana — uses daily credits</option>
               <option value="seedream">Seedream — uses daily credits</option>
               <option value="gptimage">GPT Image — uses daily credits</option>
@@ -406,6 +412,7 @@
               <option value="1280x720">Landscape 16:9</option>
               <option value="720x1280">Portrait 9:16</option>
             </select>
+            <input type="number" id="genSeed" class="hero-gen-seed" placeholder="Seed (optional)" min="0" step="1">
             <button type="button" class="hero-gen-random" id="genRandom">&#127922; Random prompt</button>
           </div>
           <div class="hero-gen-chips" id="genChips">
@@ -444,6 +451,7 @@
           var promptEl = document.getElementById('genPrompt');
           var modelEl = document.getElementById('genModel');
           var ratioEl = document.getElementById('genRatio');
+          var seedEl = document.getElementById('genSeed');
           var btn = document.getElementById('genBtn');
           var stageImg = document.getElementById('genImage');
           var placeholder = document.getElementById('genPlaceholder');
@@ -506,7 +514,7 @@
             if (!prompt) { promptEl.focus(); return; }
             var dims = (ratioEl.value || '1024x1024').split('x');
             var model = modelEl.value || 'flux';
-            var seed = Math.floor(Math.random() * 1000000);
+            var seed = (seedEl && seedEl.value.trim() !== '') ? seedEl.value.trim() : Math.floor(Math.random() * 1000000);
             var url = 'https://image.pollinations.ai/prompt/' + encodeURIComponent(prompt)
               + '?width=' + dims[0] + '&height=' + dims[1] + '&model=' + model + '&seed=' + seed + '&nologo=true';
             if (POLLINATIONS_REFERRER) { url += '&referrer=' + encodeURIComponent(POLLINATIONS_REFERRER); }
@@ -765,9 +773,9 @@
       <div class="cta-box">
         <h2>Ready to Create with AI?</h2>
         <p>Download FP AI Studio for free and start generating stunning images and videos today.</p>
-        <a href="#" class="btn btn-primary">
+        <a href="conjure.apk" class="btn btn-primary" download>
           <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.523 2H6.477L3.694 7.618 12 21.5l8.306-13.882L17.523 2zM12 17.776L5.237 7.6 7.2 4h9.6l1.963 3.6L12 17.776z"/></svg>
-          Get it on Google Play
+          Download for Android (APK)
         </a>
       </div>
     </div>
