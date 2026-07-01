@@ -309,7 +309,9 @@
       flex: 1; border: 1px solid var(--border); border-radius: var(--radius-sm);
       padding: 0.75rem 1rem; font-family: var(--font); font-size: 0.95rem;
       color: var(--text); outline: none; transition: border-color 0.2s, box-shadow 0.2s;
+      resize: vertical; min-height: 48px; line-height: 1.5;
     }
+    .hero-gen-inputrow { align-items: flex-start; }
     .hero-gen-input:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(37,99,235,0.12); }
     .hero-gen-btn { white-space: nowrap; }
     .hero-gen-controls { display: flex; gap: 0.5rem; margin-bottom: 0.75rem; flex-wrap: wrap; }
@@ -353,7 +355,7 @@
     .hero-gen-cta { font-weight: 600; font-size: 0.9rem; color: var(--ink); }
     @media (max-width: 600px) {
       .hero-gen { padding: 1.25rem; }
-      .hero-gen-inputrow { flex-direction: column; }
+      .hero-gen-inputrow { flex-direction: column; align-items: stretch; }
       .hero-gen-btn { width: 100%; justify-content: center; }
     }
   </style>
@@ -406,7 +408,7 @@
         </div>
         <form class="hero-gen-form" id="genForm" autocomplete="off">
           <div class="hero-gen-inputrow">
-            <input type="text" id="genPrompt" class="hero-gen-input" placeholder="Describe an image — e.g. a neon cyberpunk fox, cinematic lighting" maxlength="500" required>
+            <textarea id="genPrompt" class="hero-gen-input" placeholder="Describe an image — e.g. a neon cyberpunk fox, cinematic lighting" maxlength="500" rows="2" required></textarea>
             <button type="submit" class="btn btn-primary hero-gen-btn" id="genBtn">Generate</button>
           </div>
           <div class="hero-gen-controls">
