@@ -1008,11 +1008,17 @@
         msgData.replyToUser = replyTo.user;
         msgData.replyToText = replyTo.text;
       }
-      push(ref(db, `messages/${currentRoom}`), msgData);
-      input.value = '';
-      input.style.height = 'auto';
-      cancelReply();
-      input.focus();
+      push(ref(db, `messages/${currentRoom}`), msgData)
+        .then(function () {
+          input.value = '';
+          input.style.height = 'auto';
+          cancelReply();
+          input.focus();
+        })
+        .catch(function (err) {
+          console.error('Chat send failed:', err);
+          alert('Message could not be sent.\n\nFirebase: ' + ((err && err.message) ? err.message : err) + '\n\nThis usually means the Realtime Database rules are blocking writes — publish the rules from database.rules.json.');
+        });
     }
 
     function setReply(msgId, user, text) {
