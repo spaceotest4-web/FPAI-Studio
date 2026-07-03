@@ -23,13 +23,6 @@
         ".write": "!data.exists()",
         ".validate": "newData.hasChildren(['name'])"
       }
-    },
-    "gallery": {
-      ".read": true,
-      "$id": {
-        ".write": "newData.exists()",
-        ".validate": "newData.hasChildren(['prompt','url','timestamp']) && newData.child('url').isString() && newData.child('url').val().length <= 2000 && newData.child('prompt').isString() && newData.child('prompt').val().length <= 1000 && newData.child('timestamp').isNumber()"
-      }
     }
   }
 }

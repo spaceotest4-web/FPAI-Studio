@@ -89,12 +89,6 @@
       width: 30px; height: 30px; border-radius: 6px; font-size: 1rem; cursor: pointer; line-height: 1;
     }
     .gen2-remix:hover { background: var(--primary); }
-    .gen2-share {
-      position: absolute; top: 8px; left: 8px; border: none; background: rgba(15,27,45,0.82); color: #fff;
-      border-radius: 6px; padding: 5px 10px; font-size: 0.78rem; font-family: var(--font); cursor: pointer;
-    }
-    .gen2-share:hover { background: var(--primary); }
-    .gen2-share:disabled { background: #10B981; cursor: default; }
     .gen2-img { cursor: zoom-in; }
     .gen2-lightbox {
       position: fixed; inset: 0; background: rgba(15,27,45,0.92); display: none;
@@ -105,7 +99,7 @@
   </style>
 </head>
 <body>
-  <header class="site-header"><div class="container"><a href="index.html" class="logo"><svg width="32" height="32" viewBox="0 0 32 32" fill="none"><rect width="32" height="32" rx="8" fill="url(#g1)"/><polygon points="13,10 13,22 23,16" fill="#fff"/><defs><linearGradient id="g1" x1="0" y1="0" x2="32" y2="32"><stop stop-color="#6366F1"/><stop offset="1" stop-color="#8B5CF6"/></linearGradient></defs></svg> FP <span>AI Studio</span></a><nav><ul class="nav-links" id="navLinks"><li><a href="index.html">Home</a></li><li><a href="ai-image-generator.html" class="active">AI Generator</a></li><li><a href="gallery.html">Gallery</a></li><li><a href="blog.html">Blog</a></li><li><a href="community.html">Community</a></li><li><a href="index.html#download" class="btn btn-primary">Download App</a></li></ul></nav><button class="mobile-toggle" id="mobileToggle" aria-label="Toggle menu"><span></span><span></span><span></span></button></div></header>
+  <header class="site-header"><div class="container"><a href="index.html" class="logo"><svg width="32" height="32" viewBox="0 0 32 32" fill="none"><rect width="32" height="32" rx="8" fill="url(#g1)"/><polygon points="13,10 13,22 23,16" fill="#fff"/><defs><linearGradient id="g1" x1="0" y1="0" x2="32" y2="32"><stop stop-color="#6366F1"/><stop offset="1" stop-color="#8B5CF6"/></linearGradient></defs></svg> FP <span>AI Studio</span></a><nav><ul class="nav-links" id="navLinks"><li><a href="index.html">Home</a></li><li><a href="ai-image-generator.html" class="active">AI Generator</a></li><li><a href="blog.html">Blog</a></li><li><a href="community.html">Community</a></li><li><a href="index.html#download" class="btn btn-primary">Download App</a></li></ul></nav><button class="mobile-toggle" id="mobileToggle" aria-label="Toggle menu"><span></span><span></span><span></span></button></div></header>
 
   <section class="page-header"><div class="container">
     <h1>Free AI Image Generator</h1>
@@ -225,7 +219,7 @@
       <div class="gen2-results" id="g2Results">
         <div class="gen2-placeholder" style="grid-column:1/-1">Your generated images will appear here.</div>
       </div>
-      <p class="gen2-note">Tap <strong>Share</strong> on any image to post it to the <a href="gallery.html">community gallery</a>. For unlimited generations plus video and editing, <a href="index.html#download">get the FP AI Studio app</a>.</p>
+      <p class="gen2-note">Free preview. For unlimited generations plus video and editing, <a href="index.html#download">get the FP AI Studio app</a>.</p>
     </div>
 
     <div class="blog-content" style="max-width:750px;margin:3rem auto 0">
@@ -268,14 +262,6 @@
   <footer class="site-footer"><div class="container"><div class="footer-grid"><div class="footer-col"><h4>FP AI Studio</h4><p>The all-in-one AI creative studio for Android.</p></div><div class="footer-col"><h4>Tools</h4><ul><li><a href="ai-image-generator.html">AI Image Generator</a></li><li><a href="blog.html">Blog</a></li></ul></div><div class="footer-col"><h4>Resources</h4><ul><li><a href="answers.html">Answers</a></li><li><a href="community.html">Community</a></li></ul></div><div class="footer-col"><h4>Legal</h4><ul><li><a href="#">Privacy Policy</a></li><li><a href="#">Terms of Service</a></li></ul></div></div><div class="footer-bottom">&copy; 2026 FP AI Studio. All rights reserved.</div></div></footer>
 
   <script>document.getElementById('mobileToggle').addEventListener('click',function(){document.getElementById('navLinks').classList.toggle('open')});</script>
-  <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-app.js";
-    import { getDatabase, ref, push } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-database.js";
-    const firebaseConfig = { apiKey: "AIzaSyD6ZVj5BcG3k5Yz855Gnqzl9OJfxw2e1rc", authDomain: "fpai-chat.firebaseapp.com", databaseURL: "https://fpai-chat-default-rtdb.firebaseio.com", projectId: "fpai-chat", storageBucket: "fpai-chat.firebasestorage.app", messagingSenderId: "578450557983", appId: "1:578450557983:web:c3da39cf03cb6b1eddd92a" };
-    const app = initializeApp(firebaseConfig);
-    const db = getDatabase(app);
-    window.fpaiShareGallery = function (item) { try { push(ref(db, 'gallery'), item); } catch (e) { console.error('share failed', e); } };
-  </script>
   <script>
     (function () {
       var POLLINATIONS_REFERRER = "fpai-studio.vercel.app";
@@ -354,14 +340,7 @@
           rm.addEventListener('click', function (e) { e.stopPropagation(); renderCell(cell, prompt, Math.floor(Math.random() * 1000000)); });
           var dl = document.createElement('button'); dl.className = 'gen2-dl'; dl.textContent = 'Download';
           dl.addEventListener('click', function (e) { e.stopPropagation(); downloadUrl(url); });
-          var sh = document.createElement('button'); sh.className = 'gen2-share'; sh.textContent = 'Share'; sh.title = 'Share to public gallery';
-          sh.addEventListener('click', function (e) {
-            e.stopPropagation();
-            var shareUrl = url.replace(/[?&]key=[^&]*/, '') + '&safe=true';
-            if (window.fpaiShareGallery) { window.fpaiShareGallery({ prompt: prompt, url: shareUrl, model: modelEl.value, seed: seed, timestamp: Date.now() }); sh.textContent = 'Shared ✓'; sh.disabled = true; }
-            else { sh.textContent = 'Unavailable'; }
-          });
-          cell.appendChild(img); cell.appendChild(rm); cell.appendChild(sh); cell.appendChild(dl);
+          cell.appendChild(img); cell.appendChild(rm); cell.appendChild(dl);
         };
         probe.onerror = function () {
           if (tries < 2) { setTimeout(function () { renderCell(cell, prompt, seed, tries + 1); }, 1200); }

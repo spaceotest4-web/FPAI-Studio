@@ -37,12 +37,16 @@
 ## Key pages
 - Home: https://fp-ai-studio.com/
 - Free AI image generator (browser tool): https://fp-ai-studio.com/ai-image-generator.html
-- AI image gallery (community creations): https://fp-ai-studio.com/gallery.html
 - Answers and facts: https://fp-ai-studio.com/answers.html
 - Blog: https://fp-ai-studio.com/blog.html
 - Community: https://fp-ai-studio.com/community.html
 
 ## Key guides and resources
+- How to generate AI images for free (no sign-up): https://fp-ai-studio.com/blog/how-to-generate-ai-images-free-2026.html
+- Mystic AI model explained (Freepik flagship): https://fp-ai-studio.com/blog/mystic-ai-model-guide-2026.html
+- AI image generator without watermark (free): https://fp-ai-studio.com/blog/ai-image-generator-no-watermark-free-2026.html
+- Unlimited free AI image generation: https://fp-ai-studio.com/blog/unlimited-free-ai-image-generation-2026.html
+- FP AI Studio image models (Flux, Mystic, Seedream, HyperFlux): https://fp-ai-studio.com/blog/fp-ai-studio-image-models-guide-2026.html
 - AI slideshow maker (photo to video): https://fp-ai-studio.com/blog/ai-slideshow-video-maker-guide-2026.html
 - AI logo animation: https://fp-ai-studio.com/blog/ai-animated-logo-generator-guide-2026.html
 - AI GIF generator: https://fp-ai-studio.com/blog/ai-gif-maker-guide-2026.html
