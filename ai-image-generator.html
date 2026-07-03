@@ -135,12 +135,10 @@
         <div class="gen2-field">
           <label for="g2Model">AI Model</label>
           <select id="g2Model">
-            <option value="flux">Flux — best quality (free)</option>
-            <option value="turbo">Turbo — fast (free)</option>
-            <option value="sana">Sana — fast (free)</option>
-            <option value="nanobanana">Nano Banana (premium)</option>
-            <option value="seedream">Seedream (premium)</option>
-            <option value="gptimage">GPT Image (premium)</option>
+            <option value="flux">Flux — best quality</option>
+            <option value="turbo">Turbo — fast</option>
+            <option value="sana">Sana — fast</option>
+            <option value="gptimage">GPT Image</option>
           </select>
         </div>
         <div class="gen2-field">
@@ -343,7 +341,8 @@
       function openLightbox(url) { lbImg.src = url; lb.classList.add('open'); }
       lb.addEventListener('click', function () { lb.classList.remove('open'); lbImg.src = ''; });
 
-      function renderCell(cell, prompt, seed) {
+      function renderCell(cell, prompt, seed, tries) {
+        tries = tries || 0;
         var url = buildUrl(prompt, seed);
         cell.innerHTML = '<div class="gen2-spin"></div>';
         var probe = new Image();
@@ -364,7 +363,10 @@
           });
           cell.appendChild(img); cell.appendChild(rm); cell.appendChild(sh); cell.appendChild(dl);
         };
-        probe.onerror = function () { cell.innerHTML = '<div class="gen2-err">Generation failed — try again.</div>'; };
+        probe.onerror = function () {
+          if (tries < 2) { setTimeout(function () { renderCell(cell, prompt, seed, tries + 1); }, 1200); }
+          else { cell.innerHTML = '<div class="gen2-err">Generation failed — try again or switch to Flux.</div>'; }
+        };
         probe.src = url;
       }
 
