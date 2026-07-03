@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4209585177080866"
+     crossorigin="anonymous"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Free AI Image Generator (No Sign-Up) — Text to Image | FP AI Studio</title>
+  <meta name="description" content="Free AI image generator — turn text into images in seconds with Flux, Turbo, and Sana. Choose style, aspect ratio, lighting, batch count, and seed. No sign-up, no watermark.">
+  <meta name="keywords" content="free ai image generator, text to image, ai art generator, ai image generator no signup, flux image generator, ai picture generator, text to image ai free">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://fp-ai-studio.com/ai-image-generator.html">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Free AI Image Generator — Text to Image, No Sign-Up">
+  <meta property="og:description" content="Turn text into images in seconds with Flux, Turbo, and Sana. Style, aspect ratio, lighting, and more filters. Free, no sign-up.">
+  <meta property="og:url" content="https://fp-ai-studio.com/ai-image-generator.html">
+  <meta property="og:site_name" content="FP AI Studio">
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"WebApplication","name":"FP AI Studio Free AI Image Generator","url":"https://fp-ai-studio.com/ai-image-generator.html","applicationCategory":"MultimediaApplication","operatingSystem":"Any (web browser)","description":"Free browser-based AI image generator that turns text prompts into images with multiple AI models and filters, no sign-up required.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"publisher":{"@type":"Organization","name":"FP AI Studio"}}
+  </script>
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://fp-ai-studio.com/"},{"@type":"ListItem","position":2,"name":"AI Image Generator","item":"https://fp-ai-studio.com/ai-image-generator.html"}]}
+  </script>
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Is this AI image generator free?","acceptedAnswer":{"@type":"Answer","text":"Yes. You can generate images for free with no sign-up. The Flux, Turbo, and Sana models are free and unlimited; premium models draw on a small daily allowance. Generated images are yours to download."}},{"@type":"Question","name":"Do I need an account to generate images?","acceptedAnswer":{"@type":"Answer","text":"No account or sign-up is required. Type a prompt, pick your filters, and generate. For unlimited use and the full editing suite, you can download the FP AI Studio Android app."}},{"@type":"Question","name":"What AI models can I choose from?","acceptedAnswer":{"@type":"Answer","text":"You can pick Flux for the best quality, Turbo or Sana for speed, and premium models such as Nano Banana, Seedream, and GPT Image. Each model has different strengths for realism, art styles, and speed."}},{"@type":"Question","name":"What filters and settings are available?","acceptedAnswer":{"@type":"Answer","text":"You can control the AI model, a style preset (photorealistic, anime, 3D, oil painting, and more), aspect ratio, lighting, detail level, number of images, and seed, plus toggles for prompt enhancement, watermark removal, and keeping images private."}},{"@type":"Question","name":"Can I use the images commercially?","acceptedAnswer":{"@type":"Answer","text":"Generated images are yours to use, but for commercial projects you should independently check likeness, trademark, and brand rights, since AI output can resemble protected content. Avoid generating logos or characters you do not have rights to."}}]}
+  </script>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .gen2-wrap { max-width: 1040px; margin: 0 auto; }
+    .gen2-card {
+      background: var(--bg-white); border: 1px solid var(--border);
+      border-radius: var(--radius); box-shadow: var(--shadow-hover); padding: 1.5rem;
+    }
+    .gen2-prompt-row { display: flex; gap: 0.6rem; margin-bottom: 0.6rem; align-items: flex-start; flex-wrap: wrap; }
+    .gen2-prompt {
+      flex: 1; min-width: 240px; border: 1px solid var(--border); border-radius: var(--radius-sm);
+      padding: 0.85rem 1rem; font-family: var(--font); font-size: 1rem; color: var(--text);
+      outline: none; resize: vertical; min-height: 58px; line-height: 1.5; transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .gen2-prompt:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(37,99,235,0.12); }
+    .gen2-btn-primary { white-space: nowrap; align-self: stretch; }
+    .gen2-chips { display: flex; gap: 0.4rem; flex-wrap: wrap; margin-bottom: 1.25rem; }
+    .gen2-chip {
+      border: 1px solid var(--border); background: var(--bg); color: var(--text-light); border-radius: 50px;
+      padding: 0.35rem 0.8rem; font-size: 0.78rem; cursor: pointer; font-family: var(--font); transition: border-color 0.15s, color 0.15s;
+    }
+    .gen2-chip:hover { border-color: var(--primary); color: var(--primary); }
+    .gen2-filters {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+      gap: 0.9rem; margin-bottom: 1rem;
+    }
+    .gen2-field { display: flex; flex-direction: column; gap: 0.3rem; }
+    .gen2-field label { font-size: 0.78rem; font-weight: 600; color: var(--text-light); }
+    .gen2-field select, .gen2-field input {
+      border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 0.55rem 0.7rem;
+      font-family: var(--font); font-size: 0.88rem; background: var(--bg-white); color: var(--text); cursor: pointer; width: 100%;
+    }
+    .gen2-toggles { display: flex; gap: 1.25rem; flex-wrap: wrap; margin-bottom: 1.25rem; padding-top: 0.25rem; }
+    .gen2-toggle { display: inline-flex; align-items: center; gap: 0.45rem; font-size: 0.85rem; color: var(--text-light); cursor: pointer; }
+    .gen2-toggle input { width: 16px; height: 16px; cursor: pointer; accent-color: var(--primary); }
+    .gen2-results {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 1rem; margin-top: 0.5rem;
+    }
+    .gen2-cell {
+      position: relative; aspect-ratio: 1/1; background: var(--bg-alt); border: 1px solid var(--border);
+      border-radius: var(--radius-sm); overflow: hidden; display: flex; align-items: center; justify-content: center;
+    }
+    .gen2-img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .gen2-dl {
+      position: absolute; bottom: 8px; right: 8px; border: none; background: rgba(15,27,45,0.82); color: #fff;
+      border-radius: 6px; padding: 5px 10px; font-size: 0.78rem; font-family: var(--font); cursor: pointer;
+    }
+    .gen2-dl:hover { background: var(--primary); }
+    .gen2-spin { width: 26px; height: 26px; border: 3px solid var(--border); border-top-color: var(--primary); border-radius: 50%; animation: gen2spin 0.7s linear infinite; }
+    @keyframes gen2spin { to { transform: rotate(360deg); } }
+    .gen2-err { color: var(--text-muted); font-size: 0.82rem; text-align: center; padding: 0.5rem; }
+    .gen2-placeholder { color: var(--text-muted); font-size: 0.9rem; text-align: center; padding: 2rem; }
+    .gen2-note { font-size: 0.72rem; color: var(--text-muted); margin-top: 1rem; text-align: center; }
+    .gen2-actions2 { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 0.85rem; }
+    .gen2-sec {
+      border: 1px solid var(--border); background: var(--bg); color: var(--ink); border-radius: var(--radius-sm);
+      padding: 0.5rem 0.9rem; font-size: 0.85rem; font-family: var(--font); font-weight: 600; cursor: pointer;
+      transition: border-color 0.15s, color 0.15s;
+    }
+    .gen2-sec:hover { border-color: var(--primary); color: var(--primary); }
+    .gen2-sec:disabled { opacity: 0.6; cursor: default; }
+    .gen2-remix {
+      position: absolute; bottom: 8px; left: 8px; border: none; background: rgba(15,27,45,0.82); color: #fff;
+      width: 30px; height: 30px; border-radius: 6px; font-size: 1rem; cursor: pointer; line-height: 1;
+    }
+    .gen2-remix:hover { background: var(--primary); }
+    .gen2-img { cursor: zoom-in; }
+    .gen2-lightbox {
+      position: fixed; inset: 0; background: rgba(15,27,45,0.92); display: none;
+      align-items: center; justify-content: center; z-index: 2000; padding: 1.5rem; cursor: zoom-out;
+    }
+    .gen2-lightbox.open { display: flex; }
+    .gen2-lightbox img { max-width: 92vw; max-height: 90vh; border-radius: 8px; box-shadow: 0 10px 40px rgba(0,0,0,0.5); }
+  </style>
+</head>
+<body>
+  <header class="site-header"><div class="container"><a href="index.html" class="logo"><svg width="32" height="32" viewBox="0 0 32 32" fill="none"><rect width="32" height="32" rx="8" fill="url(#g1)"/><polygon points="13,10 13,22 23,16" fill="#fff"/><defs><linearGradient id="g1" x1="0" y1="0" x2="32" y2="32"><stop stop-color="#6366F1"/><stop offset="1" stop-color="#8B5CF6"/></linearGradient></defs></svg> FP <span>AI Studio</span></a><nav><ul class="nav-links" id="navLinks"><li><a href="index.html">Home</a></li><li><a href="ai-image-generator.html" class="active">AI Generator</a></li><li><a href="blog.html">Blog</a></li><li><a href="community.html">Community</a></li><li><a href="index.html#download" class="btn btn-primary">Download App</a></li></ul></nav><button class="mobile-toggle" id="mobileToggle" aria-label="Toggle menu"><span></span><span></span><span></span></button></div></header>
+
+  <section class="page-header"><div class="container">
+    <h1>Free AI Image Generator</h1>
+    <p data-ai-summary="true">Turn text into images in seconds — free, no sign-up. Pick your AI model, style, aspect ratio, lighting, and more, then generate and download. Powered by Flux, Turbo, and Sana.</p>
+  </div></section>
+
+  <main class="blog-listing"><div class="container gen2-wrap">
+    <div class="gen2-card">
+      <div class="gen2-prompt-row">
+        <textarea id="g2Prompt" class="gen2-prompt" placeholder="Describe the image you want — e.g. a red panda barista making coffee, cozy cafe, warm light" rows="2" required></textarea>
+        <button type="button" class="btn btn-primary gen2-btn-primary" id="g2Generate">Generate</button>
+      </div>
+      <div class="gen2-actions2">
+        <button type="button" class="gen2-sec" id="g2EnhanceBtn">&#10024; Enhance prompt</button>
+        <button type="button" class="gen2-sec" id="g2Surprise">&#127922; Surprise me</button>
+        <button type="button" class="gen2-sec" id="g2CopyPrompt">Copy prompt</button>
+      </div>
+      <div class="gen2-chips" id="g2Chips">
+        <button type="button" class="gen2-chip">a majestic tiger in a neon jungle</button>
+        <button type="button" class="gen2-chip">cozy fantasy bookshop, warm light</button>
+        <button type="button" class="gen2-chip">futuristic city skyline at sunset</button>
+        <button type="button" class="gen2-chip">cute robot watering plants, 3d</button>
+        <button type="button" class="gen2-chip">🎲 Random</button>
+      </div>
+
+      <div class="gen2-filters">
+        <div class="gen2-field">
+          <label for="g2Model">AI Model</label>
+          <select id="g2Model">
+            <option value="flux">Flux — best quality (free)</option>
+            <option value="turbo">Turbo — fast (free)</option>
+            <option value="sana">Sana — fast (free)</option>
+            <option value="nanobanana">Nano Banana (premium)</option>
+            <option value="seedream">Seedream (premium)</option>
+            <option value="gptimage">GPT Image (premium)</option>
+          </select>
+        </div>
+        <div class="gen2-field">
+          <label for="g2Style">Style</label>
+          <select id="g2Style">
+            <option value="">None (use prompt)</option>
+            <option value="photorealistic, realistic, high detail">Photorealistic</option>
+            <option value="cinematic, film still, dramatic composition">Cinematic</option>
+            <option value="digital art, concept art, artstation">Digital Art</option>
+            <option value="anime style, detailed anime illustration">Anime</option>
+            <option value="studio ghibli style, hand-painted, soft">Studio Ghibli</option>
+            <option value="oil painting, textured brushstrokes">Oil Painting</option>
+            <option value="watercolor painting, soft washes">Watercolor</option>
+            <option value="3d render, pixar style, octane render">3D Render</option>
+            <option value="pixel art, 8-bit, retro game">Pixel Art</option>
+            <option value="cyberpunk, neon, futuristic">Cyberpunk</option>
+            <option value="fantasy art, epic, highly detailed">Fantasy</option>
+            <option value="minimalist, clean, simple, flat">Minimalist</option>
+            <option value="vaporwave, retro, synthwave, 80s">Vaporwave</option>
+            <option value="comic book style, bold ink lines">Comic</option>
+            <option value="line art, black and white ink drawing">Line Art</option>
+            <option value="low poly, geometric 3d">Low Poly</option>
+            <option value="isometric illustration, diorama">Isometric</option>
+          </select>
+        </div>
+        <div class="gen2-field">
+          <label for="g2Ratio">Aspect ratio</label>
+          <select id="g2Ratio">
+            <option value="1024x1024">Square 1:1</option>
+            <option value="1280x720">Landscape 16:9</option>
+            <option value="720x1280">Portrait 9:16</option>
+            <option value="1024x768">Standard 4:3</option>
+            <option value="768x1024">Portrait 3:4</option>
+            <option value="1200x800">Photo 3:2</option>
+            <option value="1536x640">Ultrawide 21:9</option>
+            <option value="1024x1280">Tall 4:5</option>
+          </select>
+        </div>
+        <div class="gen2-field">
+          <label for="g2Light">Lighting</label>
+          <select id="g2Light">
+            <option value="">Default</option>
+            <option value="golden hour lighting">Golden hour</option>
+            <option value="soft studio lighting">Studio</option>
+            <option value="dramatic lighting, high contrast">Dramatic</option>
+            <option value="soft diffused lighting">Soft</option>
+            <option value="glowing neon lighting">Neon</option>
+            <option value="backlit, rim light">Backlit</option>
+            <option value="cinematic lighting">Cinematic</option>
+            <option value="dark moody lighting">Moody</option>
+          </select>
+        </div>
+        <div class="gen2-field">
+          <label for="g2Detail">Detail level</label>
+          <select id="g2Detail">
+            <option value="">Default</option>
+            <option value="highly detailed, sharp focus">High detail</option>
+            <option value="8k, ultra detailed, intricate">Ultra (8K)</option>
+            <option value="ultra realistic, hyperdetailed">Hyper-real</option>
+            <option value="masterpiece, best quality">Masterpiece</option>
+            <option value="simple, clean, low detail">Minimal</option>
+          </select>
+        </div>
+        <div class="gen2-field">
+          <label for="g2Count">Number of images</label>
+          <select id="g2Count">
+            <option value="1">1 image</option>
+            <option value="2">2 images</option>
+            <option value="4">4 images</option>
+          </select>
+        </div>
+        <div class="gen2-field">
+          <label for="g2Seed">Seed (optional)</label>
+          <input type="number" id="g2Seed" placeholder="Random" min="0" step="1">
+        </div>
+      </div>
+
+      <div class="gen2-toggles">
+        <label class="gen2-toggle"><input type="checkbox" id="g2Enhance"> Auto-enhance (at generation)</label>
+        <label class="gen2-toggle"><input type="checkbox" id="g2Nologo" checked> No watermark</label>
+        <label class="gen2-toggle"><input type="checkbox" id="g2Private"> Private (hide from public feed)</label>
+      </div>
+
+      <div class="gen2-results" id="g2Results">
+        <div class="gen2-placeholder" style="grid-column:1/-1">Your generated images will appear here.</div>
+      </div>
+      <p class="gen2-note">Free preview. For unlimited generations plus video, editing, and upscaling, <a href="index.html#download">get the FP AI Studio app</a>.</p>
+    </div>
+
+    <div class="blog-content" style="max-width:750px;margin:3rem auto 0">
+      <h2>How to use the AI image generator</h2>
+      <ol>
+        <li><strong>Write a prompt</strong> — describe the subject, setting, and mood. Specific beats vague.</li>
+        <li><strong>Set your filters</strong> — pick a model, a style preset, aspect ratio, lighting, and how many images.</li>
+        <li><strong>Generate and download</strong> — hit Generate; each image has its own download button.</li>
+      </ol>
+
+      <h2>Filters and settings explained</h2>
+      <ul>
+        <li><strong>Model</strong> — Flux for quality, Turbo/Sana for speed, or premium models (Nano Banana, Seedream, GPT Image).</li>
+        <li><strong>Style</strong> — one-click looks like photorealistic, anime, 3D render, oil painting, cyberpunk, and more.</li>
+        <li><strong>Aspect ratio</strong> — square, landscape, portrait, ultrawide, and social sizes.</li>
+        <li><strong>Lighting &amp; detail</strong> — steer mood and sharpness without rewriting your prompt.</li>
+        <li><strong>Number of images</strong> — generate up to four variations at once.</li>
+        <li><strong>Seed</strong> — reuse a seed to reproduce or fine-tune a result; leave blank for random.</li>
+        <li><strong>Enhance</strong> — let AI expand a short prompt into a richer one.</li>
+        <li><strong>No watermark / Private</strong> — clean exports and keep your images off public feeds.</li>
+      </ul>
+      <p>New to prompting? Read the <a href="blog/ai-prompt-engineering-tips.html">prompt engineering tips</a>, browse the <a href="blog/top-ai-art-styles.html">top AI art styles</a>, learn <a href="blog/ai-image-aspect-ratio-guide-2026.html">which aspect ratio to use</a>, or see the <a href="blog/best-free-ai-image-generator-2026.html">best free AI image generators of 2026</a>.</p>
+
+      <h2>Frequently asked questions</h2>
+      <h3>Is this AI image generator free?</h3>
+      <p>Yes. You can generate images for free with no sign-up. The Flux, Turbo, and Sana models are free and unlimited; premium models draw on a small daily allowance. Generated images are yours to download.</p>
+      <h3>Do I need an account to generate images?</h3>
+      <p>No account or sign-up is required. Type a prompt, pick your filters, and generate. For unlimited use and the full editing suite, you can download the FP AI Studio Android app.</p>
+      <h3>What AI models can I choose from?</h3>
+      <p>You can pick Flux for the best quality, Turbo or Sana for speed, and premium models such as Nano Banana, Seedream, and GPT Image. Each model has different strengths for realism, art styles, and speed.</p>
+      <h3>What filters and settings are available?</h3>
+      <p>You can control the AI model, a style preset (photorealistic, anime, 3D, oil painting, and more), aspect ratio, lighting, detail level, number of images, and seed, plus toggles for prompt enhancement, watermark removal, and keeping images private.</p>
+      <h3>Can I use the images commercially?</h3>
+      <p>Generated images are yours to use, but for commercial projects you should independently check likeness, trademark, and brand rights, since AI output can resemble protected content. Avoid generating logos or characters you do not have rights to.</p>
+    </div>
+  </div></main>
+
+  <div class="gen2-lightbox" id="g2Lightbox"><img id="g2LbImg" alt="Enlarged AI image"></div>
+
+  <footer class="site-footer"><div class="container"><div class="footer-grid"><div class="footer-col"><h4>FP AI Studio</h4><p>The all-in-one AI creative studio for Android.</p></div><div class="footer-col"><h4>Tools</h4><ul><li><a href="ai-image-generator.html">AI Image Generator</a></li><li><a href="blog.html">Blog</a></li></ul></div><div class="footer-col"><h4>Resources</h4><ul><li><a href="answers.html">Answers</a></li><li><a href="community.html">Community</a></li></ul></div><div class="footer-col"><h4>Legal</h4><ul><li><a href="#">Privacy Policy</a></li><li><a href="#">Terms of Service</a></li></ul></div></div><div class="footer-bottom">&copy; 2026 FP AI Studio. All rights reserved.</div></div></footer>
+
+  <script>document.getElementById('mobileToggle').addEventListener('click',function(){document.getElementById('navLinks').classList.toggle('open')});</script>
+  <script>
+    (function () {
+      var POLLINATIONS_REFERRER = "fpai-studio.vercel.app";
+      var POLLINATIONS_KEY = "sk_tQ3h9enOwM7mdXWihfYAh6vekUaB2I0h"; // publicly visible; rotate at auth.pollinations.ai if abused
+
+      var promptEl = document.getElementById('g2Prompt');
+      var modelEl = document.getElementById('g2Model');
+      var styleEl = document.getElementById('g2Style');
+      var ratioEl = document.getElementById('g2Ratio');
+      var lightEl = document.getElementById('g2Light');
+      var detailEl = document.getElementById('g2Detail');
+      var countEl = document.getElementById('g2Count');
+      var seedEl = document.getElementById('g2Seed');
+      var enhanceEl = document.getElementById('g2Enhance');
+      var nologoEl = document.getElementById('g2Nologo');
+      var privateEl = document.getElementById('g2Private');
+      var btn = document.getElementById('g2Generate');
+      var enhBtn = document.getElementById('g2EnhanceBtn');
+      var surpriseBtn = document.getElementById('g2Surprise');
+      var copyBtn = document.getElementById('g2CopyPrompt');
+      var results = document.getElementById('g2Results');
+      var lb = document.getElementById('g2Lightbox');
+      var lbImg = document.getElementById('g2LbImg');
+
+      var RSUB = ['a majestic snow leopard','a cyberpunk street samurai','a cozy treehouse cafe','a floating island city','a curious robot explorer','a fantasy forest spirit','a vintage sports car','a dragon perched on a cliff','an astronaut on a neon planet','a steampunk airship'];
+      var RSET = ['in a misty bamboo forest','under a glowing aurora','on a rainy neon street','in a blooming meadow at dawn','above the clouds at sunset','in an enchanted library','beside a calm mountain lake','in a bustling night market'];
+      function rp(a){ return a[Math.floor(Math.random()*a.length)]; }
+
+      Array.prototype.forEach.call(document.querySelectorAll('.gen2-chip'), function (c) {
+        c.addEventListener('click', function () {
+          var t = c.textContent.trim();
+          if (t.indexOf('Random') !== -1) { promptEl.value = rp(RSUB) + ' ' + rp(RSET); }
+          else { promptEl.value = t; }
+          promptEl.focus();
+        });
+      });
+
+      function buildPrompt() {
+        var p = promptEl.value.trim();
+        [styleEl.value, lightEl.value, detailEl.value].forEach(function (m) { if (m) p += ', ' + m; });
+        return p;
+      }
+      function buildUrl(prompt, seed) {
+        var d = ratioEl.value.split('x');
+        var u = 'https://image.pollinations.ai/prompt/' + encodeURIComponent(prompt)
+          + '?width=' + d[0] + '&height=' + d[1] + '&model=' + encodeURIComponent(modelEl.value) + '&seed=' + seed;
+        if (nologoEl.checked) u += '&nologo=true';
+        if (enhanceEl.checked) u += '&enhance=true';
+        if (privateEl.checked) u += '&private=true';
+        if (POLLINATIONS_REFERRER) u += '&referrer=' + encodeURIComponent(POLLINATIONS_REFERRER);
+        if (POLLINATIONS_KEY) u += '&key=' + encodeURIComponent(POLLINATIONS_KEY);
+        return u;
+      }
+      function downloadUrl(url) {
+        fetch(url).then(function (r) { return r.blob(); }).then(function (b) {
+          var ext = b.type === 'image/png' ? 'png' : 'jpg';
+          var o = URL.createObjectURL(b);
+          var a = document.createElement('a'); a.href = o; a.download = 'fp-ai-studio-image.' + ext;
+          document.body.appendChild(a); a.click(); document.body.removeChild(a);
+          setTimeout(function () { URL.revokeObjectURL(o); }, 1500);
+        }).catch(function () { window.open(url, '_blank', 'noopener'); });
+      }
+      function openLightbox(url) { lbImg.src = url; lb.classList.add('open'); }
+      lb.addEventListener('click', function () { lb.classList.remove('open'); lbImg.src = ''; });
+
+      function renderCell(cell, prompt, seed) {
+        var url = buildUrl(prompt, seed);
+        cell.innerHTML = '<div class="gen2-spin"></div>';
+        var probe = new Image();
+        probe.onload = function () {
+          cell.innerHTML = '';
+          var img = document.createElement('img'); img.className = 'gen2-img'; img.src = url; img.alt = 'AI generated image';
+          img.addEventListener('click', function () { openLightbox(url); });
+          var rm = document.createElement('button'); rm.className = 'gen2-remix'; rm.innerHTML = '&#8635;'; rm.title = 'New variation';
+          rm.addEventListener('click', function (e) { e.stopPropagation(); renderCell(cell, prompt, Math.floor(Math.random() * 1000000)); });
+          var dl = document.createElement('button'); dl.className = 'gen2-dl'; dl.textContent = 'Download';
+          dl.addEventListener('click', function (e) { e.stopPropagation(); downloadUrl(url); });
+          cell.appendChild(img); cell.appendChild(rm); cell.appendChild(dl);
+        };
+        probe.onerror = function () { cell.innerHTML = '<div class="gen2-err">Generation failed — try again.</div>'; };
+        probe.src = url;
+      }
+
+      function generate() {
+        var base = promptEl.value.trim();
+        if (!base) { promptEl.focus(); return; }
+        var prompt = buildPrompt();
+        var count = parseInt(countEl.value, 10) || 1;
+        var seedGiven = seedEl.value.trim() !== '';
+        var baseSeed = seedGiven ? parseInt(seedEl.value, 10) : Math.floor(Math.random() * 1000000);
+        results.innerHTML = '';
+        for (var i = 0; i < count; i++) {
+          var cell = document.createElement('div'); cell.className = 'gen2-cell';
+          results.appendChild(cell);
+          var seed = seedGiven ? (baseSeed + i) : Math.floor(Math.random() * 1000000);
+          renderCell(cell, prompt, seed);
+        }
+      }
+      btn.addEventListener('click', generate);
+
+      function enhancePrompt() {
+        var p = promptEl.value.trim();
+        if (!p) { promptEl.focus(); return; }
+        var lbl = enhBtn.innerHTML;
+        enhBtn.disabled = true; enhBtn.textContent = 'Enhancing...';
+        var instr = 'Rewrite this text-to-image prompt into one vivid, detailed prompt covering subject, setting, art style, lighting, and composition. Reply with ONLY the improved prompt text, no quotes and no preamble: ' + p;
+        fetch('https://text.pollinations.ai/' + encodeURIComponent(instr) + '?referrer=' + encodeURIComponent(POLLINATIONS_REFERRER))
+          .then(function (r) { if (!r.ok) throw new Error('bad'); return r.text(); })
+          .then(function (t) {
+            t = (t || '').trim().replace(/^["'\s]+|["'\s]+$/g, '');
+            if (t && t.length > 3 && t.length < 1500) { promptEl.value = t; }
+            enhBtn.disabled = false; enhBtn.innerHTML = lbl;
+          })
+          .catch(function () {
+            promptEl.value = p + ', highly detailed, cinematic lighting, sharp focus, intricate, 8k';
+            enhBtn.disabled = false; enhBtn.innerHTML = lbl;
+          });
+      }
+      enhBtn.addEventListener('click', enhancePrompt);
+
+      function surprise() {
+        promptEl.value = rp(RSUB) + ' ' + rp(RSET);
+        if (styleEl.options.length > 1) { styleEl.selectedIndex = 1 + Math.floor(Math.random() * (styleEl.options.length - 1)); }
+        lightEl.selectedIndex = Math.floor(Math.random() * lightEl.options.length);
+        ratioEl.selectedIndex = Math.floor(Math.random() * ratioEl.options.length);
+        generate();
+      }
+      surpriseBtn.addEventListener('click', surprise);
+
+      copyBtn.addEventListener('click', function () {
+        if (navigator.clipboard) { navigator.clipboard.writeText(buildPrompt()); }
+        copyBtn.textContent = 'Copied!';
+        setTimeout(function () { copyBtn.textContent = 'Copy prompt'; }, 1200);
+      });
+    })();
+  </script>
+</body>
+</html>

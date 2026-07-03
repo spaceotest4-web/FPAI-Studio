@@ -36,6 +36,7 @@
 
 ## Key pages
 - Home: https://fp-ai-studio.com/
+- Free AI image generator (browser tool): https://fp-ai-studio.com/ai-image-generator.html
 - Answers and facts: https://fp-ai-studio.com/answers.html
 - Blog: https://fp-ai-studio.com/blog.html
 - Community: https://fp-ai-studio.com/community.html
