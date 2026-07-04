@@ -42,6 +42,16 @@
 - Community: https://fp-ai-studio.com/community.html
 
 ## Key guides and resources
+- AI baby generator (future baby): https://fp-ai-studio.com/blog/ai-baby-generator-guide-2026.html
+- AI age progression (see yourself older): https://fp-ai-studio.com/blog/ai-age-progression-generator-guide-2026.html
+- AI pop art generator (Warhol style): https://fp-ai-studio.com/blog/ai-pop-art-generator-guide-2026.html
+- AI tarot card generator (custom deck): https://fp-ai-studio.com/blog/ai-tarot-card-generator-guide-2026.html
+- AI storyboard generator (film/video): https://fp-ai-studio.com/blog/ai-storyboard-generator-guide-2026.html
+- AI 3D icon generator: https://fp-ai-studio.com/blog/ai-3d-icon-generator-guide-2026.html
+- AI mascot logo generator (esports): https://fp-ai-studio.com/blog/ai-mascot-logo-generator-guide-2026.html
+- AI texture generator (seamless/tileable): https://fp-ai-studio.com/blog/ai-texture-generator-guide-2026.html
+- AI phone case design generator: https://fp-ai-studio.com/blog/ai-phone-case-design-generator-guide-2026.html
+- AI Discord PFP and banner generator: https://fp-ai-studio.com/blog/ai-discord-pfp-generator-guide-2026.html
 - AI YouTube banner maker: https://fp-ai-studio.com/blog/ai-youtube-banner-maker-guide-2026.html
 - AI car photography (dealership/listing): https://fp-ai-studio.com/blog/ai-car-photography-generator-guide-2026.html
 - AI photo to vector (SVG): https://fp-ai-studio.com/blog/ai-photo-to-vector-converter-guide-2026.html
