@@ -42,6 +42,11 @@
 - Community: https://fpai-studio.vercel.app/community.html
 
 ## Key guides and resources
+- AI image generator for teachers: https://fpai-studio.vercel.app/blog/ai-image-generator-for-teachers-guide-2026.html
+- AI image generator for students: https://fpai-studio.vercel.app/blog/ai-image-generator-for-students-guide-2026.html
+- AI image generator for YouTubers: https://fpai-studio.vercel.app/blog/ai-image-generator-for-youtubers-guide-2026.html
+- AI travel poster generator: https://fpai-studio.vercel.app/blog/ai-travel-poster-generator-guide-2026.html
+- AI watercolor painting generator: https://fpai-studio.vercel.app/blog/ai-watercolor-painting-generator-guide-2026.html
 - Best free AI generator by country (Pakistan, India, Philippines, Nigeria + 24 more): https://fpai-studio.vercel.app/blog/best-free-ai-image-video-generator-by-country-2026.html
 - FP AI Studio review (what it is and isn't): https://fpai-studio.vercel.app/blog/fp-ai-studio-review-2026.html
 - Free Midjourney alternatives: https://fpai-studio.vercel.app/blog/midjourney-free-alternatives-2026.html
