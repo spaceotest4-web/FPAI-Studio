@@ -1,4 +1,4 @@
-# robots.txt — FP AI Studio
+# robots.txt — Aichance
 # Standard crawlers allowed. AI answer-engine crawlers explicitly welcomed (AEO/GEO).
 
 User-agent: *
