@@ -487,12 +487,16 @@ h4 { font-size: 1.15rem; }
 
 .blog-detail-container { max-width: 750px; margin: 0 auto; }
 
-/* Blog article + sidebar layout (uses the formerly-empty right gutter) */
-.blog-layout { display: flex; gap: 2.5rem; align-items: flex-start; max-width: 1120px; margin: 0 auto; }
-.blog-layout > .blog-detail-container { margin: 0; flex: 1 1 auto; min-width: 0; }
-.blog-sidebar { flex: 0 0 300px; width: 300px; position: sticky; top: 100px; }
-.blog-sidebar .ad-slot { min-height: 600px; }
+/* Blog article with left + right ad rails (uses both gutters) */
+.blog-detail .container { max-width: 1500px; }
+.blog-layout { display: flex; gap: 2.5rem; align-items: flex-start; justify-content: center; max-width: 1500px; margin: 0 auto; }
+.blog-layout > .blog-detail-container { margin: 0; flex: 0 1 750px; min-width: 0; }
+.blog-sidebar, .blog-sidebar-left { flex: 0 0 300px; width: 300px; position: sticky; top: 100px; }
+.blog-sidebar .ad-slot, .blog-sidebar-left .ad-slot { min-height: 600px; }
+/* drop the left rail first when space is tight, then the right rail on tablets */
+@media (max-width: 1400px) { .blog-sidebar-left { display: none; } }
 @media (max-width: 1024px) {
+  .blog-detail .container { max-width: 1120px; }
   .blog-layout { display: block; max-width: 750px; }
   .blog-sidebar { display: none; }
 }
