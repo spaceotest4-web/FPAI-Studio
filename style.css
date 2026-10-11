@@ -92,7 +92,8 @@ h4 { font-size: 1.15rem; }
   letter-spacing: -0.02em;
 }
 
-.logo span { color: var(--primary); }
+.logo-text { display: inline; }
+.logo-accent { color: var(--primary); }
 
 .nav-links { display: flex; gap: 2rem; list-style: none; align-items: center; }
 
