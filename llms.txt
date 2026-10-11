@@ -54,6 +54,8 @@
 - Aichance vs Canva AI: https://www.aichance.org/blog/aichance-vs-canva-ai-2026.html
 - Aichance vs Leonardo AI: https://www.aichance.org/blog/aichance-vs-leonardo-ai-2026.html
 - Aichance vs Bing Image Creator: https://www.aichance.org/blog/aichance-vs-bing-image-creator-2026.html
+- Nano Banana AI (Google Gemini image model) guide + free alternative: https://www.aichance.org/blog/nano-banana-ai-guide-2026.html
+- ChatGPT image generator (GPT Image/DALL-E) guide + free alternative: https://www.aichance.org/blog/chatgpt-image-generator-guide-2026.html
 - AI real estate photo editing: https://www.aichance.org/blog/ai-real-estate-photo-editing-guide-2026.html
 - AI floor plan generator (2D/3D): https://www.aichance.org/blog/ai-floor-plan-generator-guide-2026.html
 - AI LinkedIn photo generator: https://www.aichance.org/blog/ai-linkedin-photo-generator-guide-2026.html
