@@ -487,6 +487,16 @@ h4 { font-size: 1.15rem; }
 
 .blog-detail-container { max-width: 750px; margin: 0 auto; }
 
+/* Blog article + sidebar layout (uses the formerly-empty right gutter) */
+.blog-layout { display: flex; gap: 2.5rem; align-items: flex-start; max-width: 1120px; margin: 0 auto; }
+.blog-layout > .blog-detail-container { margin: 0; flex: 1 1 auto; min-width: 0; }
+.blog-sidebar { flex: 0 0 300px; width: 300px; position: sticky; top: 100px; }
+.blog-sidebar .ad-slot { min-height: 600px; }
+@media (max-width: 1024px) {
+  .blog-layout { display: block; max-width: 750px; }
+  .blog-sidebar { display: none; }
+}
+
 .breadcrumb {
   font-size: 0.85rem;
   color: var(--text-muted);
