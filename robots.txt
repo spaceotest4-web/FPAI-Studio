@@ -19,5 +19,5 @@ User-agent: CCBot
 User-agent: Applebot-Extended
 Allow: /
 
-Sitemap: https://fpai-studio.vercel.app/sitemap.xml
-Host: https://fpai-studio.vercel.app
+Sitemap: https://www.aichance.org/sitemap.xml
+Host: https://www.aichance.org
