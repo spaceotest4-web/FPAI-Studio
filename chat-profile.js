@@ -23,6 +23,31 @@
     return '<img class="chat-avatar" loading="lazy" src="' + escAttr(url) + '" alt="" onerror="this.style.display=\'none\'">';
   }
 
+  // ---- image upload to the project's own Firebase Storage ----
+  var FB = {
+    apiKey: "AIzaSyD6ZVj5BcG3k5Yz855Gnqzl9OJfxw2e1rc",
+    authDomain: "fpai-chat.firebaseapp.com",
+    databaseURL: "https://fpai-chat-default-rtdb.firebaseio.com",
+    projectId: "fpai-chat",
+    storageBucket: "fpai-chat.firebasestorage.app",
+    messagingSenderId: "578450557983",
+    appId: "1:578450557983:web:c3da39cf03cb6b1eddd92a"
+  };
+  function uploadToStorage(file) {
+    return Promise.all([
+      import('https://www.gstatic.com/firebasejs/12.11.0/firebase-app.js'),
+      import('https://www.gstatic.com/firebasejs/12.11.0/firebase-storage.js')
+    ]).then(function (mods) {
+      var appMod = mods[0], st = mods[1];
+      var app = appMod.getApps().length ? appMod.getApp() : appMod.initializeApp(FB);
+      var storage = st.getStorage(app);
+      var ext = (file.name.split('.').pop() || 'jpg').toLowerCase().replace(/[^a-z0-9]/g, '') || 'jpg';
+      var path = 'avatars/' + Date.now() + '-' + Math.random().toString(36).slice(2, 8) + '.' + ext;
+      var r = st.ref(storage, path);
+      return st.uploadBytes(r, file, { contentType: file.type }).then(function () { return st.getDownloadURL(r); });
+    });
+  }
+
   var modal = null;
   function buildModal() {
     if (modal) return;
@@ -35,6 +60,8 @@
       '<input class="cp-input" id="cpNick" maxlength="24" placeholder="Optional nickname">' +
       '<label class="cp-label">Profile pic URL <span>(paste an image link)</span></label>' +
       '<input class="cp-input" id="cpAvatar" maxlength="400" placeholder="https://.../me.jpg">' +
+      '<div class="cp-uprow"><button type="button" class="cp-upbtn" id="cpUpload">⬆ Upload image</button><span class="cp-upstatus" id="cpUpStatus"></span></div>' +
+      '<input type="file" id="cpFile" accept="image/*" style="display:none">' +
       '<div class="cp-preview" id="cpPrev"></div>' +
       '<div class="cp-actions"><button class="cp-btn cp-cancel" id="cpCancel">Cancel</button><button class="cp-btn cp-save" id="cpSave">Save</button></div>' +
       '</div>';
@@ -46,6 +73,23 @@
     function refreshPrev() { prev.innerHTML = avatarImg(av.value.trim()) + '<span>' + (escAttr(nick.value.trim()) || 'Preview') + '</span>'; }
     av.addEventListener('input', refreshPrev);
     nick.addEventListener('input', refreshPrev);
+
+    var fileInput = modal.querySelector('#cpFile');
+    var upBtn = modal.querySelector('#cpUpload');
+    var upStatus = modal.querySelector('#cpUpStatus');
+    upBtn.addEventListener('click', function () { fileInput.click(); });
+    fileInput.addEventListener('change', function () {
+      var f = fileInput.files && fileInput.files[0];
+      if (!f) return;
+      if (f.size > 3 * 1024 * 1024) { upStatus.textContent = 'Image too large (max 3 MB)'; return; }
+      upStatus.textContent = 'Uploading…'; upBtn.disabled = true;
+      uploadToStorage(f).then(function (url) {
+        av.value = url; refreshPrev(); upStatus.textContent = 'Uploaded ✓';
+      }).catch(function (e) {
+        console.warn('upload failed', e);
+        upStatus.textContent = 'Upload failed — check Storage rules';
+      }).then(function () { upBtn.disabled = false; fileInput.value = ''; });
+    });
     modal.querySelector('#cpCancel').addEventListener('click', closeModal);
     modal.addEventListener('click', function (e) { if (e.target === modal) closeModal(); });
     modal.querySelector('#cpSave').addEventListener('click', function () {
@@ -100,6 +144,10 @@
     '.cp-label span{font-weight:400;color:#888}' +
     '.cp-input{width:100%;padding:10px 12px;border:1px solid #d5d8e0;border-radius:9px;font:inherit;outline:none}' +
     '.cp-input:focus{border-color:#6C63FF}' +
+    '.cp-uprow{display:flex;align-items:center;gap:10px;margin-top:8px}' +
+    '.cp-upbtn{padding:7px 12px;border-radius:8px;border:1px dashed #b8bccb;background:#f6f7fb;color:#555;font:inherit;font-size:.82rem;cursor:pointer}' +
+    '.cp-upbtn:hover{background:#eef0f7}.cp-upbtn:disabled{opacity:.6;cursor:default}' +
+    '.cp-upstatus{font-size:.8rem;color:#888}' +
     '.cp-preview{display:flex;align-items:center;gap:8px;margin-top:14px;min-height:28px;color:#555;font-size:.9rem}' +
     '.cp-preview img{width:32px;height:32px;border-radius:50%;object-fit:cover}' +
     '.cp-actions{display:flex;justify-content:flex-end;gap:10px;margin-top:18px}' +
