@@ -10,7 +10,7 @@
 (function () {
   'use strict';
   var IMG_BASE = 'https://user.uploads.dev/file/';
-  var COLS = 6, MAX_RESULTS = 18;
+  var COLS = 6, MAX_RESULTS = 300;
 
   var names = [];            // insertion-ordered emoji names
   var urls = new Map();      // name -> url
@@ -90,7 +90,9 @@
       var r = input.getBoundingClientRect();
       menu.style.left = r.left + 'px';
       menu.style.width = r.width + 'px';
-      menu.style.top = (r.top - menu.offsetHeight - 6) + 'px';
+      var top = r.top - menu.offsetHeight - 6;
+      if (top < 8) top = 8;
+      menu.style.top = top + 'px';
     }
 
     function render(q) {
@@ -160,22 +162,34 @@
   // styles
   var css = document.createElement('style');
   css.textContent =
-    '.chat-emo{width:22px;height:22px;object-fit:contain;vertical-align:-5px;margin:0 1px;display:inline-block}' +
+    '.chat-emo{width:33px;height:33px;object-fit:contain;vertical-align:middle;margin:0 2px;display:inline-block}' +
+    '.msg-text,.home-msg-text{line-height:1.9}' +
     '.emoji-menu{position:fixed;display:none;z-index:9999;background:#23262d;border:1px solid #343842;border-radius:10px;box-shadow:0 10px 30px rgba(0,0,0,.45);overflow:hidden}' +
     '.emoji-menu.open{display:block}' +
     '.emoji-menu-title{padding:8px 12px 4px;font-size:11px;text-transform:uppercase;letter-spacing:.05em;color:#8a90a0}' +
-    '.emoji-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:4px;padding:6px;max-height:220px;overflow:auto}' +
+    '.emoji-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:4px;padding:6px;max-height:340px;overflow-y:auto;overflow-x:hidden}' +
     '.emoji-item{display:flex;flex-direction:column;align-items:center;gap:3px;padding:7px 2px 5px;cursor:pointer;border-radius:8px;color:#c9ced6}' +
     '.emoji-item img{width:30px;height:30px;object-fit:contain}' +
     '.emoji-item .emoji-name{font-size:9px;max-width:100%;text-align:center;word-break:break-all;line-height:1.2;color:#9aa0ab}' +
     '.emoji-item.active{background:#343a46;color:#fff}';
   (document.head || document.documentElement).appendChild(css);
 
+  // re-render :name: in already-displayed messages (they render before the list loads)
+  function sweep() {
+    var els = document.querySelectorAll('.msg-text, .home-msg-text');
+    for (var i = 0; i < els.length; i++) {
+      var el = els[i];
+      if (el.innerHTML.indexOf(':') !== -1) el.innerHTML = emojify(el.innerHTML);
+    }
+  }
+
   function autoAttach() {
     ['#chatInput', '#homeChatInput'].forEach(function (sel) {
       var el = document.querySelector(sel);
       if (el) attach(el);
     });
+    // eager-load so messages show images on page load, then fix any already rendered
+    load().then(function () { sweep(); setTimeout(sweep, 1500); });
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', autoAttach);
   else autoAttach();
