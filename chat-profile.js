@@ -153,11 +153,28 @@
     '.cp-actions{display:flex;justify-content:flex-end;gap:10px;margin-top:18px}' +
     '.cp-btn{padding:9px 18px;border-radius:9px;border:none;font:inherit;font-weight:600;cursor:pointer}' +
     '.cp-cancel{background:#eef0f5;color:#444}' +
-    '.cp-save{background:#6C63FF;color:#fff}';
+    '.cp-save{background:#6C63FF;color:#fff}' +
+    '.msg-reply-ref,.home-msg-reply-ref{cursor:pointer}' +
+    '.msg-flash{animation:msgFlash 1.6s ease}' +
+    '@keyframes msgFlash{0%,100%{background:transparent}25%{background:rgba(108,99,255,.22)}}';
   (document.head || document.documentElement).appendChild(css);
 
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
   else init();
+
+  // clicking a reply quote jumps to (and flashes) the original message
+  document.addEventListener('click', function (e) {
+    var ref = e.target.closest && e.target.closest('.msg-reply-ref[data-jump], .home-msg-reply-ref[data-jump]');
+    if (!ref) return;
+    var id = ref.getAttribute('data-jump');
+    if (!id) return;
+    var sel = '[data-msg-id="' + ((window.CSS && CSS.escape) ? CSS.escape(id) : id) + '"]';
+    var target = document.querySelector(sel);
+    if (!target) return;
+    target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    target.classList.add('msg-flash');
+    setTimeout(function () { target.classList.remove('msg-flash'); }, 1600);
+  });
 
   window.ChatProfile = { get: get, avatarImg: avatarImg, open: openModal };
 })();
