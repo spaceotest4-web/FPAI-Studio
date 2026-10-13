@@ -406,6 +406,9 @@
     </div>
   </footer>
 
+  <!-- Chat emoji (:name: -> image) + picker; pure client-side, loads emoji-list.txt lazily -->
+  <script src="emoji-chat.js"></script>
+
   <!-- FIREBASE -->
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-app.js";
@@ -554,7 +557,7 @@
         replyHtml = `<div class="msg-reply-ref" title="Replying to ${esc(msgData.replyToUser || '?')}">↩ ${esc(msgData.replyToUser || '?')}: ${esc(msgData.replyToText || '...')}</div>`;
       }
 
-      div.innerHTML = `${replyHtml}<span class="msg-user" style="background:${esc(msgData.color || '#6C63FF')}">${esc(msgData.userId || 'Anon')}</span><span class="msg-text">${esc(msgData.text || '')}</span><span class="msg-time">${fmtTime(msgData.timestamp || Date.now())}</span><span class="msg-actions"><button class="msg-action-btn reply-btn" data-msg-id="${esc(msgId)}" data-user="${esc(msgData.userId || '')}" data-text="${esc((msgData.text || '').substring(0,80))}">↩</button></span>`;
+      div.innerHTML = `${replyHtml}<span class="msg-user" style="background:${esc(msgData.color || '#6C63FF')}">${esc(msgData.userId || 'Anon')}</span><span class="msg-text">${window.EmojiChat ? EmojiChat.emojify(esc(msgData.text || '')) : esc(msgData.text || '')}</span><span class="msg-time">${fmtTime(msgData.timestamp || Date.now())}</span><span class="msg-actions"><button class="msg-action-btn reply-btn" data-msg-id="${esc(msgId)}" data-user="${esc(msgData.userId || '')}" data-text="${esc((msgData.text || '').substring(0,80))}">↩</button></span>`;
       return div;
     }
 
