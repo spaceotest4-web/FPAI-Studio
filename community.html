@@ -408,6 +408,8 @@
 
   <!-- Chat emoji (:name: -> image) + picker; pure client-side, loads emoji-list.txt lazily -->
   <script src="emoji-chat.js"></script>
+  <!-- Chat profile: gear settings for nickname + profile pic (localStorage) -->
+  <script src="chat-profile.js"></script>
 
   <!-- FIREBASE -->
   <script type="module">
@@ -557,7 +559,7 @@
         replyHtml = `<div class="msg-reply-ref" title="Replying to ${esc(msgData.replyToUser || '?')}">↩ ${esc(msgData.replyToUser || '?')}: ${window.EmojiChat ? EmojiChat.emojify(esc(msgData.replyToText || '...')) : esc(msgData.replyToText || '...')}</div>`;
       }
 
-      div.innerHTML = `${replyHtml}<span class="msg-user" style="background:${esc(msgData.color || '#6C63FF')}">${esc(msgData.userId || 'Anon')}</span><span class="msg-text">${window.EmojiChat ? EmojiChat.emojify(esc(msgData.text || '')) : esc(msgData.text || '')}</span><span class="msg-time">${fmtTime(msgData.timestamp || Date.now())}</span><span class="msg-actions"><button class="msg-action-btn reply-btn" data-msg-id="${esc(msgId)}" data-user="${esc(msgData.userId || '')}" data-text="${esc((msgData.text || '').substring(0,80))}">↩</button></span>`;
+      div.innerHTML = `${replyHtml}${window.ChatProfile ? ChatProfile.avatarImg(msgData.avatar) : ''}<span class="msg-user" style="background:${esc(msgData.color || '#6C63FF')}">${esc(msgData.nickname || msgData.userId || 'Anon')}</span><span class="msg-text">${window.EmojiChat ? EmojiChat.emojify(esc(msgData.text || '')) : esc(msgData.text || '')}</span><span class="msg-time">${fmtTime(msgData.timestamp || Date.now())}</span><span class="msg-actions"><button class="msg-action-btn reply-btn" data-msg-id="${esc(msgId)}" data-user="${esc(msgData.userId || '')}" data-text="${esc((msgData.text || '').substring(0,80))}">↩</button></span>`;
       return div;
     }
 
@@ -711,6 +713,7 @@
       const text = input.value.trim();
       if (!text || text.length > 500) return;
 
+      const _p = window.ChatProfile ? ChatProfile.get() : {};
       const msgData = {
         userId: userId,
         color: userColor,
@@ -718,6 +721,8 @@
         timestamp: Date.now(),
         room: currentRoom,
       };
+      if (_p.avatar) msgData.avatar = _p.avatar;
+      if (_p.nickname) msgData.nickname = _p.nickname;
 
       if (replyTo) {
         msgData.replyTo = replyTo.msgId;

@@ -859,6 +859,8 @@
 
   <!-- Chat emoji (:name: -> image) + picker; pure client-side, loads emoji-list.txt lazily -->
   <script src="emoji-chat.js"></script>
+  <!-- Chat profile: gear settings for nickname + profile pic (localStorage) -->
+  <script src="chat-profile.js"></script>
 
   <!-- HOMEPAGE CHAT (shares Firebase DB with community.html) -->
   <script type="module">
@@ -949,7 +951,7 @@
       if (data.replyTo) {
         replyHtml = `<div class="home-msg-reply-ref">↩ ${esc(data.replyToUser || '?')}: ${window.EmojiChat ? EmojiChat.emojify(esc(data.replyToText || '...')) : esc(data.replyToText || '...')}</div>`;
       }
-      div.innerHTML = `${replyHtml}<span class="home-msg-user" style="background:${esc(data.color || '#6C63FF')}">${esc(data.userId || 'Anon')}</span><span class="home-msg-text">${window.EmojiChat ? EmojiChat.emojify(esc(data.text || '')) : esc(data.text || '')}</span><span class="home-msg-time">${fmtTime(data.timestamp || Date.now())}</span><span class="home-msg-actions"><button class="home-msg-action-btn reply-btn" data-msg-id="${esc(id)}" data-user="${esc(data.userId || '')}" data-text="${esc((data.text || '').substring(0,80))}">↩</button></span>`;
+      div.innerHTML = `${replyHtml}${window.ChatProfile ? ChatProfile.avatarImg(data.avatar) : ''}<span class="home-msg-user" style="background:${esc(data.color || '#6C63FF')}">${esc(data.nickname || data.userId || 'Anon')}</span><span class="home-msg-text">${window.EmojiChat ? EmojiChat.emojify(esc(data.text || '')) : esc(data.text || '')}</span><span class="home-msg-time">${fmtTime(data.timestamp || Date.now())}</span><span class="home-msg-actions"><button class="home-msg-action-btn reply-btn" data-msg-id="${esc(id)}" data-user="${esc(data.userId || '')}" data-text="${esc((data.text || '').substring(0,80))}">↩</button></span>`;
       return div;
     }
 
@@ -995,10 +997,13 @@
       const input = document.getElementById('homeChatInput');
       const text = input.value.trim();
       if (!text || text.length > 500) return;
+      const _p = window.ChatProfile ? ChatProfile.get() : {};
       const msgData = {
         userId, color: userColor, text,
         timestamp: Date.now(), room: currentRoom,
       };
+      if (_p.avatar) msgData.avatar = _p.avatar;
+      if (_p.nickname) msgData.nickname = _p.nickname;
       if (replyTo) {
         msgData.replyTo = replyTo.msgId;
         msgData.replyToUser = replyTo.user;

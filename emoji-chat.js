@@ -50,7 +50,8 @@
     if (!escapedHtml) return escapedHtml;
     return escapedHtml.replace(/:([a-zA-Z0-9_+\-]{2,40}):/g, function (full, name) {
       var u = urlFor(name);
-      return u ? '<img class="chat-emo" loading="lazy" src="' + u + '" alt="' + full + '" title="' + full + '">' : full;
+      // alt/title use the bare name (no colons) so re-running emojify can't double-wrap
+      return u ? '<img class="chat-emo" loading="lazy" src="' + u + '" alt="' + name + '" title="' + name + '">' : full;
     });
   }
 
