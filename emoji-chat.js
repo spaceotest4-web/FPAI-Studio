@@ -162,8 +162,9 @@
   // styles
   var css = document.createElement('style');
   css.textContent =
-    '.chat-emo{width:33px;height:33px;object-fit:contain;vertical-align:middle;margin:0 2px;display:inline-block}' +
-    '.msg-text,.home-msg-text{line-height:1.9}' +
+    '.chat-emo{width:28px;height:28px;object-fit:contain;vertical-align:middle;margin:0 2px;display:inline-block}' +
+    '.msg-text,.home-msg-text{line-height:1.4}' +
+    '.msg-reply-ref .chat-emo,.home-msg-reply-ref .chat-emo{width:16px;height:16px;vertical-align:-3px}' +
     '.emoji-menu{position:fixed;display:none;z-index:9999;background:#23262d;border:1px solid #343842;border-radius:10px;box-shadow:0 10px 30px rgba(0,0,0,.45);overflow:hidden}' +
     '.emoji-menu.open{display:block}' +
     '.emoji-menu-title{padding:8px 12px 4px;font-size:11px;text-transform:uppercase;letter-spacing:.05em;color:#8a90a0}' +

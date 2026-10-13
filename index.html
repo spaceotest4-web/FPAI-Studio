@@ -947,7 +947,7 @@
       div.dataset.msgId = id;
       let replyHtml = '';
       if (data.replyTo) {
-        replyHtml = `<div class="home-msg-reply-ref">↩ ${esc(data.replyToUser || '?')}: ${esc(data.replyToText || '...')}</div>`;
+        replyHtml = `<div class="home-msg-reply-ref">↩ ${esc(data.replyToUser || '?')}: ${window.EmojiChat ? EmojiChat.emojify(esc(data.replyToText || '...')) : esc(data.replyToText || '...')}</div>`;
       }
       div.innerHTML = `${replyHtml}<span class="home-msg-user" style="background:${esc(data.color || '#6C63FF')}">${esc(data.userId || 'Anon')}</span><span class="home-msg-text">${window.EmojiChat ? EmojiChat.emojify(esc(data.text || '')) : esc(data.text || '')}</span><span class="home-msg-time">${fmtTime(data.timestamp || Date.now())}</span><span class="home-msg-actions"><button class="home-msg-action-btn reply-btn" data-msg-id="${esc(id)}" data-user="${esc(data.userId || '')}" data-text="${esc((data.text || '').substring(0,80))}">↩</button></span>`;
       return div;
