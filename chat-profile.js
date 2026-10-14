@@ -156,7 +156,9 @@
     '.cp-save{background:#6C63FF;color:#fff}' +
     '.msg-reply-ref,.home-msg-reply-ref{cursor:pointer}' +
     '.msg-flash{animation:msgFlash 1.6s ease}' +
-    '@keyframes msgFlash{0%,100%{background:transparent}25%{background:rgba(108,99,255,.22)}}';
+    '@keyframes msgFlash{0%,100%{background:transparent}25%{background:rgba(108,99,255,.22)}}' +
+    '.msg-reply-more{cursor:pointer;font-size:.72rem;color:#6C63FF;padding:1px 6px;margin-bottom:2px;font-weight:600}' +
+    '.msg-reply-more:hover{text-decoration:underline}';
   (document.head || document.documentElement).appendChild(css);
 
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
@@ -164,6 +166,13 @@
 
   // clicking a reply quote jumps to (and flashes) the original message
   document.addEventListener('click', function (e) {
+    // expand a collapsed reply chain
+    var more = e.target.closest && e.target.closest('.msg-reply-more');
+    if (more) {
+      var h = more.previousElementSibling;
+      if (h && h.classList.contains('msg-reply-hidden')) { h.style.display = ''; more.style.display = 'none'; }
+      return;
+    }
     var ref = e.target.closest && e.target.closest('.msg-reply-ref[data-jump], .home-msg-reply-ref[data-jump]');
     if (!ref) return;
     var id = ref.getAttribute('data-jump');

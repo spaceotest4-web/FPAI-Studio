@@ -760,8 +760,7 @@
         </div>
 
         <div class="home-reply-preview" id="homeReplyPreview">
-          <span>↩ Replying to <strong id="homeReplyToUser"></strong></span>
-          <span class="home-reply-preview-text" id="homeReplyToText"></span>
+          <div class="home-reply-preview-chain" id="homeReplyChain" style="flex:1;min-width:0"></div>
           <button class="home-reply-cancel" id="homeReplyCancel" title="Cancel reply">✕</button>
         </div>
 
@@ -912,6 +911,29 @@
 
     let currentRoom = 'general';
     let replyTo = null;
+    const msgCache = {};
+    function emoText(t) { return window.EmojiChat ? EmojiChat.emojify(esc(t || '')) : esc(t || ''); }
+    function refLine(id, who, text) {
+      return `<div class="home-msg-reply-ref" data-jump="${esc(id)}" title="Jump to ${esc(who)}'s message">↩ <b>${esc(who)}</b>: ${emoText(text)}</div>`;
+    }
+    function chainHtml(startId, snapUser, snapText) {
+      const arr = [];
+      let id = startId, guard = 0;
+      while (id && guard < 25) {
+        const m = msgCache[id];
+        if (!m) break;
+        arr.push({ id, who: m.nickname || m.userId || '?', text: m.text || '' });
+        id = m.replyTo; guard++;
+      }
+      if (!arr.length) return (snapText != null) ? refLine(startId, snapUser || '?', snapText) : '';
+      arr.reverse();
+      const MAX = 4;
+      if (arr.length <= MAX) return arr.map(x => refLine(x.id, x.who, x.text)).join('');
+      const hidden = arr.slice(0, arr.length - MAX), shown = arr.slice(arr.length - MAX);
+      return '<div class="msg-reply-hidden" style="display:none">' + hidden.map(x => refLine(x.id, x.who, x.text)).join('') + '</div>'
+        + `<div class="msg-reply-more">⋯ show ${hidden.length} earlier</div>`
+        + shown.map(x => refLine(x.id, x.who, x.text)).join('');
+    }
     let currentListener = null;
 
     // Presence
@@ -949,9 +971,10 @@
       const div = document.createElement('div');
       div.className = 'home-msg';
       div.dataset.msgId = id;
+      msgCache[id] = data;
       let replyHtml = '';
       if (data.replyTo) {
-        replyHtml = `<div class="home-msg-reply-ref" data-jump="${esc(data.replyTo || '')}" title="Jump to ${esc(data.replyToUser || '?')}'s message">↩ ${esc(data.replyToUser || '?')}:${window.EmojiChat ? EmojiChat.emojify(esc(data.replyToText || '...')) : esc(data.replyToText || '...')}</div>`;
+        replyHtml = chainHtml(data.replyTo, data.replyToUser, data.replyToText);
       }
       div.innerHTML = `${replyHtml}${window.ChatProfile ? ChatProfile.avatarImg(data.avatar) : ''}<span class="home-msg-user" style="background:${esc(data.color || '#6C63FF')}">${esc(data.nickname || data.userId || 'Anon')}</span><span class="home-msg-text">${window.EmojiChat ? EmojiChat.emojify(esc(data.text || '')) : esc(data.text || '')}</span><span class="home-msg-time">${fmtTime(data.timestamp || Date.now())}</span><span class="home-msg-actions"><button class="home-msg-action-btn reply-btn" data-msg-id="${esc(id)}" data-user="${esc(data.userId || '')}" data-text="${esc((data.text || ''))}">↩</button></span>`;
       return div;
@@ -1026,8 +1049,7 @@
 
     function setReply(msgId, user, text) {
       replyTo = { msgId, user, text };
-      document.getElementById('homeReplyToUser').textContent = user;
-      document.getElementById('homeReplyToText').textContent = text;
+      document.getElementById('homeReplyChain').innerHTML = chainHtml(msgId, user, text);
       document.getElementById('homeReplyPreview').classList.add('active');
       document.getElementById('homeChatInput').focus();
     }

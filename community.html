@@ -361,8 +361,7 @@
         </div>
 
         <div class="reply-preview" id="replyPreview">
-          <span>↩ Replying to <strong id="replyToUser"></strong></span>
-          <span class="reply-preview-text" id="replyToText"></span>
+          <div class="reply-preview-chain" id="replyChain"></div>
           <button class="reply-cancel" id="replyCancel" title="Cancel reply">✕</button>
         </div>
 
@@ -474,6 +473,32 @@
     let rooms = { ...defaultRooms };
     let currentRoom = 'general';
     let replyTo = null;
+    const msgCache = {}; // msgId -> msgData, for building reply chains
+
+    // Build a reply-chain of quotes (oldest at top). Caps at 4 visible; older ones
+    // collapse behind a "⋯ show earlier" toggle so it never grows too tall.
+    function emoText(t) { return window.EmojiChat ? EmojiChat.emojify(esc(t || '')) : esc(t || ''); }
+    function refLine(id, who, text) {
+      return `<div class="msg-reply-ref" data-jump="${esc(id)}" title="Jump to ${esc(who)}'s message">↩ <b>${esc(who)}</b>: ${emoText(text)}</div>`;
+    }
+    function chainHtml(startId, snapUser, snapText) {
+      const arr = [];
+      let id = startId, guard = 0;
+      while (id && guard < 25) {
+        const m = msgCache[id];
+        if (!m) break;
+        arr.push({ id, who: m.nickname || m.userId || '?', text: m.text || '' });
+        id = m.replyTo; guard++;
+      }
+      if (!arr.length) return (snapText != null) ? refLine(startId, snapUser || '?', snapText) : '';
+      arr.reverse(); // oldest -> immediate parent
+      const MAX = 4;
+      if (arr.length <= MAX) return arr.map(x => refLine(x.id, x.who, x.text)).join('');
+      const hidden = arr.slice(0, arr.length - MAX), shown = arr.slice(arr.length - MAX);
+      return '<div class="msg-reply-hidden" style="display:none">' + hidden.map(x => refLine(x.id, x.who, x.text)).join('') + '</div>'
+        + `<div class="msg-reply-more">⋯ show ${hidden.length} earlier</div>`
+        + shown.map(x => refLine(x.id, x.who, x.text)).join('');
+    }
     let currentListener = null;
     let oldestKey = null; // for pagination
     let isLoadingMore = false;
@@ -553,10 +578,11 @@
       const div = document.createElement('div');
       div.className = 'msg';
       div.dataset.msgId = msgId;
+      msgCache[msgId] = msgData;
 
       let replyHtml = '';
       if (msgData.replyTo) {
-        replyHtml = `<div class="msg-reply-ref" data-jump="${esc(msgData.replyTo || '')}" title="Jump to ${esc(msgData.replyToUser || '?')}'s message">↩${esc(msgData.replyToUser || '?')}: ${window.EmojiChat ? EmojiChat.emojify(esc(msgData.replyToText || '...')) : esc(msgData.replyToText || '...')}</div>`;
+        replyHtml = chainHtml(msgData.replyTo, msgData.replyToUser, msgData.replyToText);
       }
 
       div.innerHTML = `${replyHtml}${window.ChatProfile ? ChatProfile.avatarImg(msgData.avatar) : ''}<span class="msg-user" style="background:${esc(msgData.color || '#6C63FF')}">${esc(msgData.nickname || msgData.userId || 'Anon')}</span><span class="msg-text">${window.EmojiChat ? EmojiChat.emojify(esc(msgData.text || '')) : esc(msgData.text || '')}</span><span class="msg-time">${fmtTime(msgData.timestamp || Date.now())}</span><span class="msg-actions"><button class="msg-action-btn reply-btn" data-msg-id="${esc(msgId)}" data-user="${esc(msgData.userId || '')}" data-text="${esc((msgData.text || ''))}">↩</button></span>`;
@@ -740,8 +766,7 @@
     // ═══ REPLY ═══
     function setReply(msgId, user, text) {
       replyTo = { msgId, user, text };
-      document.getElementById('replyToUser').textContent = user;
-      document.getElementById('replyToText').textContent = text;
+      document.getElementById('replyChain').innerHTML = chainHtml(msgId, user, text);
       document.getElementById('replyPreview').classList.add('active');
       document.getElementById('chatInput').focus();
     }
