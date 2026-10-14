@@ -173,7 +173,11 @@
     '.emoji-item{display:flex;flex-direction:column;align-items:center;gap:3px;padding:7px 2px 5px;cursor:pointer;border-radius:8px;color:#c9ced6}' +
     '.emoji-item img{width:30px;height:30px;object-fit:contain}' +
     '.emoji-item .emoji-name{font-size:9px;max-width:100%;text-align:center;word-break:break-all;line-height:1.2;color:#9aa0ab}' +
-    '.emoji-item.active{background:#343a46;color:#fff}';
+    '.emoji-item.active{background:#343a46;color:#fff}' +
+    '.emo-pop{position:fixed;display:none;z-index:10001;background:#23262d;border:1px solid #343842;border-radius:12px;padding:12px;box-shadow:0 12px 34px rgba(0,0,0,.5);flex-direction:column;align-items:center;gap:7px}' +
+    '.emo-pop.open{display:flex}' +
+    '.emo-pop img{width:104px;height:104px;object-fit:contain}' +
+    '.emo-pop code{font-size:12px;color:#c9ced6;background:#1a1d23;padding:3px 8px;border-radius:6px;user-select:all}';
   (document.head || document.documentElement).appendChild(css);
 
   // re-render :name: in already-displayed messages (they render before the list loads)
@@ -195,6 +199,25 @@
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', autoAttach);
   else autoAttach();
+
+  // click an inline emoji in a message -> show enlarged preview + its :name:
+  var emoPop = null;
+  document.addEventListener('click', function (e) {
+    var em = e.target.closest && e.target.closest('.chat-emo');
+    if (em) {
+      e.stopPropagation();
+      if (!emoPop) { emoPop = document.createElement('div'); emoPop.className = 'emo-pop'; document.body.appendChild(emoPop); }
+      var nm = em.getAttribute('alt') || em.getAttribute('title') || '';
+      emoPop.innerHTML = '<img src="' + em.src + '" alt=""><code>:' + nm.replace(/[<>&]/g, '') + ':</code>';
+      emoPop.classList.add('open');
+      var r = em.getBoundingClientRect();
+      emoPop.style.left = Math.min(Math.max(8, r.left - 40), window.innerWidth - emoPop.offsetWidth - 8) + 'px';
+      var top = r.top - emoPop.offsetHeight - 8;
+      emoPop.style.top = (top < 8 ? r.bottom + 8 : top) + 'px';
+      return;
+    }
+    if (emoPop && !e.target.closest('.emo-pop')) emoPop.classList.remove('open');
+  });
 
   window.EmojiChat = { emojify: emojify, attach: attach, load: load };
 })();
