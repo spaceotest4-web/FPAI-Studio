@@ -162,7 +162,7 @@
       border-left: 2px solid var(--primary);
       background: rgba(108,99,255,0.04); border-radius: 0 3px 3px 0;
       cursor: pointer; overflow: hidden;
-      text-overflow: ellipsis; white-space: nowrap;
+      display: -webkit-box; -webkit-line-clamp: 5; -webkit-box-orient: vertical; white-space: normal;
       margin-bottom: 2px;
     }
     .msg-user {
@@ -559,7 +559,7 @@
         replyHtml = `<div class="msg-reply-ref" data-jump="${esc(msgData.replyTo || '')}" title="Jump to ${esc(msgData.replyToUser || '?')}'s message">↩${esc(msgData.replyToUser || '?')}: ${window.EmojiChat ? EmojiChat.emojify(esc(msgData.replyToText || '...')) : esc(msgData.replyToText || '...')}</div>`;
       }
 
-      div.innerHTML = `${replyHtml}${window.ChatProfile ? ChatProfile.avatarImg(msgData.avatar) : ''}<span class="msg-user" style="background:${esc(msgData.color || '#6C63FF')}">${esc(msgData.nickname || msgData.userId || 'Anon')}</span><span class="msg-text">${window.EmojiChat ? EmojiChat.emojify(esc(msgData.text || '')) : esc(msgData.text || '')}</span><span class="msg-time">${fmtTime(msgData.timestamp || Date.now())}</span><span class="msg-actions"><button class="msg-action-btn reply-btn" data-msg-id="${esc(msgId)}" data-user="${esc(msgData.userId || '')}" data-text="${esc((msgData.text || '').substring(0,80))}">↩</button></span>`;
+      div.innerHTML = `${replyHtml}${window.ChatProfile ? ChatProfile.avatarImg(msgData.avatar) : ''}<span class="msg-user" style="background:${esc(msgData.color || '#6C63FF')}">${esc(msgData.nickname || msgData.userId || 'Anon')}</span><span class="msg-text">${window.EmojiChat ? EmojiChat.emojify(esc(msgData.text || '')) : esc(msgData.text || '')}</span><span class="msg-time">${fmtTime(msgData.timestamp || Date.now())}</span><span class="msg-actions"><button class="msg-action-btn reply-btn" data-msg-id="${esc(msgId)}" data-user="${esc(msgData.userId || '')}" data-text="${esc((msgData.text || ''))}">↩</button></span>`;
       return div;
     }
 

@@ -173,7 +173,8 @@
       padding: 2px 6px; border-left: 2px solid var(--primary);
       background: rgba(108,99,255,0.04);
       border-radius: 0 3px 3px 0; margin-bottom: 2px;
-      overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+      overflow: hidden; cursor: pointer;
+      display: -webkit-box; -webkit-line-clamp: 5; -webkit-box-orient: vertical; white-space: normal;
     }
     .home-msg-user {
       font-weight: 700; font-size: 0.72rem;
@@ -952,7 +953,7 @@
       if (data.replyTo) {
         replyHtml = `<div class="home-msg-reply-ref" data-jump="${esc(data.replyTo || '')}" title="Jump to ${esc(data.replyToUser || '?')}'s message">↩ ${esc(data.replyToUser || '?')}:${window.EmojiChat ? EmojiChat.emojify(esc(data.replyToText || '...')) : esc(data.replyToText || '...')}</div>`;
       }
-      div.innerHTML = `${replyHtml}${window.ChatProfile ? ChatProfile.avatarImg(data.avatar) : ''}<span class="home-msg-user" style="background:${esc(data.color || '#6C63FF')}">${esc(data.nickname || data.userId || 'Anon')}</span><span class="home-msg-text">${window.EmojiChat ? EmojiChat.emojify(esc(data.text || '')) : esc(data.text || '')}</span><span class="home-msg-time">${fmtTime(data.timestamp || Date.now())}</span><span class="home-msg-actions"><button class="home-msg-action-btn reply-btn" data-msg-id="${esc(id)}" data-user="${esc(data.userId || '')}" data-text="${esc((data.text || '').substring(0,80))}">↩</button></span>`;
+      div.innerHTML = `${replyHtml}${window.ChatProfile ? ChatProfile.avatarImg(data.avatar) : ''}<span class="home-msg-user" style="background:${esc(data.color || '#6C63FF')}">${esc(data.nickname || data.userId || 'Anon')}</span><span class="home-msg-text">${window.EmojiChat ? EmojiChat.emojify(esc(data.text || '')) : esc(data.text || '')}</span><span class="home-msg-time">${fmtTime(data.timestamp || Date.now())}</span><span class="home-msg-actions"><button class="home-msg-action-btn reply-btn" data-msg-id="${esc(id)}" data-user="${esc(data.userId || '')}" data-text="${esc((data.text || ''))}">↩</button></span>`;
       return div;
     }
 
